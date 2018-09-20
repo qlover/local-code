@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<userlist>
+	<list title="user1">
+		<user>qlover</user>
+		<pass>qlover123</pass>
+		<site>www.qlover.website</site>
+	</list>
+	<list title="user2">
+		<user>hone</user>
+		<pass>hone123</pass>
+		<site>www.hone.website</site>
+	</list>
+</userlist>
