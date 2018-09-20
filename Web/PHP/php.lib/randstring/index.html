@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>视图页面</title>
+	<link rel="stylesheet" href="../css/css.css">
+	<script src="../js/jquery.min.js"></script>
+	<!--[if lt IE 7]>
+		<script src="../js/jquery.js"></script>
+	<![endif]-->
+	<script src="../js/main.js"></script>
+</head>
+<body>
+<?php 
+	echo $string ;
+?>
+<p>
+	<a href="?s=Number">数字</a>
+	<a href="?s=Letter">字母</a>
+	<a href="?s=Char">字符</a>
+	<a href="?s=All">随机字符串</a>
+</p>
+<h2>提供函数的随机字符串</h2>
+<div class="string">
+	<?php echo $stro->generateRand(10); ?>	
+</div>
+<h2>用户传递参数的字符串是：</h2>
+<div class="string ipt">
+	<?php echo $userstr ;?>
+</div>
+<h2>随机数字字符串是：</h2>
+<div class="string">
+	<?php echo $numstr; ?>
+</div>
+<h2>随机字母字符串是：</h2>
+<div class="string">
+	<?php echo $letterstr; ?>
+</div>
+<h2>随机字符字符串是：</h2>
+<div class="string">
+	<?php echo $charstr; ?>
+</div>
+<h2>随机字符串是：</h2>
+<div class="string">
+	<?php echo $randstr; ?>
+</div>
+<h2>内部函数：</h2>
+<div class="string">
+	<!-- <?php echo $crestr; ?> -->
+</div>
+
+
+
+</body>
+</html>

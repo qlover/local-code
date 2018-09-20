@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>视图页面</title>
+	<link rel="stylesheet" href="../css/css.css">
+	<script src="../js/jquery.min.js"></script>
+	<!--[if lt IE 7]>
+		<script src="../js/jquery.js"></script>
+	<![endif]-->
+	<script src="../js/main.js"></script>
+
+</head>
+<body>
+
+<?php
+
+foreach ( $result as $val ){
+	echo "<a href='{$val}'>{$val}</a>".'<br />';
+}
+
+?>
+
+<p>这里面是 AJAX 获取到的结果 </p>
+<div id="get">
+	
+
+</div>
+
+
+
+	<script>
+	function sendajax( href ){
+		var xhr = new XMLHttpRequest();
+		xhr.open('get', href);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				if(xhr.status == 304 || xhr.status == 200){
+					document.getElementById('get').innerHTML += xhr.responseText;
+				}
+			}
+		}
+		xhr.send(null);
+	}	
+
+
+	$('a').click(function(event){
+		// sendajax_jq($(this)[0].href);
+
+		// jq 做法
+		var $url = this.href;
+		var $args = {'time':new Date()};
+		$.get($url, $args, function(data){
+			$('#get').html(data);
+		});
+
+		event.preventDefault();
+	});
+
+	</script>
+
+<?php
+// $dlo->delFile( 'test.txt' );
+//echo "<p>文件被删除了</p>";
+?>
+
+
+</body>
+</html>

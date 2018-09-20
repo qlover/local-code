@@ -1,0 +1,8 @@
+var RandStr = function() {
+	
+
+}
+
+
+
+
