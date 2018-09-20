@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>transition</title>
+  <style>
+   *{margin:0; padding:0; background:#fff;}
+   body{ padding-bottom:500px;}
+	#start{ width:200px; height:200px; background:#eee;
+			margin:10px; color:#fff; transition:1.5s;}
+	#start:hover{background:#f00; color:#000;}
+	#width{margin:10px;  width:100px; height:100px; 
+			background:#bbb; transition:width 1s;/*只过渡宽度*/
+			
+		}
+	#width:hover{ width:250px;}
+	#height{margin:10px; width:100px; height:100px; 
+			background:#bbb; transition:height 1s;/*只过渡高度*/
+
+		}
+	#height:hover{ height:250px; width:250px;}
+	#speed{ margin:10px; width:100px; height:100px; 
+			background:#bbc; transition:1s linear;/*平均速度*/	
+		}
+	#speed:hover{ width:250px; height:250px;}
+	#slow{ margin:10px; width:100px; height:100px; 
+			background:#ccb; transition:1s ease-in;
+	}
+	#slow:hover{ width:200px; height:200px;}
+	#slow_over{ margin:10px; width:100px; height:100px; 
+			background:#ccb; transition:1s ease-out;
+	}
+	#slow_over:hover{ width:200px; height:200px;}
+	#slow_inout{ margin:10px; width:150px; height:150px; 
+			background:#bcb; transition:1s ease-in-out;
+	}
+	#slow_inout:hover{ width:250px; height:250px;}
+	#random_speed{ margin:10px; width:100px; height:100px; 
+			background:#ccc; 
+	}
+	#random_speed:hover{ width:250px; height:250px;}
+  </style>
+ </head>
+ <body>
+
+<div id="start">把鼠标移动到这里，慢慢地改变背景颜色</div>
+<div id="width">只过渡宽度</div>
+<div id="height">只过渡高度</div>
+<div id="speed">平均速度过渡</div>
+<div id="slow">慢速开始过渡</div>
+<div id="slow_over">慢速结束过渡</div>
+<div id="slow_inout">慢速开始/结束过渡</div>
+<div id="random_speed">随机速度过渡</div>
+
+
+<script>
+//固定小数位数
+function fix(fixNumber,decimalPlaces){
+	var div = Math.pow(10,decimalPlaces);
+	fixNumber = Math.round(fixNumber * div)/div;
+	return fixNumber;
+};
+
+//产生一个随机速度的函数
+function randomSpeedString(seconds){
+	var str = '';
+	var ran1 = fix(Math.random(),2);
+	var ran2 = fix(Math.random(),2);
+	var ran3 = fix(Math.random(),2);
+	var ran4 = fix(Math.random(),2);
+	str = seconds +'s'+' cubic-bezier(' + ran1 +','+ ran2 +','+ ran3 +','+ ran4 +')';
+	return str;
+};
+	var random_speed = document.getElementById('random_speed');
+	random_speed.style.transition = randomSpeedString(1);
+	random_speed.onmouseout = function(){
+		random_speed.style.transition = randomSpeedString(1);
+	}
+
+
+
+</script>
+ </body>
+</html>
+
+
+

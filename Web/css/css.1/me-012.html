@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>animation!!!!!(this is failed)</title>
+  <style>
+   *{margin:0; padding:0; cursor:default; font-size:12px;list-style:none;  }
+   html,body{width:100%; height:100%;}
+   a{ text-decoration:none; color:#000; cursor:pointer;}
+   a:hover{ color:#e00;}
+	button.mhover{
+		border:0 none; outline:0 none;
+		margin:15px;
+		width:150px; height:80px;
+		font-family:'serif';
+		text-align:center; 
+		background:#00e; 
+		border-bottom:5px solid #00a; border-right:5px solid #00a;
+		position:relative;
+		transition:.1s;
+		overflow:hidden;
+	}
+	button.mhover:active{
+		border-bottom-width:1px;
+		border-right-width:1px;
+	}
+	button.mhover:before{
+		content : '';
+		display:block;
+		width:5px; height:80px; 
+		background:rgba(255,255,255,0.8);
+		position:absolute;
+		top:0; left:-4.5em;
+		transform:skew(-45deg,0deg);
+		transition:.8s;
+		
+	}
+	button.mhover:hover:before{
+		animation:shan 1s;
+	}
+	@keyframes shan{
+		from{left:-4.5em}
+		to{left:17em}
+	}
+	#bg{
+		width:300px; height:300px; background:#eee;
+		margin:15px;
+		position:relative;
+	}
+	#bg .spin{
+		display:block;
+		width:200px; height:80px;
+		text-align:center; line-height:80px; font-size:2em;
+		position:absolute;
+		left:20px; bottom:50px;
+		transform:translate(50px,0px);
+		animation:sp 3.5s infinite;
+		animation-play-state:paused;
+		
+		animation-timing-function:inear;
+		
+		
+	}
+	@keyframes sp{
+		0%{transform:translate(50px,0px); background:#0ff;}
+		25%{transform:translate(70px,-60px); background:#ff0;}
+		50%{transform:translate(50px,-120px); background:#f0f;}
+		75%{transform:translate(30px,-60px); background:#00f;}
+		100%{transform:translate(50px,0px); background:#f00;}
+	}
+	#top{
+		width:800px; padding:10px 15px; background:#f0f;
+		overflow:hidden;
+	}
+	#top .content{
+		width:100%; height:20px;
+		overflow:hidden;
+		background:#0ff;
+		position:relative;
+	}
+	#top .content a{ width:300px; display:block; float:left; }
+	#top .content .banner{
+		height:20px;  width:3500px;
+		position:absolute;
+		left:0px;
+		/*animation:moved 10s;*/
+	}
+	@keyframes moved{
+		0%{left:0px;}
+		100%{left:-1200px;}
+	}
+	#top .content ul.banner li{
+		float:left; background:#ff0; 
+		width:300px; height:20px; line-height:20px; text-align:center;
+		
+	}
+  </style>
+  <script src="jquery.js"></script>
+  <script type="text/javascript">
+  function toleft(ele){
+	//alert('第一次向左');
+	ele.style.transition = '30s';
+	ele.style.left = -1200+'px';
+  }
+  function twiceleft(ele){
+	//alert('第二次向左');
+	ele.style.transition = '60s';
+	ele.style.left = -1200+'px';
+	/*setTimeout(function(){
+		toleft(ele);
+	},30500);*/
+  }
+  function releft(ele){
+	setTimeout(function(){
+		ele.style.transition = '0s';
+		ele.style.left = 800+'px';
+	},30000);
+	setTimeout(function(){
+		twiceleft(ele);
+	},30500);
+  }
+  function finised(ele){
+	toleft(ele);
+	releft(ele);
+  }
+	window.onload = function(){
+
+		var ban = document.getElementsByClassName('banner')[0];
+		//finised(ban);
+		var lii = document.getElementsByClassName('move');
+		ban.offsetLeft = 50;
+		
+	}
+  </script>
+ </head>
+ <body onselectstart="return false";>
+	<div id="top">
+		<div class="content">
+		<!-- <marquee>
+			<a href="#one">1.习近平抵达布拉格 捷克空军两架战机护航</a>
+			<a href="#one">2.全国社会保障基金条例发布 1.5万亿将"有规可依</a>
+			<a href="#one">3.美媒称“中国是洗钱天堂”遭驳:绝非国际洗钱中心</a>
+			<a href="#one">4.三轮车刮擦宝马逃逸 女司机被拖行几百米一路惨叫</a>
+		</marquee> -->
+		<!-- <div class="banner">
+			<a href="#one">1.习近平抵达布拉格 捷克空军两架战机护航</a>
+			<a href="#one">2.全国社会保障基金条例发布 1.5万亿将"有规可依</a>
+			<a href="#one">3.美媒称“中国是洗钱天堂”遭驳:绝非国际洗钱中心</a>
+			<a href="#one">4.三轮车刮擦宝马逃逸 女司机被拖行几百米一路惨叫</a>
+		</div> -->
+			<ul class="banner">
+				<li class="move">1</li>
+				<li class="move">2</li>
+				<li class="move">3</li>
+				<li class="move">4</li>
+				<li class="move">5</li>
+			</ul>
+		</div>
+		
+	</div>
+	<button class="mhover">Mouseover Here</button>
+	
+	<div id="bg">
+		<div class="spin">404</div>
+	</div>
+</body>
+</html>
+
+
+

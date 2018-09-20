@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <title>图片滚动与轮播</title>
+  <meta name="Description" content="">
+  <style>
+   html,body,ul,li,em,a{
+		margin:0; padding:0; font-size:12px; cursor:default; font-style:normal;
+		text-decoration:none; list-style:none; color:#000;
+	}
+	#bg{
+		width:500px; height:300px; background:#eee; margin:100px auto;
+		position:relative;
+		border-radius:10%;
+		box-shadow:2px 2px 2px 2px #bbb;
+	}
+	#bg #fix{
+		width:450px; height:250px; margin:25px auto; background:rgba(101,101,101,.8);
+		position:relative; top:25px;
+		overflow:hidden;
+		border-radius:5%;
+		box-shadow:2px 2px 2px 2px #000;
+	}
+	#bg #fix .banner{
+		width:3000px; height:250px;
+		position:absolute; left:0px; top:0px;
+		transition:500ms;
+		
+	}
+	#bg #fix .banner ul li{
+		width:400px; height:250px; 
+		float:left; margin-left:25px; cursor:pointer;
+	}
+	/*下面这句比较重要，因为是为了给第一个 li 元素定位*/
+	#bg #fix .banner ul li:first-child {
+		position:relative; overflow:hidden;
+	}
+	/*下面这句比较重要，因为是为了给最后一个 li 元素定位*/
+	#bg #fix .banner ul li:last-child{
+		position:relative;left:0px;
+	}
+	#bg #fix .banner ul li img{
+		width:400px; height:250px; border:0 none;
+		opacity:0.888; transition:1s;
+	}
+	#bg #fix .banner ul li img:hover{
+		opacity:0.999;
+		transform:scale(1.05);
+	}
+	#bg .prve,#bg .next{
+		position:absolute; width:50px; height:200px;
+		top:50%; margin-top:-100px;
+		line-height:200px; text-align:center;
+		background:rgba(0,0,0,0.4);
+		cursor:pointer;
+		font-size:8em;
+		color:#fff;
+		box-shadow:0 0 18px #eee;
+	}
+	#bg .prve:hover{background:rgba(0,0,0,0.3);color:rgba(0,0,0,0.77)}
+	#bg .next:hover{background:rgba(0,0,0,0.3);color:rgba(0,0,0,0.77)}
+	#bg .prve{left:0px;}
+	#bg .next{right:0px;}
+  </style>
+  <script src="js/jquery.js"></script>
+  <script src="js/me.js"></script>
+  <script type="text/javascript">
+  var timer = null;
+  //四个初始位置函数
+function firstlocal(){
+	var lis = document.getElementsByClassName('move')[0];
+	lis.style.left = 2125+'px';
+}
+function clearfirst(){
+	var lis = document.getElementsByClassName('move')[0];
+	lis.removeAttribute('style');
+}
+function lostlocal(){
+	var lis = document.getElementsByClassName('move')[4];
+	lis.style.left = -2125+'px';
+}
+function clearlost(){
+	var lis = document.getElementsByClassName('move')[4];
+	lis.removeAttribute('style');
+}
+	window.addEventListener('load',function(){
+		innerSelectStop(document);
+		var ban = document.getElementsByClassName('banner')[0];
+		var lis = ban.getElementsByTagName('li')[0];
+		var moves = ban.getElementsByClassName('move');
+		var prve = document.getElementsByClassName('prve')[0];
+		var next = document.getElementsByClassName('next')[0];
+		var timer = null;
+		
+		/*
+		var myMove = new Move();
+		timer = setInterval(function(){
+			myMove.toleft(ban,425,5);
+		},2000);
+		
+		function stopMove(){clearInterval(timer);}
+		function startMove(){timer = setInterval(function(){myMove.toleft(ban,425,5);},2000);}
+		document.getElementById('bg').onmousemove=stopMove;
+		document.getElementById('bg').onmouseout=startMove;
+		prve.addEventListener('mousedown',function(){
+			clearInterval(timer);
+			myMove.toleft(ban,425,5);
+		},false);
+		prve.addEventListener('mouseup',function(){
+			timer = setInterval(function(){myMove.toleft(ban,425,5);},2000);	
+		},false);
+		next.addEventListener('mousedown',function(){
+			clearInterval(timer);
+			myMove.toright(ban,425,5);
+		},false);
+		next.addEventListener('mouseup',function(){
+			timer = setInterval(function(){myMove.toleft(ban,425,5);},2000);	
+		},false);
+		*/
+
+//滚动与轮播动实现开始
+		var ban = document.getElementsByClassName('banner')[0];
+		var lis = ban.getElementsByTagName('li')[0];
+		var moves = ban.getElementsByClassName('move');
+		var distance = lis.offsetParent.offsetLeft;		//全局距离
+		var prve = document.getElementsByClassName('prve')[0];
+		var next = document.getElementsByClassName('next')[0];
+		//向左滚动
+		function toleft(){
+			ban.style.transition = '500ms';
+				if(distance <= -1700){
+					firstlocal();
+					setTimeout(function(){
+						clearfirst();
+						distance = 0;
+						ban.style.transition = '0s';
+						ban.style.left = distance+'px';
+					},505);
+					distance -= 425;
+					ban.style.left = distance+'px';
+					return false;
+				}
+				distance -= 425;
+				ban.style.left = distance+'px';	
+		}
+		//向右滚动
+		function toright(){
+			ban.style.transition = '500ms';
+			if(distance == 0){
+				lostlocal();
+				setTimeout(function(){
+					clearlost();
+					distance = -1700;
+					ban.style.transition = '0s';
+					ban.style.left = distance+'px';
+				},505);
+				distance += 425;
+				ban.style.left = distance+'px';
+				return false;
+			}
+			distance+=425;
+			ban.style.left = distance+'px';	
+		}
+		//移动的停止和开始
+		function stopMove(){
+			clearInterval(timer);
+		}
+		function startMove(){
+			timer = setInterval(function(){toleft();},2000);
+		}
+		//自动滚动
+		timer = setInterval(function(){toleft();},2000);	
+
+		//在每一个项目中移动与移出
+		/*for(var i=0; i<moves.length; i++){
+			moves[i].index = i;
+			moves[i].addEventListener('mouseover',function(){
+				clearInterval(timer);
+			},false);
+			moves[i].addEventListener('mouseout',function(){
+				timer = setInterval(function(){toleft();},2000);		
+			},false);
+		}*/
+		
+
+		//在整个当中移动与移出
+		document.getElementById('bg').onmousemove=stopMove;
+		document.getElementById('bg').onmouseout=startMove;
+	
+		//手动滚动
+		prve.addEventListener('mousedown',function(){
+			clearInterval(timer);
+			toleft();
+		},false);
+		prve.addEventListener('mouseup',function(){
+			timer = setInterval(function(){toleft();},2000);	
+		},false);
+		next.addEventListener('mousedown',function(){
+			clearInterval(timer);
+			toright();
+		},false);
+		next.addEventListener('mouseup',function(){
+			timer = setInterval(function(){toleft();},2000);	
+		},false);
+// 滚动与轮播实现结束
+	
+	},false);
+  </script>
+ </head>
+ <body>
+
+	<div id="bg">
+		<div id="fix">
+			<div class="banner">
+				<ul>
+					<li class="move"><img src="http://5.26923.com/download/pic/000/328/b29be35971924d3783a77c61216ef348.jpg"/></li>
+					<li class="move"><img src="http://bizhi.4493.com/uploads/allimg/141017/4-14101G42138.jpg"/></li>
+					<li class="move"><img src="http://4493bz.1985t.com/uploads/allimg/150116/4-150116143217.jpg"/></li>
+					<li class="move"><img src="http://www.orsoon.com/uploads/allimg/2015/02/28/1-83031425105426.jpg"/></li>
+					<li class="move"><img src="http://pic21.nipic.com/20120530/4639117_110740722000_2.jpg"/></li>
+				</ul>
+		</div>
+	</div>
+	<div class="prve"><</div>
+	<div class="next">></div>
+
+ <!-- position:relative; left:3300px; -->
+</body>
+</html>
+
+
+

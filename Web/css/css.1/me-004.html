@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>transform</title>
+  <style>
+   *{margin:0; padding:0; background:#fff;}
+   body{ padding-bottom:500px;}
+   div{width:100px; height:100px; margin:10px;		
+		text-align:center; line-height:100px; font-weight:800;
+		cursor:default;
+	}
+   #first{ background:#eee; transition:1s;}
+   #first:hover{ transform:rotate(90deg);}
+   #second{ background:#eeb; transition:1s;}
+   #second:hover{ transform:rotate(180deg);}
+   #third{ background:#bee; transition:1s;}
+   #third:active{ transform:matrix(0.2,0.2,0,0.2,0,0.2);}
+   #fourth{ background:#beb; transition:1s;}
+   #fourth:hover{ transform:matrix3d(0.2,0.2,0,0.2,0,0,0.2,0.2,0,0,0,0.2,0.2,0.2,0,0);}
+   #fifth{ background:#ebe; transition:1s;}
+   #fifth:active{ transform:translate(100px,200px);}
+   #sixth{ background:#ebb; transition:1s;}
+   #sixth:active{ transform:translate3d(100px,200px,300px);}
+   #sevth{ background:#bbe; transition:1s;}
+   #sevth:hover{ transform:translateX(300px);}
+   #eigth{ background:#ecb; transition:1s;}
+   #eigth:hover{ transform:translateY(300px);}
+   #ninth{ background:#cbe; transition:1s;}
+   #ninth:active{ transform:translateZ(300px);}
+  </style>
+ </head>
+ <body>
+<p>让它旋转90度</p>
+<div id="first">---></div>
+ <p>让它旋转180度</p>
+<div id="second">---></div>
+ <p>让它旋转矩阵值</p>
+<div id="third">⑩</div>
+ <p>让它旋转矩阵值</p>
+<div id="fourth">⑩</div>
+ <p>让它2d移动</p>
+<div id="fifth">⑩</div>
+ <p>让它3d移动</p>
+<div id="sixth">⑩</div>
+ <p>让它2d X 轴移动</p>
+<div id="sevth">⑩</div>
+ <p>让它2d Y 轴移动</p>
+<div id="eigth">⑩</div>
+ <p>让它3d Z 轴移动(暂时没用)</p>
+<div id="ninth">⑩</div>
+
+</body>
+</html>
+
+
+

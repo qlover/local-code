@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>纯 JS 打字机效果</title>
+  <style>
+   *{margin:0; padding:0; cursor:default;}
+   html,body{width:100%; height:100%; color:#fff;}
+   #showor{
+		width:100px;
+		text-align:center;
+		line-height:30px;
+		background:#eee;
+		color:#555;
+		height:30px;
+		border:1px solid #f00;
+		position:absolute;
+		top:0;left:50%;
+		margin:0 0 0 -50px;
+		font-size:14px;
+		
+		/*css3*/
+		border-radius:20%;
+		box-shadow:3px 3px 5px #222;
+		animation:diao 1s ease-out;
+   }
+   #dian{
+		color:#aaa;
+   }
+   
+   @keyframes diao{
+		0%{top:0px;}
+		to{top:50%;}
+   }
+    @keyframes rdiao{
+		0%{top:50%;}
+		to{top:-100px;}
+   }
+  </style>
+   <script type="text/javascript">
+   		setTimeout('addD()',200);
+    </script>
+ </head>
+ <body onselectstart="return false;">
+	<p id="str_p">
+	1.当神已无能为力，那便是魔渡众生。
+　　3. 那是不同高度上的两片云---你在底下看上去它们重合了，事实上却永远不会相遇。
+　　4. 纵然是七海连天，也会干涸枯竭，纵然是云荒万里，也会分崩离析，这世间的种种生死离别，来了又去，可是 所爱的人啊 只要我曾真的爱过你 那我就永远不会忘记　但 请你原谅 我还是要不动声色地继续走下去
+　　5.日光照到的一切地方都有阴影。
+　　6.原来这一场千里的跋涉，只不过是来做最后一次甚至无法相见的告别。
+　　7.君生我未生，我生君已老。
+　　8.隔了百年的光阴，万里的迢梯，浮世肮脏，人心险诈，割裂了生和死。到哪里，再去寻找，纯白如羽的华衣,还有那张莲花般的素颜。
+　　9. 喝一口忘川的水，再喝一口记川的水，忘记了一切，又记起了一切。
+　　10.我只是一个人，天地都背弃。</p>
+<div id="showor">获取文本中<span id="dian"></span></div>
+  <script type="text/javascript">
+ var showor = document.getElementById('showor');
+  function showorStop(){
+	setTimeout(function(){
+		document.getElementById('showor').style.animationPlayState = 'paused';
+	},1000);
+  }
+  function showorBegin(){
+	setTimeout(function(){
+		W.innerHTML = '';
+		showor.innerHTML = '获取成功！';
+		showor.style.animationPlayState ='running';
+		showor.style.animation='rdiao 1s ease-in'; 
+		showorHid();
+	},1000);
+  }
+  function showorHid(){
+	setTimeout(function(){
+		showor.style.display = 'none';
+		document.body.style.color ='#000';
+	},1000);
+  }
+	showorStop();
+  function checkN(str){
+	var reg = /\n$/g;
+	return reg.test(str);
+  }
+		var str = document.getElementById('str_p').innerHTML;
+		var time = null;
+		var text_number = 0;
+		var strlen = str.length;
+		var allTime = strlen*50;	//全局获取文本时间
+
+		//把所有空格去掉
+		var reg = /\s/g;
+		if(reg.test(str)){
+			str = str.replace(reg,'');
+		}
+		
+		//在每个番号前面加上一个换行符
+		var reg2 = /([0-9]+\.)/g;
+		if(reg2.test(str)){
+			str = str.replace(reg2,'\n $1');
+		}
+
+		//去掉第一个换行符
+		var reg3 = /\n/;
+		if(reg3.test(str)){
+			str = str.replace(reg3,'');
+		}
+
+	
+		function chang(){
+			time = setTimeout("change_text()",1800);
+		}
+
+		function change_text(){
+			var sctn = str.charAt(text_number);
+			if(text_number < strlen){
+				if(checkN(sctn)){
+					sctn+='<br>';
+				}
+				document.write(sctn);
+				setTimeout("change_text()",100);	
+			}else{
+				clearTimeout(time);
+				alert('word printed over');
+				return false;
+			}
+			text_number+=1;
+		}
+		var Dn = 0;
+		var W = document.getElementById('dian');
+		var addD = function(){	
+			Dn++;
+			W.innerHTML+='.';
+			if(Dn > 3){
+				Dn = 0;
+				W.innerHTML ="";
+			}
+			setTimeout(addD,1000);
+		}
+ 
+	window.onload = function(){
+
+		setTimeout(function(){
+						addD = null;
+			showorBegin();
+
+			setTimeout('chang()',100);
+			
+		},allTime);
+	}
+  </script>
+
+
+
+</body>
+</html>
+
+
+

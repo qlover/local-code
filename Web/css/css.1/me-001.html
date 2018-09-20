@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>transition</title>
+<style>
+#lry{width:300px; height:100px; background:#eee; z-index:100}
+#switch{ width:100px; height:50px; background:#f00; text-align:center; line-height:50px; transition:all .8s; z-index:100}
+#switch:hover{ width:200px; height:300px; line-height:300px; font-size:50px;}
+#cen{width:200px; height:200px; background:#eee; margin:50px auto 0; position:relative; text-align:center; color:#ebe; line-height:200px; overflow:hidden;z-index:10}
+#cen .left,#cen .top{ text-align:center; position:absolute; opacity:0.2; font-size:40px; }
+#cen .left{left:-150px; width:150px; height:200px; background:#ff0; top:0px; transition:left .3s;}
+#cen .top{top:-150px; width:200px; height:150px; background:#0ff; line-height:150px; transition:top .8s;}
+#cen:hover .left{left:0;}
+#cen:hover .top{top:0;}
+
+#spin{ height:40px; background:#666; margin-bottom:20px; padding-top:10px;}
+#spin .move{ width:90%; height:30px; background:#00f; margin:0 auto; text-align:center; line-height:30px; transition:.7s; overflow:hidden; position:relative;}
+#spin .move span{width:200px; }
+#spin .prve,#spin .next{ width:50%; height:30px; position:absolute; background:#666; transition:.7s;}
+#spin .prve{left:0; left:-50px;}
+#spin .next{right:0; right:-50px;}
+#spin .move:hover .prve{width:0;}
+#spin .move:hover .next{width:0;}
+
+#retato{width:200px; height:200px; border-radius:50%; background:#0f0; transition:0.8s;}
+#retato:hover{transform:rotate3d(20,60,100,45deg)}
+h3{width:200px; background:#ff0; display:block;}
+</style>
+ </head>
+ <body>
+ <h3>55555555555555555555555555555555555555555555546546546546546546546546546543216532465465</h3>
+<div id="spin">
+	<div class="move">
+		<div class="prve"></div>
+		<div class="next"></div>
+		<span>you can change width in here!</span>
+	</div>
+</div>
+<div id="lry">
+	<div id="switch">
+	
+	</div>
+</div>
+<div id="cen">
+	鼠标移入这里看看
+ <div class="left">left</div>
+ <div class="top">top</div>
+</div>
+
+<div id="retato">
+retato
+</div>
+ </body>
+</html>
+
+
+

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <title>animation_click</title>
+  <meta name="Description" content="">
+  <style>
+   html,body,ul,li,em{margin:0; padding:0; font-size:12px; cursor:default; font-style:normal;}
+   div{margin:5px;}
+	input {
+		padding:5px; margin:5px;
+		
+	}
+	.spin{
+		border:70px solid #fff;background:#0f0;
+		width:0px; height:0px; transition:.5s;
+		position:relative;
+	}
+	.spin:hover{
+		width:50px; height:50px;
+		border-width:45px;
+	}
+	.spin:hover:before{
+		content: '有惊喜';
+		position:absolute;
+		
+	}
+	.show{
+		padding:5px; float:left;
+		background:#eee;
+		border:1px solid #f00;
+		overflow:hidden;
+	}
+	.show img{
+		width:200px; height:200px;
+		transition:1s;
+	}
+	input{
+			
+	}
+	.show img:hover{
+		transform:scale(1.1,1.1);
+	}
+	.dis{
+		width:100px; height:100px; background:#00f;
+		transition:.5s;
+		transform:scale(1,1);
+	}
+	.bg{
+		width:100%; height:100%;
+		background:#fff;
+		position:fixed;
+		z-index:-1;
+		transform:scale(0.0009,0.0009);
+		background:url('http://imgsrc.baidu.com/forum/w%3D580/sign=177a38afd2c8a786be2a4a065708c9c7/b15c267f9e2f07081a5db255ea24b899a801f291.jpg') no-repeat center;
+		background-size:100% 100%;
+		opacity:0.2;
+	}	
+	.leave{
+		width:200px; height:200px; border-radius:50%; 
+		background:#0f0; 
+		transition:2s ease;
+		text-align:center; line-height:200px;
+	}
+	@keyframes bgc{
+		0%{transform:scale(0.0009,0.0009); }
+		50%{transform:scale(1,1); opacity:1;}
+		100%{transform:scale(0.0009,0.0009); opacity:0;}
+	}
+	@keyframes leav{
+		0%{transform:scale(1);}
+		50%{transform:scale(0.8);}
+		90%{transform:translateY(-5555px);}
+		100%{scale(0);}
+		
+	}
+	@keyframes apper{
+		0%{}
+		20%{transform:rotateY(180deg);}
+		90%{opacity:0;}
+		100%{display:none;}
+	}
+	.ring{
+		width:200px; height:100px; 
+		position:relative;
+	}
+	.ring:before{
+		content:'come here, to ring me';
+		z-index:55;
+		width:150px; height:20px;
+		display:block;
+		position:absolute;
+		left:50%;top:50%;margin:-10px 0 0 -75px;
+		color:#000;
+		font-size:13px;
+		text-shadow:2px 2px #888;
+		text-transform:capitalize;
+		transition:1s;
+	}
+	.ring .front{
+		width:200px; height:100px; background:#0ff; transition:.5s;
+		margin:0;
+		position:absolute; top:0; opacity:1;
+		transform:rotateY(0deg);
+		z-index:10;
+		background-image:url('http://imgsrc.baidu.com/forum/w%3D580/sign=177a38afd2c8a786be2a4a065708c9c7/b15c267f9e2f07081a5db255ea24b899a801f291.jpg');
+		background-size:200px 100px;
+	}
+	.ring .back{
+		width:200px; height:100px; background:#ff0; transition:.5s;
+		margin:0;
+		position:absolute; top:0; opacity:0;
+		transform:rotateY(180deg);
+		z-index:10;
+		background-image:url('http://imgsrc.baidu.com/forum/w=580/sign=323aabe91b950a7b75354ecc3ad0625c/f3ae4710b912c8fcbdfc0612fa039245d7882183.jpg');
+		background-size:200px 100px;
+	}
+	.ring:hover:before{
+		opacity:0;
+	}
+	.ring:hover .front{
+		opacity:0; transform:rotateY(180deg);
+	}
+	.ring:hover .back{
+		opacity:1;transform:rotateY(0deg);
+	}
+	
+  </style>
+  <script type="text/javascript">
+	window.onload = function(){
+		
+		//first scale
+		document.adi.click.onmousedown = function(){
+			document.getElementsByClassName('dis')[0].style.transform = 'scale(0.1,0.1)';
+		}
+		document.adi.click.onmouseup = function(){
+			document.getElementsByClassName('dis')[0].style.transform = 'scale(1,1)';
+		}
+		var open = true;
+		//change background
+		document.adi.chang_bg.onmousedown = function(){
+			if(open){
+			open = false;
+			document.getElementsByClassName('bg')[0].style.animation = "bgc 5s infinite cubic-bezier(1,0.5,0.9,1)";
+			}else{
+				open = true;
+			document.getElementsByClassName('bg')[0].style.animationPlayState = "paused";
+			}
+		}
+		//throw leav
+		document.adi.leave.onmousedown = function(){
+			document.getElementsByClassName('leave')[0].style.transform = 'scale(0.7)';
+			setTimeout(function(){				
+				document.getElementsByClassName('leave')[0].style.transform = 'translateY(-5555px)';
+				setTimeout(function(){
+					var le = document.getElementsByClassName('leave')[0];
+					le.parentNode.removeChild(le);
+				},100);
+			},800);
+		}
+		//other way to throw leave
+		/*document.adi.leave.onmousedown = function(){
+			document.getElementsByClassName('leave')[0].style.animation = 'leav 2s';
+			setTimeout(function(){document.getElementsByClassName('leave')[0].style.display = 'none';
+			},1500);
+		}*/
+	}
+  </script>
+ </head>
+ <body onselectstart="return false";>
+ <form name="adi">
+	<div class="bg"></div>
+	<div id="top">
+	<input type="button" name="click" value="click me"/>
+	<input type="button" name="chang_bg" value="click me to change background"/>
+	<input type="button" name="leave" value="throw it"/>
+	</div>
+	<div class="dis"></div>
+	<div class="leave"> throw me away!</div>	
+	<div class="spin"></div>
+	<div class="ring">
+		<div class="front"></div>
+		<div class="back"></div>
+	</div>
+	<div class="show"><img src="http://imgsrc.baidu.com/forum/w=580/sign=323aabe91b950a7b75354ecc3ad0625c/f3ae4710b912c8fcbdfc0612fa039245d7882183.jpg" /></div>
+</form>
+</body>
+</html>
+
+
+

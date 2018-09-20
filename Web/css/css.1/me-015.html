@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <title> CSS 选择符 </title>
+  <meta name="Description" content="">
+  <style>
+  @charset "utf-8";
+  html,body,ul,li,em{margin:0; padding:0; font-size:12px; cursor:default; font-style:normal;}
+	ol{
+		width:800px; height:auto; 
+	}
+	ol li:first-child{		/*整个 OL 第一个 LI*/
+		color:#f00;
+	}
+	ol li:last-child{		/*整个 O; 最后一个 LI*/
+		color:#00f;
+	}
+	ol li:first-child *{		/*它的优先级很高*/
+		color:#0ff;
+	}
+	p{
+		color:#0f0 !important;	/*强制其优先*/
+	}
+	div{
+		width:300px; height:auto; text-align:center; background:#eee;
+		color:#fff !important;	/*如果没有这一句，则下面的  div#top 和div 下的 #top 都可以用上自己的属性了，因为标签优先级比 ID 高*/
+	}
+	div.one{
+		font-size:20px; 
+	}
+	div .one{
+		font-size:30px; color;#000 !important;/* 然而这里加了强制也没有什么用，因为标签下类的优先级还是没有 * 高*/
+	}
+	.one{
+		color:#000 !important;		/* 这里会发瑞，虽然 * 优先级很高，但是用类加上强制就会越过 * 的优先级*/
+	}
+	div#two{
+		color:#f00;
+	}
+	div #two{
+		color:#ee0 !important;	/*当然如果在来强制下也可以*/
+		font-size:15px;
+	}
+	#two{
+		color:#f00;
+		background:#f00;	/*这里优先级一下就来了，是因为前面的层没有加背景或是没有强制*/
+	}
+	#fix{
+		position:fixed; right:0;
+	}
+	#fix p{
+		font-size:2em !important;
+		color:#000 !important;	/* 把上面强制过的 P 在强制一下，改变优先级*/
+	}
+	
+	.a.b{							/*多类选择符表示 高级应用*/
+		background:rgba(0,0,0,0.6);
+	}
+	
+	.c{
+		background:#0f0;
+	}
+	.d{
+		background:#0f0;
+	}
+	
+	
+	#fix div{
+		height:50px;
+	}
+	
+	
+	li:nth-child(2){
+		/*color:#fff;*/ background:#bbb;
+	}
+	li:nth-child(2) > div{		/* 子选择器，只让下一层的所有 DIV 应用*/
+		color:#000 !important;
+	}
+	li:nth-child(2) div{		/* 让所有 DIV 应用*/
+		color:#f0f !important;
+	}
+	li:nth-child(2) .layer > div{
+	
+		color:#f00;
+	}
+
+	
+	h1+h1{		/* 相邻选择器 相邻选择符只会命中符合条件的相邻的兄弟元素*/
+		color:#f00;
+	}
+	h2~h2{		/* 兄弟选择器 兄弟选择符会命中所有符合条件的兄弟元素，而不强制是紧邻的元素*/
+		color:#0f0;
+	}
+</style>
+<script src="js/jquery.js"></script>
+<script src="js/me.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+
+}
+</script>
+ </head>
+ <body>
+<div id="fix"><p>多类选择符</p>
+	<div class="a b">这个是多类选择符用法，但可以用另一种方法来表示出来</div>
+	<div class="c d">这个则是用的另一种可以来表示出来的方法</div>
+<p style="color:#f00 !important">
+			如何区分伪对象和伪元素，现在 CSS3 已经可以完成了
+			只要是 伪元素的都是单个冒号
+			而伪对象是两冒号
+		</p>
+</div>
+ <ol>
+	<li>元素选择符
+		<p>this first paragraph</p>
+		this third paragraph
+		<p>this second paragtaph</p>
+		<span>this fourth paragraph</span>
+		<div class="one">
+			this fifth paragraph
+			<div class="one">
+				this fifth paragraph
+			</div>
+		</div>
+		<p>标签ID和标签类的效果都是一样的</p>
+		<div id="two">
+			this sixth paragraph
+			<div id="two">
+				this seventh paragraph
+			</div>
+		</div>
+		
+	</li>
+	<li>关系选择符
+		<div>我被包含了</div>
+		<div>我被包含了</div>
+		<div class="layer">我被包含了
+			<div>我又被包含了</div>
+			<div>我又被包含了
+					<div>我再一次被包含了</div>
+					<div>我再一次被包含了
+						<div>我还是要包含</div>
+						<div>我还是要包含</div>
+						<div>我还是要包含</div>
+					</div>
+					<div>我再一次被包含了</div>
+			</div>
+			<div>我又被包含了</div>
+		</div>
+		
+		<h1>我是 H1</h1>
+		<h1>我是 H1</h1>
+		<h2>我是 H2</h2>
+		<h2>我是 H2</h2>
+		<h1>我是 H1</h1>
+		<h1>我是 H1</h1>
+		<h3>我是 H3</h3>
+		<h1>我是 H1</h1>
+		<h2>我是 H2</h2>
+		<h2>我是 H2</h2>
+		<h2>我是 H2</h2>
+		<h2>我是 H2</h2>
+		<h2>我是 H2</h2>
+		<h2>我是 H2</h2>
+		
+	</li>
+	<li>属性选择符
+		<div style="height:500px; color:#000 !important">	<!-- 再高也没这个优先级高  因前面用过强制-->
+			<span class="nl">内联一</span>
+			<span>内联二</span>
+			<span>内联三</span>
+			<span class>内联三</span>
+			<input name value="同样的文本框下面的选中了这一个却没有选中"/>
+			<input type="text" />
+			<input type="password"/><p>
+			<button>按钮一</button>
+			<button disabled>按钮二</button>
+			<button>按钮三</button>
+			</p>
+			<span name="nl">内联一</span>
+			<span>内联二</span>
+			<span>内联三</span>
+			<span name>内联三</span>
+			<span name="nl">内联三</span>
+			
+			<h4 class="a b c">我是 H4</h4>
+			<h4 class="b a">我是 H4</h4>
+			<h4 class="a">我是 H4</h4>
+			<h4 class>我是 H4</h4>
+			
+			
+			<h5 class="abc">我是 H5</h5>
+			<h5 class="b a">我是 H5</h5>
+			<h5 class="ab ca">我是 H5</h5>
+			<h5 class>我是 H5</h5>
+		</div>
+			
+	</li>
+	<li>伪类选择符(必须定义 content 属性)
+		<p>主要的 <strong style="color:#f00">伪元素/伪对象</strong> 就看下图</p>
+		<img src="img/06.jpg">
+		
+	</li>
+	<li>伪对象选择符(必须定义 content 属性)
+		
+	</li>
+ </ol>
+ 
+ <style>
+ span[name="nl"]{	/* 这个属性选择就需要加上值了。因为是属性和值的选择器*/
+	color:#00f;
+ }
+	span[class]{			/* 记住 即使是没有属性值也会选择到，因为只是属性选择器*/
+		color:#f00;
+	}
+	input[name]{
+		width:300px;
+	}
+	input[type]{
+		background:#0ff;
+	}
+	button[disabled]{/*这个还可以用伪元素 :disabled 来获取,当然还有匹配可用的 :enabled*/
+		background:rgba(0,0,0,0.6);
+		position:relative;
+	}
+	button[disabled]:after{
+		content: '这个被选中了';
+		position:absolute;
+		font-size:10px;
+		left:20px; color:#f00;
+	}
+	h4[class~="a"]{			/* 会选择 H4 中 class 属性中有 a 值的元素，且只要有 a 值的元素都会被选上*/
+		background:#f00 !important;
+	}
+	h5[class^="a"]{		/* 这个和 上一个 选择器类似，但是选择值以 a 开头的才行*/
+		background:#00f !important;
+	}
+	/*
+		其实在这里也发现了，所谓的属性选择器，和正则表达示的选择是一们发现没 ^ 是匹配开头，$ 是匹配结尾
+		而 | 则匹配在 CSS 属性选择器中的 - 号
+		* 则匹配 只要有这个字符就匹配的值
+	*/
+ </style>
+ 
+</body>
+</html>
+
+
+

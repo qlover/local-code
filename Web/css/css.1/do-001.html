@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>animation</title>
+  <style>
+   *{margin:0; padding:0; background:#fff;}
+   body{ padding-bottom:500px;}
+   /*div{width:100px; height:100px; margin:10px;		
+		text-align:center; line-height:100px; font-weight:800;
+		cursor:default;
+	}*/
+	#nav{ width:500px; height:50px; background:#eee; margin:10px; }
+	#nav .menu{ width:500px; height:50px; background:#bbb; position:relative;overflow:hidden;}
+	#nav .menu ul{ list-style:none;}
+	#nav .menu ul li{ width:100px; height:50px; background:#bbb; margin-left:10px; float:left; cursor:pointer;transition:.5s;}
+	#nav .menu ul li span{ width:100px; height:50px; display:block; position:absolute; text-align:center; line-height:50px; transition:.5s; border-radius:2px;}
+	#nav .menu ul li span.back{ background:#f00; top:-50px; border-bottom:5px solid rgb(200,0,0); height:45px;}
+	#nav .menu ul li span.front{ background:#0f0; top:0; }
+	#nav .menu ul li:hover span.back{ top:0px; }
+	#nav .menu ul li:hover span.front{ top:50px;}
+
+	#con{width:200px; height:200px; background:#eee;margin:10px; text-align:center; line-height:200px;}
+	#con .srcy i{width:1px; height:1px; color:#0ff; position:absolute; top:0; left:46%; margin:-1px 0 0 -1px; z-index:999}
+	#con .srcy{ width:200px; height:200px; background:#00a; border-radius:50%; position:relative; transition:1s; overflow:hidden; }
+	#con .srcy ul{ list-style:none;}
+	#con .srcy ul li{ width:100px; height:100px; background:#f00; position:absolute; /*left:-7px; top:-9px; 
+		transform:skew(10deg,10deg);*/ left:-43px; top:-38px; transform:skew(44deg,40deg);
+	}
+	#con:hover .srcy{ transform:rotate(360deg);}
+
+	#xz{ width:200px; height:200px; background:#aaa; margin:10px; overflow:hidden;}
+	#xz .main{ width:200px; height:200px; background:#eee; border-radius:50%; position:relative; transition:1s;}
+	#xz .main .con{ width:190px; height:190px; background:#ddd; border-radius:50%; margin:0 auto; position:relative; top:5px;}
+	#xz .main #me{ width:10px; height:10px; background:#f00; border-radius:50%; position:absolute; top:0px; left:100px;}
+	#xz .main:hover{ transform:rotate(360deg);}
+
+/*
+   top left
+	0   100
+	100	200
+	200 100
+	100  0
+*/
+  </style>
+ </head>
+ <body>
+ <div id="con">
+	<div class="srcy">
+		<i>·</i>
+		<ul>
+			<li></li>
+		</ul>
+	</div>
+</div>
+
+
+<div id="xz">
+	<div class="main">
+		<div class="con"></div>
+		<div id="me"></div>
+	</div>
+</div>
+<div id="nav">
+	<div class="menu">
+		<ul>
+			<li>
+				<span class="back">一导航</span>
+				<span class="front">导航一</span>
+			</li>
+			<li>
+				<span class="back">二导航</span>
+				<span class="front">导航二</span>
+			</li>
+			<li>
+				<span class="back">三导航</span>
+				<span class="front">导航三</span>
+			</li>
+			<li>
+				<span class="back">四导航</span>
+				<span class="front">导航四</span>
+			</li>
+
+		</ul>
+	</div>
+</div>
+
+</body>
+</html>
+
+
+

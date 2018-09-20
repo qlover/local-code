@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>timer</title>
+  <style>
+   *{margin:0; padding:0; cursor:default;}
+	#bg{width:500px; height:500px;  margin:50px auto 0;}
+	#bg #clock_bg{
+		width:500px; height:500px; background:#eee;
+		border-radius:50%; position:relative;
+		overflow:hidden;
+		box-shadow:12px 20px 10px #666;
+		z-index:500;/*clock_bg 层*/
+	}
+	#bg #clock_bg_cover{
+		width:500px; height:500px; 
+		border-radius:50%;
+		background:rgba(0,0,0,.2);/*clock_bg_cover 背景*/
+		position:absolute;
+		box-shadow:0 0 6px #555;
+		z-index:1000;/*clock_bg_cover 层*/
+	}
+	#bg #clock_bg #main{
+		width:450px; height:450px; 
+		background:#fff;/*装三个针的层的背景（main）*/
+		position:absolute; left:5%; top:5%;/*left:25px;top:25px;*/
+		border-radius:50%;
+		transform:rotate(46deg);
+		z-index:60;/*时钟的层次*/
+	}
+	#bg #clock_bg #main #disk{
+		position:absolute; width:400px; height:400px;  top:50%; margin-top:-200px;
+		left:50%; margin-left:-200px; border-radius:50%;
+		transform:rotate(0deg);
+		animation:spin infinite paused;
+		animation-duration:2s;
+		animation-delay:2s;
+		z-index:888;/*秒针的层次*/
+	}
+	#bg #clock_bg #main #minute{
+		width:400px; height:400px; 
+		position:absolute; top:50%; margin-top:-200px;
+		left:50%;margin-left:-200px;
+		transform:rotate(0deg);
+		z-index:777;/*分针的层次*/
+	}
+	#bg #clock_bg #main #hour{
+		width:400px; height:400px; 
+		position:absolute; top:50%; margin-top:-200px;
+		left:50%;margin-left:-200px;
+		transform:rotate(0deg);
+		z-index:666;/*时针的层次*/
+	}
+	#bg #clock_bg #main .finger_bg{
+		width:400px; height:400px;
+		background:#eee; /*finger_bg 背景*/
+		position:absolute; top:50%;left:50%;
+		margin:-200px 0 0 -200px;
+		border-radius:50%;
+		z-index:555;/*finger_bg 层次*/
+	}
+	#bg #clock_bg .cut{
+		position:absolute; font-size:30px; font-weight:bolder;
+		color:#000; z-index:50;/*时钟刻的层次*/
+	}
+	#clock_bg .top{top:0; left:45%;}
+	#clock_bg .left{left:0; top:49%;}
+	#clock_bg .bottom{bottom:0; left:44%;}
+	#clock_bg .right{right:0; top:49%;}
+	#clock_bg .center{ position:absolute; top:50%; left:50%;		display:block; width:10px; height:10px;
+		margin-top:-5px; margin-left:-5px;
+		z-index:70; /*中心圆点的层次*/
+		border-radius:50%;
+		background:#f00;/*中心圆点的颜色*/
+	}
+	#main .big{width:240px; height:240px; }
+	#main .small{width:220px; height:220px; }
+	#main .middle{width:230px; height:230px; }
+	#main .cover{
+		position:relative;
+		overflow:hidden;
+		border-radius: 0 0 10px 0;
+	}
+	#main .cover .sec_finger{
+		width:200px; height:200px; background:rgb(10,10,10); position:absolute;
+		transform:skew(45deg,44deg);
+		top:109px;left:109px;
+		box-shadow:20px 20px 3px #000;
+		border-radius:18%;
+	}
+	#main .cover .min_finger{
+		width:165px; height:165px; background:rgb(0,0,222);
+		position:absolute;
+		right:0; bottom:0;
+		transform:skew(44deg,43.5deg) translate(20px,30px);
+		border-radius:15%;
+	}
+	#main .cover .hou_finger{
+		width:145px; height:145px; background:rgb(250,250,0);
+		position:absolute;
+		right:0; bottom:0;
+		transform:skew(43deg,43deg) translate(25px,20px);
+		border-radius:20%;
+
+	}
+	@keyframes spin{
+		0%{transform:rotate(0deg);}
+		100%{transform:rotate(360deg);}
+	}
+	#bg_ke{
+		width:500px; height:500px; position:absolute; background:#ccc;/*刻度的背景*/
+		border-radius:50%; 
+	}
+	#bg_ke span{
+		position:absolute; font:1.5em '黑体'; font-weight:bolder;
+	}
+	span.a12{
+		width:10px; height:15px; top:0; left:50%;	
+		margin-left:-5px; line-height:15px;
+	}
+	span.a6{
+		width:10px; height:15px; bottom:10px; 
+		left:49%; margin-left:-5px;
+	}
+	span.a9{
+		width:15px; height:10px; left:10px; top:50%;
+		margin-top:-5px;						transform:rotate(90deg);
+	}
+	span.a3{
+		width:15px; height:10px; right:0; top:50%;
+		margin-top:-5px;
+		transform:rotate(90deg);
+	}
+ </style>
+<script type="text/javascript" src="js/me.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var disk = document.getElementById('disk');
+		var minute = document.getElementById('minute');
+		var hour = document.getElementById('hour');
+		var time = 0;
+		var mydate = new Nowtime();
+		var seconds = mydate.nowSecond;
+		var minutes = mydate.nowMinute;
+		var hours = to12hours(mydate.nowHour);
+		var sec_deg = (time+seconds)*6;
+		var min_deg = ((time+minutes)*6 + (sec_deg/60))%360;
+		var hou_deg = ((time+hours)*30 + (min_deg/12))%360;
+		disk.style.transform = "rotate("+ (sec_deg) +"deg"+")";
+		minute.style.transform = "rotate("+ (min_deg) +"deg"+")";
+		hour.style.transform = "rotate("+ (hou_deg) +"deg"+")";
+		setInterval(function(){
+			if(sec_deg>=360) sec_deg = 0;
+			else if(min_deg >=360) min_deg = 0;
+			else if(hou_deg >=360) hou_deg = 0;
+			disk.style.transform = "rotate("+ (sec_deg+=6) +"deg"+")";
+			minute.style.transform = "rotate("+ (min_deg+=0.1) +"deg"+")";
+			hour.style.transform = "rotate("+ (hou_deg+=((1/10)*(1/12))) +"deg"+")";
+		},1000);
+	/*
+		setInterval(function(){
+			if(sec_deg>=360){
+				sec_deg = 0;
+				minute.style.transform = "rotate("+ (min_deg+=6) +"deg"+")";
+				if(min_deg >=360){
+					min_deg = 0;
+					//hour.style.transform = "rotate("+ (hou_deg+=30) +"deg"+")";
+					if(hou_deg >=360){
+						hou_deg = 0;
+					}
+				}else if(min_deg<(min_deg+6)){
+					hour.style.transform = "rotate("+ (hou_deg+=1/12) +"deg"+")";
+				}
+			}
+			disk.style.transform = "rotate("+ (sec_deg+=6) +"deg"+")";
+		},1000);
+	*/
+	}
+
+</script>
+ </head>
+ <body onselectstart="return false;">
+
+
+<div id="bg">
+	<div id="clock_bg_cover"></div>
+	<div id="clock_bg">
+		<div id="bg_ke">
+			<span class="a12">|</span>
+			<span class="a6">|</span>
+			<span class="a9">|</span>
+			<span class="a3">|</span>
+		</div>
+		<div id="main">
+			<div class="finger_bg"></div>
+			<div id="disk">
+				<div class="cover big">
+					<div class="sec_finger"></div>	
+				</div>
+			</div>
+			<div id="minute">
+				<div class="cover middle">
+					<div class="min_finger"></div>
+				</div>
+			</div>
+			<div id="hour">
+				<div class="cover small">
+					<div class="hou_finger"></div>
+				</div>
+			</div>
+		</div>
+		<span class="center"></span>
+	</div>
+</div>
+
+
+
+</body>
+</html>
+
+<script>
+/*
+12.00	 46deg  || 406deg		cha 87
+3.00	135deg					cha 89
+6.00	225deg					cha 90 
+9.00	315deg					cha 90
+
+12~3   90
+3~6    90
+6~9    90
+9~12   90
+
+秒针一秒走6度；分针一秒走1/10度；时针一秒走1/120度.
+*/
+/*
+var Nowdate = function(){
+	var now = new Date();
+	this.second = 
+}*/
+
+/*这个查看秒与分之间的进制
+一秒等于 6 度，一秒则等于一分的 0.1 度，（但要记得保留一位小数）
+一秒等于 1/120 度
+var miao = 0;
+var fen = 0;
+while(miao <= 360){
+	miao += 6;
+	fen += 0.1;
+	if(miao == 360){
+		alert('秒是：'+miao+'分是：'+fix(fen,1));
+		break;
+	}
+
+}
+*/
+/*
+这个是查看分与时之间的进制,结果是一分钟6度 == 一小时0.5度
+分钟度数除以 12 等于当时的小时度
+		var fen = 0;
+		var hour = 0;
+		while(fen <= 360){
+			fen += 6;
+			hour += 0.5;
+			if(fen == 360){
+				alert('分是：'+fen +'时是：'+hour);
+				break;
+			}
+		}
+*/
+</script>
+

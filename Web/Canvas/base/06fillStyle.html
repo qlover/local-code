@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> fillStyle </title>
+</head>
+<body style="height: 100%;">
+	
+<canvas id="canvas" width="800" height="800"
+	style="border: 1px solid #ddd; display: block;margin: 0 auto"></canvas>
+
+<script type="text/javascript">
+var canvas = document.querySelector('#canvas')
+var context = canvas.getContext('2d');
+</script>
+
+<script>
+// 线性渐变
+var linearGrad = context.createLinearGradient(0, 0, 800, 800);
+linearGrad.addColorStop(0.0, '#fff');
+linearGrad.addColorStop(1.0, '#000');
+// 填充
+context.fillStyle = linearGrad;
+context.fillRect(0, 0,800, 800)
+</script>

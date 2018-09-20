@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <title>flex</title>
+  <meta name="Description" content="">
+  <style>
+   html,body,ul,li,em{margin:0; padding:0; font-size:12px; cursor:default; font-style:normal;}
+   div{margin:5px;}
+	#top{
+		width:200px; height:200px; background:#f00;
+		position:relative;
+	}	
+	#top:after{
+		content:'这个没有用上 flex 属性的布局后的效果';
+		display:block;
+		position:absolute;
+	}
+	#bod{
+		width:200px; height:200px; background:#f00;
+		display:flex;
+		position:relative;
+	}
+	#bod:after{
+		content:'这个是用上了 flex 属性的布局后的效果';
+		display:block;
+		position:absolute;
+	}
+	#bod .bod{
+		width:500px;
+		flex:1;
+	}
+	
+	
+#main {
+  width: 350px;
+  height: 100px;
+  border: 1px solid #c3c3c3;
+  display: flex;
+}
+
+#main div {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 40px;
+}
+
+#myBlueDiv
+{
+animation:mymove 5s infinite;
+/*Safari 和 Chrome:*/
+-webkit-animation:mymove 5s infinite;
+}
+
+@keyframes mymove
+{
+50% {flex-basis:200px;}
+}
+
+/*Safari 和 Chrome:*/
+@-webkit-keyframes mymove
+{
+50% {flex-basis:200px;}
+}
+  </style>
+  <script src="js/jquery.js"></script>
+  <script src="js/me.js"></script>
+  <script type="text/javascript">
+	window.onload = function(){
+		innerSelectStop(document);
+		setTimeout(function(){
+			alert('注意:\n\n\t\t因为该方法用于自适应布局，所以暂时还用不上');
+		},5000);
+	}
+  </script>
+ </head>
+ <body>
+
+<div id="top">	
+  <div class="top" style="background-color:coral;">one</div>
+  <div class="top" style="background-color:lightblue;">two</div>  
+  <div class="top" style="background-color:lightgreen;">three three three threethree three three three</div>
+</div>
+<div id="bod">	
+  <div class="bod" style="background-color:coral;">one</div>
+  <div class="bod" style="background-color:lightblue;">two</div>  
+  <div class="bod" style="background-color:lightgreen;">three three three three three three three three</div>
+</div>
+ 
+
+
+<p>"蓝色 DIV" 的 flex-basis 属性逐渐地从 40px 变化到 200px，然后再变回来：<p>
+
+<div id="main">
+  <div style="background-color:coral;">红色 DIV</div>
+  <div style="background-color:lightblue;" id="myBlueDiv">蓝色 DIV</div>
+</div>
+
+<p>在 CSS 中，flex-basis 属性是 <em>可动画化（animatable）</em> 的。</p>
+
+<p>Internet Explorer 10、Firefox 和 Opera 支持 CSS 动画。</p>
+<p>Safari 和 Chrome 通过带有前缀 -webkit-，支持 CSS 动画。</p>
+ 
+ 
+</body>
+</html>
+
+
+

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>css3 图片滚动</title>
+  <style>
+   body,ul,li,html{margin:0; padding:0; font-style:normal; font-size:15px;list-style:none;}
+   #bg{
+		padding:25px; width:500px;background:#333; opacity:0.99; margin:50px auto 0;
+		box-shadow:0px 0px 2px 3px #888;
+		border-radius:5%;
+   }
+
+   #bg #banner{
+		width:480px; height:230px; background:#fff; padding:10px;	
+		border-radius:20%;
+		background:rgba(200,200,200,0.5);
+		overflow:hidden;
+		position:relative;
+   }
+   #bg #banner #menu{
+		width:476px; height:228px; border-left:2px solid #898989; border-right:2px solid #898989; 
+		border-top:2px solid;border-bottom:2px solid; border-color:#898989;
+		overflow:hidden; border-radius:1%;
+		position:absolute; 									z-index:5000;
+   }
+   #bg #banner #view{
+		width:478px; height:230px; position:absolute; 
+		left:11px; overflow:hidden;  						z-index:500; 
+   }
+   #bg #banner #menu:before,#bg #banner #menu:after{
+		content: "";
+		width:20px; height:230px;
+		position:absolute;
+		border-radius:30%;	
+			z-index:50000;
+   }
+   #bg #banner #menu:before{
+		left:-20px;box-shadow:10px 0px 15px #222;
+   }
+   
+   #bg #banner #menu:after{
+		right:-20px;box-shadow:-10px 0px 15px #222;
+   }
+  
+   
+   #bg #banner #menu ul#move li{
+		width:400px; height:220px; margin-right:40px; float:right; margin-top:2px;
+		box-shadow:2px 2px 2px 1px rgba(250,250,250,0.668);
+		opacity:0.89; cursor:pointer;
+   }
+   #bg #banner #menu ul#move li:hover{
+		opacity:0.99;
+   }
+   #bg #banner #menu ul#move li img{
+		width:400px; height:220px; border:none;
+   }
+    #bg #banner #menu ul#move{
+		width:3000px; height:230px;  position:absolute;
+		right:0px; transition:1s;
+		animation:moveing 20s infinite ease-out;
+   }
+    #bg #banner #menu ul#move:hover{
+		animation-play-state:paused;
+	}
+   @keyframes moveing{
+		0%{right:0px;}
+		20%{right:-440px; }
+		40%{right:-880px;}
+		60%{right:-1320px;}
+		80%{right:-1760px;}
+		100%{right:0; animation-duration:0s;}
+   }
+   </style>
+   <script src="me.js"></script>
+   <script src="jquery.js"></script>
+  <script type="text/javascript">
+  </script>
+ </head>
+ <body onselectstart="return false";>
+	<div id="bg">
+		<div id="banner">
+			<div id="view"></div>
+			<div id="menu">
+				<ul id="move">
+					<li><a href="#a"><img src="img/01.jpg" /></a></li>
+					<li><a href="#b"><img src="img/02.jpg" /></a></li>
+					<li><a href="#c"><img src="img/03.jpg" /></a></li>
+					<li><a href="#d"><img src="img/04.jpg" /></a></li>
+					<li><a href="#e"><img src="img/05.jpg" /></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+

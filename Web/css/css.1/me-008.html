@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>animation</title>
+  <style>
+   *{margin:0; padding:0; }
+   body{ background:#fff;}
+   div{width:150px; height:150px; margin:10px;		
+		text-align:center; line-height:150px; font-weight:800;
+		cursor:default; transition:1s;
+	}
+
+	/*
+		animation: 动画名 持续时间 过渡类型 延迟时间 循环次数 循环是否可以反向运动 时间之外状态 动画状态
+	*/
+	
+	#move{background:#f00; }
+	#move1{background:#f00; position:relative; left:0;}
+	#move:hover{transform:translateX(200px)}
+	#move1:hover{ left:200px;}
+	#move2{background:#f00; position:relative; left:0; animation:mymove2 1s 1/*循环次数*/;}
+	
+	@keyframes mymove{
+		from{left:0}
+		to{left:200px}
+	}
+	@keyframes mymove2{
+		0%{left:0px;}
+		50%{left:200px}
+		100%{left:0px;}
+	}
+
+	@keyframes animation{
+		from{transform:translateX(0px)}
+		to{transform:translateX(200px)}
+	}
+	@keyframes otheranimation{
+		0%{transform:translateX(0px)}
+		25%{transform:translateX(100px)}
+		50%{transform:translateX(200px)}
+		75%{transform:translateX(100px)}
+		100%{transform:translateX(0px)}
+	}
+	/*#anima{ background:#0f0; animation:animation 2s infinite;}*/
+	#anima{ background:#0f0; animation:otheranimation 2s 1;}
+  </style>
+  <script>
+	window.onload=function(){ 
+		document.onselectstart=function(){
+			return false;
+		};
+	};
+  </script>
+ </head>
+ <body>
+
+<div id="move">向右移动</div>
+<div id="move1">向右移动</div>
+<div id="move2">向右移动</div>
+
+<div id="anima">向右移动</div>
+</body>
+</html>
+
+
+

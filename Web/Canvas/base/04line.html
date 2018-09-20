@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> 线条 </title>
+</head>
+<body style="height: 100%;">
+	
+<canvas id="canvas" width="800" height="800"
+	style="border: 1px solid #ddd; display: block;margin: 0 auto"></canvas>
+
+<script type="text/javascript">
+
+	var context = document.querySelector('#canvas').getContext('2d');
+
+	context.save();
+	context.fillStyle = '#f00';
+	// 变换
+	context.translate(100, 100);
+	context.fillRect(0, 0, 400, 400);
+	context.restore();
+
+	context.save();
+	context.fillStyle = '#0f0';
+	// 变换
+	context.translate(300, 300); // 这里物理上是 400,400
+	context.fillRect(0, 0, 400, 400);
+	context.restore();
+
+
+	function drawStar (cxt, x, y, R, rot) {
+		starPath(cxt);
+	}
+
+	function starPath ( cxt ) {
+		cxt.beginPath();
+		for(var i = 0; i < 5; i++){
+			cxt.lineTo(
+				Math.cos( (18 + i * 72) / 180 * Math.PI),
+				-Math.sin( (18 + i * 72 ) / 180 * Math.PI)
+			);
+			cxt.lineTo(
+				Math.cos( (54 + i * 72) / 180 * Math.PI),
+				-Math.sin( (54 + i * 72 ) / 180 * Math.PI)
+			);		
+		}
+		cxt.closePath();
+	}
+
+</script>

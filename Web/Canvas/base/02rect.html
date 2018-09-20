@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> rect </title>
+</head>
+<body style="height: 100%;">
+	
+	<canvas id="canvas" width="800" height="800"
+		style="border: 1px solid #eee; display: block;margin: 0 auto"></canvas>
+
+<script type="text/javascript">
+	
+	var ctx = document.getElementById('canvas').getContext('2d');
+
+	// 默认以黑色填充
+	ctx.lineWidth = 5;
+	ctx.fillStyle = '#0f0';
+	ctx.strokeStyle = '#000';
+
+	ctx.rect(0, 0, 150, 150);
+
+	ctx.fillRect(10, 10, 150, 150);
+
+	ctx.strokeRect(50, 50, 150, 150);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>纯 JS tab 选项卡</title>
+  <style>
+   body,ul,html{margin:0; padding:0; font-style:normal; font-size:15px;list-style:none;}
+   #tab{
+		width:400px; height:400px; background:#eee;
+		margin:50px auto 0;
+		position:relative;
+		border:2px solid;
+   }
+   #tab #top,#tab #bod{
+		width:100%; 
+   }
+   #tab #top{
+		height:50px; 
+	}
+   #tab #bod{
+		height:350px; 
+		
+   }
+   #tab #top ul.nav li{
+		width:100px; height:50px;
+		float:left; margin-left:25px; 
+		text-align:center;
+		position:relative;
+		overflow:hidden;
+   }
+   #tab #top ul.nav li a{
+		display:block; text-decoration:none;
+		color:#000; width:100%; height:100px;
+		line-height:50px; position:absolute;
+		top:0; left:0;
+		transition:.5s;
+   }
+   #tab #top ul.nav li a.default{
+		top:-50px;
+   }
+   #tab #top ul.nav li a:hover{
+		top:-50px;
+   }
+   #tab #top ul.nav li a span{
+		display:block; width:100%; height:50px;
+
+   }
+   #tab #top ul.nav li a span.front{
+		background:#b00;
+   }
+   #tab #top ul.nav li a span.back{
+		height:45px;
+		background:#ff0;
+		border-bottom:5px solid rgb(200,200,0);
+		border-radius:0 0 2px 2px;
+   }
+   #tab #bod ul li{
+
+		width:100%; height:345px; background:#ccc;
+		border-top:5px solid #f0f; position:absolute;
+		opacity:0;
+		text-align:center; line-height:345px; font-size:3em;
+		transition:1.2s;
+   }
+   #tab #bod ul li.show{
+		opacity:0.99; 
+   }
+   </style>
+   <script src="me.js"></script>
+   <script src="jquery.js"></script>
+  <script type="text/javascript">
+	window.onload = function(){
+		var top = document.getElementById('top');
+		var bod = document.getElementById('bod');
+		var topA = top.getElementsByTagName('a');
+		var bodLi = bod.getElementsByTagName('li');
+		//完成导航的选择
+		for(var i=0; i < topA.length; i++){
+			topA[i].index = i;
+			topA[i].onmousedown = function(){
+				var time = this.index;
+				for(var a=0; a<topA.length; a++){
+					if(a==time){
+						topA[a].className = 'default';
+					}
+					if(a != time){
+						topA[a].className = '';
+						
+					}
+				}
+				//完成内容的选择与切换
+				for(var l=0; l < bodLi.length; l++){
+					if(l==time){
+						bodLi[l].className = 'show';						
+					}
+					if(l != time){
+						bodLi[l].className = '';
+					}
+				}
+				return false;
+			}
+		}
+		
+		
+	}
+
+//下面函数只用于实验
+function hidden(obj){
+	obj.style.display = 'none';
+}
+function show(obj){
+	obj.style.display = 'block';
+}
+function set(fn,ms){ 
+	setTimeout(function(){fn},ms);
+}
+</script>
+ </head>
+ <body onselectstart="return false";>
+	<div id="tab">
+		<div id="top">
+			<ul class="nav">
+				<li>
+					<a href="#tab1" class="">
+						<span class="front">选项卡一前面</span>
+						<span class="back">选项卡一后面</span>
+					</a>
+				</li>
+				<li>
+					<a href="#tab1" class="default">
+						<span class="front">选项卡二前面</span>
+						<span class="back">选项卡二后面</span>
+					</a>
+				</li>
+				<li>
+					<a href="#tab1" class="">
+						<span class="front">选项卡三前面</span>
+						<span class="back">选项卡三后面</span>
+					</a>
+				</li>
+				
+			<ul>
+		</div>
+		<div id="bod">
+			<ul>
+				<li class="" style="background:url('img/01.jpg') no-repeat center;background-size:100% 100%;"></li>
+				<li class="show" style="background:url('img/02.jpg') no-repeat center;background-size:100% 100%;"></li>
+				<li class="" style="background:url('img/03.jpg') no-repeat center;background-size:100% 100%;"></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
+
+
+

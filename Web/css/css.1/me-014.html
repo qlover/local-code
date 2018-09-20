@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <title> clip(剪裁) </title>
+  <meta name="Description" content="">
+  <style>
+  @charset "utf-8";
+   html,body,ul,li,em{margin:0; padding:0; font-size:12px; cursor:default; font-style:normal;}
+   div{margin:5px;}
+   img{border:0 none; width:250px; height:250px; margin:5px;}
+   img:nth-child(2){
+	position:absolute;
+	border-left:1px solid transparent;
+	clip:rect(auto,200px,200px,auto)
+   }
+   
+   img:nth-child(3){
+	position:absolute;
+	left:300px;
+	border:2px solid;
+	clip:rect(0px,238px,139px,0px);
+	
+   }
+	.content{
+		position:absolute;
+		width:800px; height:100px; background:#eee;
+		transition:1s;
+		clip:rect(auto,500px,auto,300px);
+	}
+	.content .one,.content .two{width:300px; height:80px;}
+	.content .one{
+		float:left; background:#f00;
+		
+	}
+	.content .two{
+		float:right; background:#0f0;
+	}
+	.content:hover{
+		clip:rect(auto,800px,auto,0px);
+	}
+	#spin{ height:40px; background:#666; padding-top:10px;}
+	#spin .move{
+		width:95%; height:30px; background:#00f; margin-left:2%;
+		text-align:center; line-height:30px; font-size:20px;
+		position:absolute;
+		transition:1s;
+		clip:rect(auto,600px,auto,300px);
+	}
+	#spin:hover .move{
+		clip:rect(auto,900px,auto,0);
+	}
+	#bottom{
+		position:relative;
+		top:150px;width:100%; height:200px;
+	}
+	#bottom .con{
+		width:800px; height:100px; background:#eee;
+		position:relative;
+	}
+	#bottom .con .bg{
+		position:absolute; width:500px; height:50px;
+		border:1px solid #00f;
+		top:50%; left:50%; margin:-25px 0 0 -250px;
+		
+	}
+	#bottom .con .bg .bar{
+		width:500px; height:50px; background:#f00;
+		position:absolute;
+		margin:0;
+		transition:500ms;
+		clip:rect(auto,1px,auto,auto);
+		z-index:1;
+	}
+	#bottom .con .bg .text{
+		width:70px; height:30px; 
+		display:block; position:absolute;
+		left:50%; top:50%; margin:-15px 0 0 -35px;
+		text-align:center;
+		line-height:30px;
+		font-size:2em; font-weight:800;
+		z-index:50;
+	}
+	#bottom .con .bg .text:after{
+		content : '%'; float:right;
+		float:right; font-size:2.1em;
+	}
+  </style>
+<script src="js/jquery.js"></script>
+<script src="js/me.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	innerSelectStop(document);
+	var clipT = 1;
+	var interval = 5;
+	var times = 1000;
+	var changeClip = function(){
+		clipT += interval;
+		if(clipT <= 501){
+			var inner = (clipT-1)/interval;
+			if(inner == 70) times = 2000; 
+			else if(inner == 88) times = 2500;
+			else if(inner == 95) times = 4000;
+			$('.text').html(inner);
+			$('.bar').css('clip',"rect(auto,"+ clipT+"px,auto,auto)");
+			setTimeout(function(){changeClip();},times);
+		}else{
+			alert('加载完毕');
+			changeClip = null;
+		};
+	}
+	changeClip();
+
+}
+</script>
+ </head>
+ <body>
+<div id="spin"><div class="move">you can change width in here!</div></div>
+<img src="img/01.jpg"/>
+<img src="img/01.jpg"/>
+<img src="img/01.jpg" />
+ 
+ 
+ <div class="content">
+	<div class="one">11111111111111</div>
+	<div class="two" align="right">22222222222222</div> 
+	前面不是在me-001 中有这个效果吗，还记得不，当时用了很多的方法才做出来，现在不需要了,看上面
+
+ </div>
+<div id="bottom">
+	下面来个用剪裁做的进度条
+	<div class="con">
+		<div class="bg">
+			<div class="bar"></div>
+			<span class="text">1</span>
+			
+		</div>
+	</div>
+
+</div>
+ 
+</body>
+</html>
+
+
+

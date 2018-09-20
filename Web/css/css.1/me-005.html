@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>transform(2)</title>
+  <style>
+   *{margin:0; padding:0; background:#fff;}
+   body{ padding-bottom:500px;}
+   div{width:100px; height:100px; margin:10px;		
+		text-align:center; line-height:100px; font-weight:800;
+		cursor:default;
+	}
+	#first{ background:#eee; transition:1s;}
+	#first:hover{ transform:translate(100px,200px) scale(2,2)}
+	#second{ background:#bbb; transition:1s;}
+	#second:hover{ transform:scaleY(2)}
+	#third{ background:#ebb; transition:1s;}
+	#third:hover{ transform:rotate(50deg)}
+	#fourth{ background:#ebb; transition:1s;}
+	#fourth:hover{ transform:rotateX(50deg)}
+	#fifth{ background:#bbe; transition:1s;}
+	#fifth:hover{ transform:skew(45deg,45deg)}
+	#sixth{ background:#beb; transition:1s;}
+	#sixth:hover{ transform:skewY(45deg)}
+	#sevth{ background:#ebe; transform:rotate3d(20,10,150,14deg)}
+	#sum{width:250px; height:250px; line-height:250px; background:rgba(0,0,0,0.2);}
+	#sum .hover{ transition:1s; background:#ccc;}
+	#sum:hover .hover{ border:10px solid rgba(0,0,0,0.4); border-radius:50%; background:#ff0; transform:translate(50px,60px) rotate(100deg) scale(2,2) skew(20deg,30deg);}
+  
+  </style>
+ </head>
+ <body>
+<p>让它 2d 缩放</p>
+<div id="first">·</div>
+<p>让它 2d y 轴缩放</p>
+<div id="second">·</div>
+<p>让它 2d 旋转</p>
+<div id="third">·</div>
+<p>让它 3d X 轴 旋转</p>
+<div id="fourth">·</div>
+<p>让它 2d 倾斜旋转</p>
+<div id="fifth">·</div>
+<p>让它 2d y 轴倾斜旋转</p>
+<div id="sixth">·</div>
+<p>让它 3d 旋转</p>
+<div id="sevth"></div>
+<p>总结一下,请把鼠标放上来</p>
+<div id="sum">
+	<div class="hover">·</div>
+</div>
+</body>
+</html>
+
+
+

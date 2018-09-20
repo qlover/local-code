@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CSS3 </title>
+<style>
+*{ margin:0; padding:0;}
+div{ text-align: center; }
+.text{
+
+	/*3列*/
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+
+    /*中间的间隙 40 像素*/
+    -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 40px; /* Firefox */
+    column-gap: 40px;
+
+    /*每列边框*/
+    -webkit-column-rule-style: solid; /* Chrome, Safari, Opera */
+    -moz-column-rule-style: solid; /* Firefox */
+    column-rule-style: solid;
+}
+.text{ width: 50%;}
+
+.gar1{
+    width: 200px; height: 200px;
+  background: -webkit-linear-gradient(left, red , blue); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, red, blue); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, red, blue); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, red , blue); /* 标准的语法 */
+}
+.gar2{
+    width: 200px; height: 200px;
+  background: -webkit-linear-gradient(bottom, red , blue); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(bottom, red, blue); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(bottom, red, blue); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to bottom, red , blue); /* 标准的语法 */
+}
+
+.gar3{
+    width: 200px; height: 200px;
+  background: -webkit-linear-gradient(left top, red , blue); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(left top, red, blue); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(left  top, red, blue); /* Firefox 3.6 - 15 */
+  background: linear-gradient( to left top, red , blue); /* 标准的语法 */
+}
+
+.gar4{
+    width: 200px; height: 200px;
+  background: -webkit-linear-gradient(80deg, red, blue); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(80deg, red, blue); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(80deg, red, blue); /* Firefox 3.6 - 15 */
+  background: linear-gradient(80deg, red, blue); /* 标准的语法 */
+}
+
+.gar5{
+    width: 200px; height: 200px;  /* Safari 5.1 - 6.0 */
+  background: -webkit-linear-gradient(left,red,orange,yellow,green,blue,indigo,violet);
+  /* Opera 11.1 - 12.0 */
+  background: -o-linear-gradient(left,red,orange,yellow,green,blue,indigo,violet);
+  /* Firefox 3.6 - 15 */
+  background: -moz-linear-gradient(left,red,orange,yellow,green,blue,indigo,violet);
+  /* 标准的语法 */
+  background: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
+}
+.gar6{
+    width: 200px; height: 200px;  /* Safari 5.1 - 6.0 */
+    background: -webkit-linear-gradient(left,rgba(255,0,0,0),rgba(255,0,0,1)); /* Safari 5.1 - 6 */
+    background: -o-linear-gradient(right,rgba(255,0,0,0),rgba(255,0,0,1)); /* Opera 11.1 - 12*/
+    background: -moz-linear-gradient(right,rgba(255,0,0,0),rgba(255,0,0,1)); /* Firefox 3.6 - 15*/
+    background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); /* 标准的语法 */
+
+}
+.gar7{
+    width: 200px; height: 200px;  /* Safari 5.1 - 6.0 */
+  /* Safari 5.1 - 6.0 */
+  background: -webkit-repeating-linear-gradient(red, yellow 10%, green 20%);
+  /* Opera 11.1 - 12.0 */
+  background: -o-repeating-linear-gradient(red, yellow 10%, green 20%);
+  /* Firefox 3.6 - 15 */
+  background: -moz-repeating-linear-gradient(red, yellow 10%, green 20%);
+  /* 标准的语法 */
+  background: repeating-linear-gradient(red, yellow 10%, green 20%);
+}
+.gar8{
+    width: 200px; height: 200px;  /* Safari 5.1 - 6.0 */
+  background: -webkit-radial-gradient(red, green, blue); /* Safari 5.1 - 6.0 */
+  background: -o-radial-gradient(red, green, blue); /* Opera 11.6 - 12.0 */
+  background: -moz-radial-gradient(red, green, blue); /* Firefox 3.6 - 15 */
+  background: radial-gradient(red, green, blue); /* 标准的语法 */
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="text">
+	我就是多列的文本内容，不相你看过来
+	我就是多列的文本内容，不相你看过来
+	我就是多列的文本内容，不相你看过来
+	我就是多列的文本内容，不相你看过来
+	我就是多列的文本内容，不相你看过来
+	我就是多列的文本内容，不相你看过来
+	我就是多列的文本内容，不相你看过来
+	我就是多列的文本内容，不相你看过来
+</div>
+
+
+<div class="gar1">我是左到右渐变</div>
+<div class="gar2">我是上到下渐变</div>
+<div class="gar3">我是对角渐变 </div>
+<div class="gar4">我是角度线性渐变 </div>
+<div class="gar5">我是多个颜色渐变 </div>
+<div class="gar6">我是透明颜色渐变 </div>
+<div class="gar7">我是重复线性渐变 </div>
+<div class="gar8">我是径向渐变 </div>
+
+</body>
+</html>

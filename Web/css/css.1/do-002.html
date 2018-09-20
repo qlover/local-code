@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>prize</title>
+  <style>
+   *{margin:0; padding:0; cursor:default;}
+   #main{background:rgba(200,200,200,.2); width:510px; height:700px; margin:20px auto;
+	border-radius:40%;
+   }
+	#disk{ width:500px; height:500px;  margin:5px auto 0; font-family:'微软雅黑'; font-weight:800;}  
+	#disk .spin{ width:500px; height:500px; 
+			background:#ee0;/*转盘圈*/border-radius:50%; 
+	}
+	#disk .spin #bg{ width:490px; height:490px; border-radius:50%; margin:0 auto; position:relative; top:5px; overflow:hidden; z-index:9}
+	#bg  ul{list-style:none; }
+	#bg ul > li{ width:243px;  height:243px;
+		background:rgb(30,200,30);/*转盘其它三个背景*/
+		text-align:center; border:1px solid; line-height:243px; cursor:default; position:absolute;
+	}
+	#bg ul li.one{top:0; left:0;}
+	#bg ul li.two{top:0; right:0; }
+	#bg ul li.three{bottom:0; left:0;}
+	#bg ul li.four{bottom:0; right:0;}
+	#bg ul li.two .layer{ width:243px; height:243px; 
+		position:relative; overflow:hidden;
+	}
+	#bg ul li.two .layer ul{list-style:none;}
+	#bg ul li.two .layer ul li{border:none; display:block; width:245px; height:245px; position:absolute;}
+	#bg ul li.two .layer ul li.first{bottom:-120px; right:-11px; 
+		transform:skewX(-76deg); background:#f00;/*亲一下 背景*/ border-top:2px solid; 
+	}
+	#bg ul li.two .layer ul li.second{right:5px;bottom:30px; 
+		transform:skewY(-14deg); border-bottom:3px solid; 
+		background:rgb(10,230,10);/*抱两下 背景*/ 
+	}
+	#bg > span{position:absolute; background:transparent;/**/}
+	#bg > span.bao{right:120px;top:111px;}
+	#bg > span.qi{right:40px;top:212px;}
+	#disk .spin #bg i.dis{width:10px; height:10px; border-radius:50%; background:#fff;/*指针圆点*/ position:absolute;top:240px; left:240px;font-style:none; }
+	#bg #xz{width:490px; height:490px; position:absolute;					background:transparent;/*指针画布*/ transform:rotate(38.8deg)
+	}
+	#bg #xz .cover{width:260px; height:260px; background:transparent;/*指针所在层*/  position:relative; z-index:88; overflow:hidden; }
+	span.finger{ width:200px; height:200px; display:block;					background:#00f;/*指针*/ position:absolute;transform:skew(45deg,40deg); 
+		top:165px; left:165px; z-index:99; box-shadow:45px 0 12px #000;
+	}
+	#finish_chose{ width:500px; height:160px; margin:0 auto; position:relative;}
+	#finish_chose .want{background:#fff;/*点击背景*/ left:45%; }
+	#finish_chose a{display:block; cursor:pointer;position:absolute; width:36px; text-align:center;border:2px solid #0f0; margin-left:-18px; top:5px; font-size:25px; padding-top:20px; height:120px;}
+	#finish_chose a.freshen{right:40%; line-height:50px; background:#fff;}
+	.have_o{opacity:1;}
+	.no_o{opacity:0.8;}
+  </style>
+  <script>
+  function fix(fixNumber,deicmalPleacs){
+	var div = Math.pow(10,deicmalPleacs);
+	fixNumber = Math.round(fixNumber*div)/div;
+	return fixNumber;
+  }
+  function ran(start,over){
+	do{
+		var num = fix(Math.random()*over,2);
+		var saved = num;
+		if(saved < start){
+			//小于了 do nothing here!
+		}else{
+			return saved;
+		}
+	}while(num < start);
+  }
+
+	window.onload = function(){
+		var li = document.getElementsByClassName('get');
+		var fs = document.getElementById('finish_chose');
+		var want = fs.getElementsByTagName('a')[0];
+		var spin = document.getElementsByClassName('spin')[0];
+		var xz = document.getElementById('xz');
+		var yes = true;
+		var no = false;noo();
+function haveo(a){
+	var n = a;
+	for(var i=0; i <li.length;i++){
+		li[n].style.opacity= '1';
+	}
+}
+function noo(a){
+	for(var i=0; i <li.length;i++){
+		li[i].style.opacity= '0.8';
+	}
+}
+	var freshen = document.getElementsByClassName('freshen')[0];
+	freshen.addEventListener('mousedown',function(){
+		window.location.replace(this);
+		this.style.background = 'rgb(200,200,200)';
+		return false;
+	},false);
+	
+	want.addEventListener('mousedown',function(){
+			noo();
+			var seconds = ran(7.1,10.1);
+			var spinPX = Math.round(Math.random()*360);
+			var again = seconds*1000+100;
+			var str = fix(spinPX*ran(15,20),0);
+			if(!no){
+				if(yes){
+					yes = false;
+					want.style.background = 'rgb(200,200,200)';
+					xz.style.transition=seconds+'s ease-out';
+					xz.style.transform='rotate('+str+'deg)';
+					no = true;
+					setTimeout(function(){
+						want.style.background = '#fff';
+						no = false;
+						yes = true;
+						if(str%360>=228 && str%360<=327) haveo(3);
+						else if(str%360>=-42 && str%360<=47) haveo(0);
+						else if(str%360>=318 && str%360<=360) haveo(0);
+						else if(str%360>=138 && str%360<=227) haveo(4);
+						else if(str%360>=123 && str%360<=137){
+							haveo(1);alert('恭喜恭喜！抽中大奖，那么亲我一下喽！');
+						}
+						else if(str%360>=48 &&str%360<=317) haveo(2); 
+				},again);
+				}else return false;
+
+			}else{
+				return false;
+			}
+		},false);
+	}
+
+  </script>
+ </head>
+ <body onselectstart="return false;">
+<div id="main">
+	<div id="finish_chose">
+		<a class="want">摇一摇</a>
+		<a class="freshen">刷 新</a>
+	</div>
+	<div id="disk">
+		<div class="spin">
+			<div id="bg">
+				<ul>
+					<li class="one get">抱一下</li>
+					<li class="two">
+						<div class="layer">
+							<ul>
+								<li class="first get"></li>
+								<li class="second get"></li>
+								
+							</ul>
+						</div>
+					</li>
+					<li class="three get">抱一下</li>
+					<li class="four get">抱一下</li>			
+				</ul>
+				<span class="qi">亲一下</span>
+				<span class="bao">抱两下</span>
+				<div id="xz">
+					<div class="cover">
+						<span class="finger"></span>
+					</div>
+				</div>
+				<i class="dis"></i>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+
+
+
+</script>
+</body>
+</html>
+
+
+

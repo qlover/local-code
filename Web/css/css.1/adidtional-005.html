@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>图片轮播</title>
+  <style>
+   html,body,ul,li,em{list-style:none; margin:0; padding:0; cursor:default; font-style:normal; font-size:15px;}
+	#web{
+		width:600px; height:400px; background:#eee; margin:100px auto 0;
+		position:relative;
+	}
+	#web #banner{
+		width:500px; height:300px; background:#ccc;
+		float:left; margin:40px;
+		padding:10px;
+		overflow:hidden;
+		
+		
+	}
+	#web #banner #menu{
+		width:500px; height:300px; display:block; 
+		position:relative;
+		overflow:hidden;
+	}
+	#web #banner .left,#web #banner .right{ position:absolute;top:0px;
+		width:100px; height:400px;
+	}
+	#web #banner .left{left:0px;}
+	#web #banner .left .prve,#web #banner .right .next{
+		position:absolute; font-size:5em;
+		display:block;
+		text-align:center; line-height:100px;
+		width:100%; height:100px;
+		top:50%; margin-top:-50px;
+		cursor:pointer;
+		background:rgba(0,0,0,0.4);
+	}
+	#web #banner .right{right:0px;}
+
+	#web #banner ul.menu{
+		width:2500px; height:300px; 
+		position:absolute;
+		left:0px; top:0px;
+		transition:1s;
+	}
+	
+	#web #banner ul li{
+		text-align:center; line-height:300px; font-size:2em;
+		width:400px; height:300px; background:#ff0; 
+		float:left; margin-left:50px;
+	}
+   </style>
+   <script src="me.js"></script>
+   <script src="jquery.js"></script>
+  <script type="text/javascript">
+  var Move = function(){
+	this.name = 'this is a moved element';
+	this.distances = 0;
+	this.open = true;
+	Move.prototype.openTrue = function(){
+		alert(this.open);
+		alert(this instanceof Move);
+		setTimeout(function(){
+			alert(this instanceof Window);
+			
+		});
+	}
+	Move.prototype.toLeft = function(ele,distance,times){
+		if(this.open == true){
+			alert('true');
+			if(this.distances == 0){
+				this.distances = 0;
+				return false;
+			}
+			this.distances += distance;
+			ele.css("left",(this.distances)+"px");
+			this.open = false;
+		}else{
+			alert('false');
+		};
+	}
+	Move.prototype.toRight = function(ele,distance,times){
+		var d = distance * times;
+		//alert(this.distances+'  '+d);
+		if(this.distances == -d){
+			this.distances = -d; 
+			return false;
+		}
+		this.distances -= distance;
+		ele.css("left",(this.distances)+"px");
+	}
+  }
+	window.onload = function(){
+		var myMove = new Move();
+		myMove.openTrue();
+		
+		
+		var liLen = $('.menu li').length;
+		
+		$('.prve').click(function(){
+			myMove.toLeft($('.menu'),450,4);
+		});
+		$('.next').click(function(){
+			myMove.toRight($('.menu'),450,4);
+		});
+	}
+	</script>
+ </head>
+ <body onselectstart="return false";>
+	<div id="web">
+		<div id="banner">
+			<div id="menu">
+				<ul class="menu">
+					<li>内容一</li>
+					<li>内容二</li>
+					<li>内容三</li>
+					<li>内容四</li>
+					<li>内容五</li>
+				</ul>
+			</div>
+			<div class="left">
+				<em class="prve"><</em>
+			</div>
+			<div class="right">
+				<em class="next">></em>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+

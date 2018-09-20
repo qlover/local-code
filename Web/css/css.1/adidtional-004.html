@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>纯 JS 手风琴</title>
+  <style>
+   *{margin:0; padding:0; cursor:default; font-style:normal; font-size:15px;}
+   #bg{ width:300px;  background:#eee;}
+   #bg ul{ list-style:none; }
+   #bg ul li{ width:180px; height:50px; background:#bbb; border-top:1px solid #fff; padding:0 10px; overflow:hidden;}
+   #bg ul li h3{ text-align:center; height:30px; line-height:30px; background:#ccc; }
+   #bg ul li .content{ width:170px; height:150px; background:#aaa; padding:5px; line-height:150px;	}
+   </style>
+   <script src="me.js"></script>
+   <script src="jquery.js"></script>
+  <script type="text/javascript">
+	window.onload = function(){
+		var items = document.getElementsByTagName('li');
+		var h = document.getElementsByTagName('h3');
+		for(var i=0; i < h.length; i++){
+			h[i].onmouseover = function(){
+				this.parentNode.className = ''
+				for(var a=0; a < items.length; a++){
+					if(items[a].className == ''){
+						this.parentNode.style.height = 200+"px";
+						this.parentNode.className = 'fold';
+					}else if(items[a].className == 'fold') items[a].style.height = 50+'px'; 
+				}
+				return false;
+			}
+		}
+	}
+	</script>
+ </head>
+ <body onselectstart="return false";>
+	<div id="bg">
+		<ul>
+			<li class="fold" style="height:200px;">
+				<h3>标题一</h3>
+				<div class="content" >
+						内容一
+				</div>
+			</li>
+			<li class="fold">
+				<h3>标题二</h3>
+				<div class="content">
+					内容二
+				</div>
+			</li>
+			<li class="fold">
+				<h3>标题三</h3>
+				<div class="content">
+					内容三
+				</div>
+			</li>
+			<li class="fold">
+				<h3>标题四</h3>
+				<div class="content">
+					内容四
+				</div>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
+
+
+

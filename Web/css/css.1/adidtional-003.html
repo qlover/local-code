@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>折叠</title>
+  <style>
+   *{margin:0; padding:0; cursor:default;font-style:normal;}
+   .box{width:200px; height:auto; background:#eee; margin:20px; overflow:hidden;}
+   .box .foot{width:90%; height:20px;  font-size:12px;background:#bbb;  padding:10px; z-index:5;}
+   .box .content{ background:#ccc; padding:10px 20px; font-size:15px; line-height:20px; letter-spacing:1px;  height:auto; z-index:1; overflow:hidden; transition:.3s;}
+   .box h3{background:#bbb; padding:10px; text-align:center; letter-spacing:10px; z-index:5;}
+   .box .foot > em{ display:block; position:absolute;  float:left;}
+   .box .foot > a{float:right; letter-spacing:5px; color:#900; text-decoration:none; cursor:pointer;}
+   /**/
+   </style>
+   <script src="me.js"></script>
+   <script src="js/jquery.js"></script>
+  <script type="text/javascript">
+  
+	window.onload = function(){
+		var key = true;
+		
+		
+		$(".box .foot a").click(function(){
+			if(key){
+				fold(160);
+				$(this).html('展开');	
+				key = !true;
+			}else{
+				show(10);
+				$(this).html('折叠');
+				key = true;
+			}
+
+		});	
+		function fold(num){
+			if(num >= 10){
+				$(".box .content").css("height",num+'px');
+				setTimeout(function(){fold(num)},10);
+			}else return false;
+			num -= 10;
+		}
+		function show(num){
+			if(num <= 160){
+				$(".box .content").css("height",num+'px');
+				setTimeout(function(){show(num)},10);
+			}else return false;
+			num += 10;
+		}
+	}
+
+  </script>
+ </head>
+ <body onselectstart="return false";>
+	<div class="box">
+		<h3>虞美人</h3>
+		<div class="content">
+			春花秋月何时了，<br>往事知多少？<br>
+			小楼昨夜又东风，<br>故国不堪回首月明中。<br>
+			雕楼玉砌应犹在，<br>只是朱颜改，<br>
+			问君能有几多愁，<br>治似一江春水向东流。
+		</div>
+		<div class="foot">
+			<em>作者：李煜</em>
+			<a href="#zhedie">折叠</a>
+		</div>
+	</div>
+
+</body>
+</html>
+
+
+
