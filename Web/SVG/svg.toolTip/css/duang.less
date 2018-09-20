@@ -1,0 +1,74 @@
+body {
+  background: #F0F0F0;
+}
+
+h1 {
+  width: 800px;
+  color: black;
+  font-family: 'STHeiTi', 'Microsoft YaHei', 'HeiTi';
+  font-weight: normal;
+  margin: 0 auto;
+  padding: 20px 0;
+
+  border-bottom: 1px solid white;
+  box-shadow: inset 0 -1px #CCC;
+}
+
+.sound-article {
+  width: 800px;
+  margin: 20px auto;
+  font-size: 0;
+  text-align: center;
+
+  .sound {
+    display: inline-block;
+    width: 300px;
+    font-size: 12px;
+    text-align: center;
+    position: relative;
+
+    .avator {
+      display: block;
+      margin-top: 100px;
+      cursor: pointer;
+      h2 {
+        font-weight: normal;
+        color: orange;
+      }
+      img {
+        border-radius: 100%;
+        overflow: hidden;
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    .sound-content {
+      position: absolute;
+      width: 200px;
+      height: 100px;
+      box-sizing: border-box;
+
+	  left: 50%;
+	  margin-left: -100px;
+	  top: -10px;
+	  padding: 5px;
+
+      p {
+        position: relative;
+        margin: 0;
+        font-size: 16px;
+      }
+
+      display: none;
+    }
+
+    &:hover {
+	  .soud-content {
+	  	display: block;
+	  }
+    }
+  }
+
+}
