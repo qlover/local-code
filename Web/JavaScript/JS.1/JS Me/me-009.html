@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+	window.onload = function(){
+// <!---1-->
+/*			for(var i=1; i<=12; i++)
+			{
+				document.write("12 *" + i + " = " + 12*i + "<br>");
+	
+			}
+*/
+
+/*var Tt = 12;
+var Tb;
+
+for(Tb = 1; Tb < 12; Tb++)
+{
+	document.write(Tt + "*" + Tb + "=" + Tb * Tt +"<br />");	
+	
+}
+*/
+
+// <!---2---->
+
+function MultiplicationTable(fn){
+	do
+	{
+			fn = parseInt(prompt("请输入 0 ~ 9 之内的数字"),"");
+			if(fn == 0)
+			{
+				alert("乘法表没有 0 × 一个数哦！");
+			}
+		
+	}while(	(isNaN(fn) == true) || (fn<1) || fn>9  );
+	
+	for(var i=1; i<=9 ; i++)
+	{
+		document.write(fn +" × "+ i + " = "+ fn*i + "<br />");
+	}
+}
+	var Calculation;
+	MultiplicationTable(Calculation);
+
+
+
+
+/*function WTT(Tt, Ts , Tb)
+{
+	for(;Ts <= Tb; Ts++)
+	{
+		document.write(Tt + "*" + Ts + "=" + Tb * Tt + "<br />");	
+
+	}	
+}
+WTT(4,4,9);
+*/
+
+// <!--3-->
+
+
+
+
+	}
+</script>
+</head>
+
+<body>
+</body>
+</html>

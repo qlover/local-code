@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+window.onload=function(){
+	var liNodes =document.getElementsByTagName("li");
+	var li1 = liNodes[2].previousSibling.previousSibling;
+	var li3 = liNodes[2].nextSibling.nextSibling;
+	alert(liNodes[1].hasChildNodes);
+/*	alert("li1 is:"+ li1.innerHTML);
+	alert("li2 is:"+ liNodes[2].innerHTML);
+	alert("li3 is:"+ li3.innerHTML);
+	alert("li3 is:"+ li3.innerHTML);
+*//*	for(var i=0; i<liNodes.length; i++){
+		alert(liNodes[i].tagName);
+	}
+*/}
+</script>
+</head>
+
+<body>
+<ul>
+	<li>文本一</li>
+    <li>文本二</li>
+    <li>文本三</li>
+    <li>文本四</li>
+    <li>文本五</li>
+</ul>
+</body>
+</html>

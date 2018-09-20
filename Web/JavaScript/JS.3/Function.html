@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Function </title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+<script>
+
+
+/* 匿名函数 */
+
+
+$.each($('script'), 
+    // 匿名函数
+    function() {
+        console.log( $(this).attr('src'));
+    }
+);
+
+
+/*
+ *  负值，如果所传递的第一个参数比第二个参数小。 
+ *   ·零，如果两个参数相等 
+ *  正值，如果第一个参数比第二个参数大
+ */
+var arr1 = [2,1,5,10,6,3,4,7,9,8].sort(
+    // sort 函数接收的匿名函数作为参数
+    function(a, b){
+        return (
+            (a == b ) ? 0 : 
+            ( ( a > b ) ? 1 : -1 )
+        );
+    }
+);
+console.log(arr1); // => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+// 遍历也有匿名函数
+var arr2 = arr1;
+arr2.forEach(function(val){
+    console.log( val );
+});
+
+
+// reduce 扁平化二维数组
+// reduce() 会一个新数组
+var arr3 = [
+    [2,3,5],
+    [7,3],
+    [0,1,5,8]
+];
+var newArr = arr3.reduce(
+    // 这也是一个匿名函数的用法
+    function( previous, current ){
+        return previous.concat(current);
+    }
+);
+console.log( newArr ); // => [2, 3, 5, 7, 3, 0, 1, 5, 8]
+
+
+// 同样，下面也是一个匿名函数，并且它还是一个拥有私有作用域自我执行函数
+(function(){
+    console.log("enter private envorionment.");
+    // 该函数外部不能访问该函数中的成员
+    var obj = Object.create({
+        name : 'qlover',
+        age : 18,
+    });
+    console.log( obj.name, obj.age );
+
+})();
+
+
+// 这一个是另一种自执行函数写法
+// 并且推荐使用
+
+(function(){
+    console.log("anouther private envorionment.");
+    var obj = Object.create({
+        name : 'home',
+        age : 20,
+    });
+    console.log( obj.name, obj.age );
+}());
+
+
+
+/* 函数表达式 */
+
+// 普通的函数表达式
+var func = function(a, b){ // 将一个匿名函数的值返回给 func
+    return a + b;
+};
+console.log(func(2,4)); //=>6
+
+// 命名式函数表达式
+var foo = function foo(a, b){ // 将一个函数赋值给 foo
+    return a * b;
+};
+console.log( foo(10, 20) ); //=> 200
+
+
+// 自执行函数可以返回值
+(function(){
+    var var1 = 10,
+        var2 = 20;
+    console.log( var1 + var2); //=> 30
+})();
+
+
+var re = (function(){
+    var var1 = 100,
+        var2 = 200;
+    return var1 +　var2;   // 将私有的成员返回出去 
+}());
+console.log( re ); //=> 300
+
+
+
+
+
+
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

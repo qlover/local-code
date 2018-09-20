@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+select{width:100px; height:35px;}
+div{ width:500px; margin:0 auto; height:auto;}
+#add,#del{width:50px; height:30px;}
+</style>
+<script>
+	window.onload = function(){
+		//获取他们
+		var addBtn = document.getElementById("add");
+		var delBtn = document.getElementById("del");
+		var Select = document.getElementById("select");
+		var option = document.getElementsByTagName("option");
+		var addEle = document.getElementById("addVal");	
+		var optwo = document.getElementsByTagName("option")[1];
+		//加属性
+		optwo.selected = true;
+		addEle.setAttribute("maxlength","10");	
+		addEle.setAttribute("size","25");
+		//添加事件	
+		addBtn.onclick = function(){
+			var addValue = addEle.value;
+			//清前后空格
+			var reg = /^\s*|\s*$/g;	
+			addValue = addValue.replace(reg, "");
+			addEle.value = addValue;
+			if(addValue == "")
+			{
+				alert("请输入内容");
+				return false;
+			}
+			var OP = document.createElement("option");
+			var optext = document.createTextNode(addValue);
+			OP.appendChild(optext);	
+			Select.appendChild(OP);
+			addEle.value = "";
+			//添加后选中所添加的
+			OP.selected = true;
+			return false;				
+		}
+		//删除事件
+		delBtn.onclick = function(){
+			var dE = prompt("请输入你要删除的项","");
+			var i=null;
+			for(i=0; i< option.length; i++)
+			{	
+				option[i].index = i;
+				//获取 select 中的每个节点的文体值
+				var opInner = option[i].innerHTML;
+				if(dE == opInner)
+				{
+					var flag = confirm("你确定要删除"+ dE+ "的信息？");
+					if(flag)
+					{
+						option[i].parentNode.removeChild(option[i]);
+						alert("删除成功");
+						break;
+					}
+				}
+			}	
+			if(dE != opInner)
+			{
+				alert("没有找到你输入的信息");
+			}
+		}
+	}
+</script>
+</head>
+<body>
+<div>
+<p align="center">Select 的删除与添加应用</p>
+你的爱好：<select id="select">
+        <option>音乐</option>
+        <option>游戏</option>
+	</select> <button id="del">删除</button>
+<br /><br /><br /><br />
+	<button id="add">添加</button> <input id="addVal" placeholder="请在这里输入你要添加的内容" />
+</div>
+</body>
+</html>

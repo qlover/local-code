@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JQ 操作 DOM</title>
+<style>
+	#box{ max-width:500px; background:#fba;}
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		function showContent(li){
+				alert($(li).text());
+			}
+			$("li").click(function(){ showContent(this)});
+		$(":submit:first").click(function(){
+			
+			
+			var $type = $(":radio[name='type']:checked");
+			if($type.length == 0){
+				alert("请选择类型");
+				return false;
+			}
+			var type = $type.val();
+			var $text = $(":text[name='name']");
+			var text = $text.val();
+			text = $.trim(text);
+			$text.val(text);
+			if(text == ''){
+				alert('请输入内容');
+				return false;
+			}
+			$("<li>"+text+"</li>").appendTo($("#"+type))
+								  .click(function(){
+										showContent(this);
+									});	
+			//但是在此要说个比较有趣的事,因为可以连缀，所以可以这样写
+			
+			
+			$(":text[name='name']").val("");
+			return false;
+		});
+	});
+</script>
+</head>
+<body>
+	<p>你喜欢吃什么水果?</p>
+    	<ul id="fruits">
+        	<li id="apple" name="pingguo">苹果</li>
+            <li>桃子</li>
+            <li name="banana">香蕉</li>
+            <li>西瓜</li>
+        </ul>
+		
+     <p>你喜欢什么运动?</p>
+     	<ul id="sports">
+        	<li id="run">跑步</li>
+        	<li>游泳</li>
+            <li name="football">足球</li>
+        	<li>篮球</li>
+        </ul> 
+		
+       <form action="..7/practice.html" name="myform"> 
+        水果:<input type="radio" id="name" name="type" value="fruits"/>  
+		运动:<input type="radio" name="type" value="sports" />
+        
+        	name:<input type="text" name="name" id="qingchu" />
+            <input type="submit" value="submit" id="submit" />
+       </form>
+
+</body>
+</html>

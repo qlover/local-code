@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="btn">点击我!</button>
+	<button id="btn1">点击我1!</button>
+	<button id="btn2">点击我2!</button>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script>
+		// var btn = document.getElementById('btn');
+		// btn.onclick = function(){
+		// 	alert('hello');
+		// }
+		
+		function hello(obj) {
+			obj.onclick = function(){
+				alert('hello');
+			}
+		}
+
+		hello(document.getElementById('btn1'));
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+	window.onload = function(){
+function checkLetter(strObject)
+{		
+	var n= -1;
+	for(var i=0; i < strObject.length; i++)
+	{
+		n++;
+		var subStr = strObject.substr(0,n);
+		var subChar = strObject.charCodeAt(n);
+		if(subChar >= 'A'.charCodeAt(0) && subChar <= 'Z'.charCodeAt(0))
+		{
+			alert("第" + n + "个字符是大写的");
+		}else if(subChar >= 'a'.charCodeAt(0) && subChar <= 'z'.charCodeAt(0))
+		{
+			alert("第" + n + "个字符是小写的");
+		}
+	}
+}
+		
+		var str = new Array("My NaMe! is qinrenjie");
+		//alert("现在是还有没变成大写的时候 ：" + str);
+		var strLength = str[0].length;
+		var n=-1;
+		
+		/*for(var i=0; i < strLength; i++)
+		{	
+			n++;
+			var subStr = str[0].substr(0,n);
+			var subChar = str[0].charCodeAt(n);
+			if(subChar >= 'A'.charCodeAt(0) && subChar <= 'Z'.charCodeAt(0))
+			{
+				alert("第" + n + "个字符是大写的");
+			}else if(subChar >= 'a'.charCodeAt(0) && subChar <= 'z'.charCodeAt(0))
+			{
+				alert("第" + n + "个字符是小写的");
+			}/*else if(subChar == '!'.charCodeAt(0))
+			{
+				alert("检查的这个字符串是：" + subStr + "!");
+				break;
+			}
+			//alert(subChar);	
+			
+		}
+		*/
+		
+		
+			//alert(subStr);
+
+		//alert("现在已经变成了大写了：" + changeStrToUpper);
+	
+/*		var newArray = new Array("This is my first pragaraph!","My name is QinRenJie!");
+		var methodOne = newArray[0].substr(0,20);
+		var displayMethodOne = prompt(methodOne,methodOne);
+		var methodTwo = newArray[0].substring(0,15);
+		var displayMethodTwo = prompt(methodTwo,methodTwo);
+		var methodThree = newArray[1].substring(0,30);
+		var displayMethodThree = prompt(methodThree,methodThree);
+		document.write(toLowerCase(methodThree));
+*/		
+function replaceEach(aNode, bNode){
+
+		var aParent = aNode.parentNode;
+		var bParent = bNode.parentNode;
+		if(aParent && bParent){
+			var aNode2 = aNode.cloneNode(true);
+			bParent.replaceChild(aNode2, bNode);
+			aParent.replaceChild(bNode, aNode);
+
+		}
+}
+
+
+var p1 = document.getElementById("p1");
+var p2 = document.getElementById("p2");
+
+var c = p1.cloneNode(true);
+alert("exchange");
+
+		replaceEach(p2,p1);
+		
+
+
+
+}
+</script>
+</head>
+
+<body>
+		<p id="p1">This is first pragaraph!</p>
+        <p id="p2">This is second pragaraph!</p>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

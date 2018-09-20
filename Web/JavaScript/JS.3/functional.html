@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>函数式</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+<script>
+	
+var func = function(f, a, b){
+    return f(a,b);
+};
+
+console.log(func(function(a, b){
+    return a + b;
+},2,3)
+);  // 返回5 
+
+function add(a, b){
+    return a+b;
+}
+console.log( add(1,2) === func(add,1,2) );
+
+
+
+var applyFirst = function (f, a) { 
+    return function (b) { return f(a, b); };
+};
+
+
+// 偏函数
+
+
+var mult = function(a, b) { return a * b; };
+var double = applyFirst(mult, 2);
+console.log(double(32)); // 64
+console.log(double(7.5)); // 15
+
+
+
+// 柯里化定义
+var curry = function (f) {
+    return function (a) {
+        return function (b) {
+            return f(a, b);
+        };
+    };
+};
+
+var double = curry(mult)(2);
+console.log( double(32) );
+console.log( double(7.5) );
+
+
+// 其余自己摸索
+
+
+
+// 词法闭包和作用域
+
+
+
+
+
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

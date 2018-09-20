@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+	window.onload = function(){
+		/*var names = new Array("Eggs","Milk","Potatoes","Cereal","Banana");
+		alert(names);
+		document.write(names + "<br>");
+		names.reverse();
+		document.write(names);*/
+/*var numbers = new Array(1,2,3,4,5);	//1.创建 numbers 数组
+	function functionName(value,index,array){
+		//do something here
+	}
+	
+	function isLessThan3(value,index,array)//2.创建 isLessThan3 测试函数，并且有三个必选参数，参数一：第一个元素的值；参数二：元素的索引；参数三：数组的本身
+	{
+		var returnValue = false;//3.在测试前，让测试的值等于 false
+		if(value < 3)//
+		{
+			returnValue = true;
+		}
+		return 	returnValue ;	
+	}
+
+	alert(numbers.every(isLessThan3));
+*/
+/*var numbers = new Array(1,2,3,4,5);	
+	
+	function isLessThan3(value,index,array)
+	{
+		var returnValue = false;
+		if(value < 3)
+		{
+			returnValue = true;
+		}	
+		return 	returnValue ;
+	}
+*/
+/*
+	var numbers = new Array(1,2,3,4,5);	
+	
+	function isLessThan3(value,index,array)
+	{
+		var returnValue = false;
+		if(value < 3)
+		{
+			returnValue = true;
+		}	
+		return 	returnValue ;
+	}
+	if(numbers.some(isLessThan3))
+	{
+		var result = numbers.filter(isLessThan3);
+		//alert("These numbers are less than 3:" + result);
+	}
+	alert(numbers.every(isLessThan3));
+	alert(numbers.some(isLessThan3));
+	alert("These numbers are less than 3:" + result);
+*/
+
+<!-- this is forEach way-->
+/*	var numbers = new Array(1,2,3,4,5);
+	
+	function dAA(value,index,array)
+	{
+		var result = value * 2;
+		alert(result);
+	}
+	numbers.forEach(dAA);*/
+
+<!-- this is map way-->
+	var numbers = new Array("a","b","c","d","e");
+
+	function dAA(value,index,array)
+	{
+		var result = value + "*Z" ;
+		return result;
+	}
+	alert(numbers.forEach(dAA));
+
+}
+</script>	
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

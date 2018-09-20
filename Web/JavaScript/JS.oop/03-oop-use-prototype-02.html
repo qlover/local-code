@@ -1,0 +1,152 @@
+<meta charset="utf-8">
+<script>
+// 构造器的原型属性
+// ii-01.ddd
+(function () {
+	console.log('-------------');
+	// 命名式函数表达式
+	// 将一个有名函数赋值给 a 并不是将一个匿名函数赋值给 a
+	// 然后将函数 aa 引用给 a
+	var a = function aa(){
+		console.log('I am aa');
+	}
+	// 将 aa 函数引用又给 b
+	var b = a;
+	// 执行 a ( 地址+（） = 执行函数 )
+	a();  //=> I am aa
+	// 将 a 判断引用，此时 函数 aa 是存在的
+	a = 123;
+	// 但是 b 还是引用到了 aa
+	b();  //=> I am aa
+	//aa(); //=> Uncaught ReferenceError: aa is not defined
+
+	// 这个例子说明函数 aa 是一直存在的
+})();
+
+// 命名式构造器
+// ii-02.ddd
+(function () {
+	console.log('-------------');
+	// 定义一个构造函数 Person 
+	// 实际上这个构造器 Person 只起一个指向 p 的作用
+	var Person = function p(){
+
+	};
+
+	// 有了构造器，同样的 p 的原型属性就有了
+	// p.prototype
+	// 但是这里的 p 只是构造器的一个名字，并没有什么实际用处
+	// 所以此时的原型属性是 Person.prototype 
+	
+	console.log(Person.name); //=> p
+
+	// 原型属性
+	console.log(Person.prototype);
+	// 原型属性指向的构造器
+	console.log(Person.prototype.constructor); //=> function p(){}
+
+
+})(); 
+
+// 构造器
+// ii-03.ddd
+(function () {
+	console.log('-------------');
+	var Person = function pp(){
+		console.log('pp');
+	}
+
+	console.log(Person.name); //=> pp
+	console.log(Person.prototype); 
+	// 因为此时 Person 构造器并没有 constructor 属性
+	// 此时的 constructor 属性是继承自 原型属性的
+	console.log(Person.constructor);
+	console.log(Person.prototype.constructor); //=> function pp(){ }
+
+	var b = Person;
+	// 尽管改变 Person 指向也没关系
+	Person = 123;
+	console.log(b.prototype.constructor);//=> function pp(){}
+})(); 
+
+// 构造器的继承 contructor 
+// ii-04.ddd
+(function () {
+	console.log('-------------');
+	var Person = function pp(){
+		console.log('person constructor');
+	}
+	// console.log(Person.prototype);
+	Person.prototype.constructor = Person;
+
+	// 可以防止其它的改变 Peson 原型属性的构造器
+})(); 
+
+// Object 构造器是 Function 的实例 
+// ii-05.ddd
+(function () {
+	console.log('-------------');
+
+	// Object 构造器是 Function 的实例
+	// Object 构造器就是 Object 类
+	// JS 中类就是用构造器表示
+	var obj = new Object();
+	function fun(){ }
+
+	// obj 构造器
+	var objCon = Object.constructor;
+	console.log(objCon === fun.constructor);  //=> true
+
+})(); 
+
+// Object 作为对象是继承自 Function.prototype 的 
+// 此时 Function.prototype 继承自 Object.prototype
+// ii-06.ddd
+(function () {
+	console.log('-------------');
+	
+	try{
+		console.log(Object.my());
+		console.log(Object.me());
+	}catch(e){
+		console.log(e);  // 打印这里内容
+	}
+	// 向函数原型添加 my
+	// 因为原型链的关系 继承自 Function.prototype
+	Function.prototype.my = function(){
+		return 200;
+	}
+	// 如果 Object 在向上搜索的时候没有在 Function 中找到就去 Object 查找
+	Object.prototype.me = function(){
+		return 300;
+	}
+	console.log(Object.my()); //=> 200
+	console.log(Object.me()); //=> 300
+	// 这也说明了 Object 作为对象是继承自 Function.prototype 的 
+
+})(); 
+
+// Function 是自己的构造函数
+// ii-07.ddd
+(function () {
+	// console.log(Function.constructor === Function);
+	// 存放 Function 自身
+	var f = Function;
+	// 存放 Function 的构造函数
+	var fc = Function.prototype.constructor;
+	console.log(f === fc);//=> true
+
+})(); 
+
+// Function 原型链
+// ii-08.ddd
+(function () {
+	console.log('-------------');
+	// 可见
+})(); 
+
+
+</script>
+
+
+

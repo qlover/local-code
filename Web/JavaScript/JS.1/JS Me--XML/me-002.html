@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理 XML 文档</title>
+</head>
+<style>
+*{margin:0; padding:0;}
+#main_check{ width:300px; height:400px; border:5px solid #594315; margin:20px auto; overflow:hidden; cursor:default; position:fixed; left:350px; top:20px; display:block;
+-webkit-border-radius:5px;
+border-radius:5px;
+-moz-border-radius:5px;}
+#main_check #title{ width:300; height:35px; background:#eee; padding:0 10px; line-height:35px;}
+#main_check #content{ width:100%; height:285px; background:rgb(250,250,250); padding-top:80px;}
+#main_check #content #main_input{ width:300px; height:150px; text-align:center; padding-top:40px;}
+#main_check #content #main_input .input_style{ height:50px; padding-top:5px; margin-bottom:10px; line-height:40px;}
+#main_check #content #main_input .input_style_m{height:20px; line-height:20px; text-align:left; font-size:10px; margin-left:30px;}
+#main_check #content #main_input .input_style span{ margin-left:10px; color:transparent;}
+.input_style input{ height:30px; line-height:5px; font-size:18px; outline:none; padding:5px; width:150px; border-radius:10px; border:1px solid #fff; box-shadow:0 0 10px #888;}
+.input_style input:focus{box-shadow:0 0 10px #288;}
+#main_check #content #content_buttom{ width:300px; height:95px; text-align:center;}
+#content_buttom .float_div{ padding-top:25px;}
+#content_buttom .float_div .float_div_a{ margin-left:35px; display:block; width:95px; height:35px; float:left;line-height:35px; border-radius:15px; background:#ffe87d; cursor:pointer; opacity:0.888;}
+#content_buttom .float_div .float_div_a:hover{ opacity:0.560;}
+td{ width:auto; padding:15px; text-align:center;}
+</style>
+<body>
+<div id="main_check" onselectstart="return false;">
+	<div id="title">欢迎进入登录</div>
+   	<form name="form1">
+    	<div id="content">
+        	<div id="main_input">
+        		<div class="input_style"><label for="name">用户名:</label> <input type="text" name="name" /><span class="dis_x">*</span></div>
+            	<div class="input_style"><label for="password">密&nbsp;&nbsp;码: </label><input type="password" name="password" /><span class="dis_x">*</span></div>
+                <div class="input_style_m"><input type="checkbox" name="remenmber"/> 记住密码</div>
+            </div>   
+            <div id="content_buttom">
+            	<div class="float_div">
+                	<span class="float_div_a"><span>登录</span></span>
+                    <span class="float_div_a"><span>清除</span></span>
+                </div>
+            </div>
+     	</div>
+    </form>
+</div>
+<table border="2">
+<thead>
+	<tr>
+    	<td>姓名</td>
+        <td>密码</td>
+    </tr>
+</thead>
+<tbody>	
+	<tr>
+    	<td id="first">admin</td>
+        <td id="second">*****</td>
+	</tr>
+</tbody>
+</table>
+<script>
+function Trim(str){
+	var reg = /\s/g;
+	return str.replace(reg,"");
+};
+function clearValue(val){
+	val.value = "";
+}
+	var startFile = true;
+	var float_div_a = document.getElementsByClassName("float_div_a");
+	var nameValue = document.form1.name;
+	var passwordValue = document.form1.password;
+	var remenmber = document.getElementsByName("remenmber")[0];
+	var disX = document.getElementsByClassName("dis_x");
+	var nameTrue = form1.name.focus();
+	var firstVal = document.getElementById("first").firstChild.nodeValue;
+	var secondVal =document.getElementById("second").firstChild.nodeValue;
+	remenmber.onclick=function(){
+		if(remenmber.checked){
+			alert("the by checked");
+			//get another file's value 
+			document.cookie = "UserName=" +firstVal+","+secondVal+";" + "expires=Tue, 25 Dec 2020 00:00:00;";
+			nameValue.value=firstVal;
+			passwordValue.value=secondVal;
+			
+		}else{
+			alert("the lost checked");
+		}
+	}
+nameValue.setAttribute("maxlength",15);
+passwordValue.setAttribute("maxlength",15);
+	for(var a=0; a<float_div_a.length; a++){
+		float_div_a[a].index = a;
+		float_div_a[a].onclick = function(){
+			var tmp = this.index;
+			if(tmp == 0){
+				nameValue.value=Trim(nameValue.value);
+				passwordValue.value=Trim(passwordValue.value);
+				//alert("This is first");
+				if(nameValue.value==""&&passwordValue.value== ""){
+					alert("Both name and password are null");			
+					form1.name.focus();
+					for(var i=0;i<disX.length;i++){
+						disX[i].style.color="#f00";
+					}
+				}else if(nameValue.value==""){
+					alert("name is empty");
+					form1.name.focus();disX[0].style.color="#f00";disX[1].style.color="transparent";
+				}else if(passwordValue.value==""){
+					alert("password is empty");
+					form1.password.focus();disX[1].style.color="#f00";disX[0].style.color="transparent";
+				}else{
+					alert("all not is null. This is both name and password are value."+"["+ nameValue.value +"]"+"["+ passwordValue.value+"]");
+					for(var q=0;q<disX.length;q++){
+						disX[q].style.color="transparent";
+					}
+				}					
+				if(nameValue.value == firstVal){
+					alert("name equal");
+				}else{
+					alert("name is not equal!");return false;
+				}
+				
+				if(passwordValue.value == secondVal){
+					alert("password equal");
+				}else{
+					alert("password is not equal!");return false;
+				}							
+			}else{
+				//alert("This is second");
+				setTimeout("clearValue(nameValue);clearValue(passwordValue);for(var i=0; i<disX.length;i++){disX[i].style.color='transparent';}remenmber.checked=false;",100);	
+			}
+		}
+	}
+</script>
+</body>
+</html>

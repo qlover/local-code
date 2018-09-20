@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+	window.onload = function(){
+		var a1 = document.getElementsByTagName("a")[0];
+		var a2 = document.getElementsByTagName("a")[1];
+		var mover = document.getElementById("move");
+		var i=1;n=0;
+
+		a1.onclick = function(){
+			i--;n--;
+			if(i<1)
+			{
+				i=0;
+				if(n<0)
+				{
+					n=0
+					mover.style.left = n*-1500+"px";	
+				}
+			}
+			mover.style.left = i*-500+"px";	
+		}
+		a2.onclick = function(){
+			i++;n++;
+			if(n>0)
+			{
+				n=1;
+				if(i>1)
+				{
+					i=2;
+					mover.style.left = "-1000px";
+				}
+			}
+			mover.style.left = i*-500+"px";
+		}
+	}
+</script>
+<style>
+*{margin:0; padding:0;}
+#content{ margin:0 auto; width:500px; height:500px; border:4px solid #00f; overflow:hidden; position:relative;}
+#content ul{ list-style:none; width:9999px; position:absolute; left:-500px;}
+#content ul li{ display:block; float:left; width:500px; height:500px; background:#777;}
+#nav{margin:0 auto; width:500px; height:50px; border:2px solid;}
+#nav a{display:block; float:left; width:100px; height:50px; line-height:50px; text-align:center; border:1px solid #0ff; text-decoration:none;}
+</style>
+</head>
+
+<body>
+<div id="nav">
+	<a id="pre" href="#">向左</a>
+    <a id="next" href="#">向右</a>
+</div>
+<div id="content">
+    <ul id="move">
+         <li style="background:#00f;">这里是选项卡一的内容</li>
+         <li style="background:#0f0;">这里是选项卡二的内容</li>
+		 <li style="background:#f00;">这里是选项卡三的内容</li>
+	</ul>
+</div>
+    
+</body>
+</html>

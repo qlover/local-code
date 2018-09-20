@@ -1,0 +1,203 @@
+<meta charset="utf-8">
+<script>
+	
+// 先说 JS 里面的隐式转换
+
+(function () {
+	
+	function fn(){
+		return 20;
+	}
+	// fn 会调用自己的 toString() 方法
+	// 因为只要 string 类型结果就还是 string 类型
+	console.log(1 + '1'); //=> '11'
+	console.log(10 + fn);  //=>10+fn.toString()
+})(); 
+
+// 重写 toString() 
+(function () {
+	function fn(){
+		return 20;
+	}
+
+	fn.toString = function(){
+		return 20;
+	}
+	console.log(10 + fn); //=> 30
+})(); 	
+
+// 重写 valueOf()
+(function () {
+	function fn(){
+		return 20;
+	}
+
+	fn.valueOf = function(){
+		return 5;
+	}
+	console.log(10 + fn); //=> 15
+})(); 
+
+// 也就是说手动控制  toString() 或者是 valueOf() 可以手动解决隐式转换
+
+
+
+
+/* call() / apply() 封装 map() 方法*/
+(function () {
+	
+	var cur = {};
+	var newArr = [1,2,3,4].map(function(item, i, now){
+		console.log(i, item, now, this);
+		return item + 1;
+	}, cur); // 并将里面的每个 this 指向 cur,否则为全局
+	console.log(newArr);
+
+
+	// 封装
+	/**
+	 * 模拟一次 map() 的实现，来自己封装一个
+	 * @param  {Function} fn      callback
+	 * @param  {Object}   context current object
+	 * @return {Array}           a new array
+	 */
+	Array.prototype._map = function(fn, context){
+		var result = [];
+		var len = this.length; // 表示当前操作的数组的长度
+		for(var i = 0; i < len; i++ ){
+			// 为每一个元素执行一次 fn 操作
+			// 因为是模拟，也要有三个参数
+			var re = fn.call(context, this[i], i, this);
+			// 向要新返回的数组中添加元素
+			result.push(re);
+		}
+		return result;
+	}// 代码需要优化
+
+	var cur = {};
+	var agaArr = [2,3,4,5].map(function(item, i, now){
+		console.log(i, item, now, this);
+		return item + 1;
+	}, cur); // 并将里面的每个 this 指向 cur,否则为全局
+	console.log(agaArr);
+
+
+
+})(); 
+
+
+
+// 真正柯里化
+/**
+ * add(1,2,3) => 6
+ * add(1,2)(3) => 6
+ * add(1)(2)(3) => 6
+ */
+console.log('-----------');
+(function () {
+	function add(a){
+		return function(b){
+			return function(c){
+				return a + b + c;
+			}
+		}
+	}
+	
+	console.log( add(1)(2)(3) ); //=> 6
+})(); 
+
+
+
+
+
+
+
+(function () {
+	
+	var adder = null; // 闭包的引用
+	function add(){
+		// 1.获取第一次传入的参数
+		var args = [].slice.call(arguments);
+
+		// 2.定义闭包，让每个参数可以驻留在内存中
+		adder = function() {
+
+			// 3.定义在闭包中要做的事
+			var toAdder =  function toAdder(){
+				// 连续获取后一个参数
+				/* 
+				 * add(1)(2)
+				 * 先已经获取了 1 参数，那么此时  function add(1){ }
+				 *
+				 * 这里在就是在获取 2 ，将 add(1) 看作了一个函数，参数就是2 
+				 * 所以要写单独写 [].slice.call(arguments)
+				 *
+				 * 用 apply() 是因为，参数可以是 add(1)(2,3) 类似传入
+				 */ 
+				[].push.apply(args, [].slice.call(arguments));
+				// 重复获取第一个括号后括号中的参数
+				return toAdder;
+			};
+
+
+			// 4.为上面的每一个 toAdder() 重写 toString()
+			// 不然，每一次加起来只是函数自己
+			toAdder.toString = function(){
+				return args.reduce(function(a, b){
+					return a + b;
+				});
+			};
+
+			// 5.做定义好的事
+			return toAdder;
+		}
+		// 调用调用，自己执行，不要作用域
+		// 因为把参数驻留在了内存，所以要一个参数一个参数的来 adder 
+		return adder.apply(null, args);
+
+		// 还有就是，最后返回是也是一个函数，这是因为，
+		// 柯里化函数后面参数是自由的，所以返回的是一个函数
+	}
+	
+	add(5);  // 此时，驻留了一个闭包 adder() 并且参数 5 已经被保存
+	console.log( add(5) == adder() ) //=> false
+	// adder() 相当于执行了一次 add(5) 但不等于
+	console.log( adder()(3) );  //=> function 8
+
+
+})(); 
+
+
+(function () {
+	function add(){
+		var args = [].slice.call(arguments);
+		// 定义闭包
+		var adder = function adder(){
+			var to = function to(){
+				[].push.apply(args, [].slice.call(arguments));
+				return to;
+			}
+			to.toString = function(){
+				return args.reduce(function(a, b){
+					return a + b;
+				});
+			}
+			return to;
+		}
+		// 在内存中调用闭包
+		return adder.apply(null, args);
+	}
+
+	console.log( add(2)(1,3)(3) );
+
+
+
+})(); 
+
+
+
+
+
+
+
+</script>

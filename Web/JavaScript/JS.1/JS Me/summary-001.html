@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+button{font-size:15px; text-align:center;  }
+button#first{width:300px; height:40px; line-height:40px;}
+button#second{width:200px; height:50px; }
+#all{width:300px; height:500px; padding:10px; margin:0 auto; border:10px solid rgba(0,0,0,0.5); overflow:auto;}
+</style>
+<script src="main-jq.js"></script>
+<script>
+	window.onload = function(){
+		
+		$("#first").click(function(){
+		
+			//alert("你要做运算吗");
+			var flagStart = confirm("你想要做简单的数学运算吗？");
+			if(flagStart)
+			{
+			<!---加法与减法--->
+				var tipContent = new Array("你输入的数有问题，请输入一个数字！","请输入你的第一个数","请输入你的第二个数","最后的结果是：");
+			
+				var flagTwo = confirm("加减确定，乘除取消");
+				if(flagTwo)
+				{
+					//alert("vb");
+					do{
+						var firstNumber = Number(prompt(tipContent[1],""));
+						if(isNaN(firstNumber) == true)
+						{
+							alert(tipContent[0]);
+						}else break;
+						
+					}while(Number(firstNumber) != true);
+					do{
+						var secondNumber = Number(prompt(tipContent[2],""));
+						if(isNaN(secondNumber) == true)
+						{
+							alert(tipContent[0])
+						}else break;
+					}while(Number(secondNumber) != true)
+					
+					var flagThree = confirm("你要做加法还是减法，（确定【加】，取消做【减】）");
+					if(flagThree == true)
+					{
+						var overNumber = firstNumber + secondNumber
+						alert(tipContent[3] + "" + firstNumber+" + "+secondNumber +" = " + overNumber);
+					}else{
+						var overNumberTwo = firstNumber-secondNumber;
+						alert(tipContent[3] + "" + firstNumber+" - "+secondNumber +" = " + overNumberTwo);
+					}
+					<!---乘法与除法-->
+				}else{
+					//alert("你要做乘除法");
+					do
+					{
+						var threeNumber = Number(prompt(tipContent[1],""));
+						if(isNaN(threeNumber) == true)
+						{
+							alert(tipContent[0]);
+						}else break;
+						
+					}while(Number(threeNumber) != true)
+					do{
+						var fourNumber = Number(prompt(tipContent[2],""));
+						if(isNaN(fourNumber) == true)
+						{
+							alert(tipContent[0]);
+						}else break;
+					}while(Number(fourNumber) != true)
+					
+					var flagFour = confirm("乘法确定，除法取消");
+					if(flagFour == true)
+					{
+						var overNumberThree = threeNumber * fourNumber;
+						alert(tipContent[3] + "" + threeNumber+" × "+fourNumber +" = " + overNumberThree);
+					}else
+					{
+						var overNumberFour = threeNumber / fourNumber;
+						alert(tipContent[3] + "" + threeNumber+" ÷ "+fourNumber +" = " + overNumberFour);
+					}
+				}
+			}
+		});
+		
+						
+			$("#article").click(function(){
+				var Article = document.getElementById("all").innerHTML;
+				var printfChar = prompt("Please enter your want find char!","");
+				var cycleTimes = 0;		//1. y这定义，
+				var searchNumber = 0;				
+				while(cycleTimes != -1)	//2.在这里用一个循环(因为这个是 while 循环不是 do-whihle 循环，所以首先是判断条件在循环)
+				{
+					//此句的含义：现找到 printfChar 的位置，然后就利用找到的这个位置开始在找 printfChar 也就是从 0 开始，因为 1.定义了一个0 也就是在这个循环之前的语句是 cycleTimes = Article.indexOf(printfChar,0)	在找到之后，就在这个的基础上，变成找到的那一个值如下：
+					/*
+						我们来用 China 这个字符来说
+						第一次找：cycleTimes = Article.indexOf("china",0)	//这里 cycleTimes 的值就成了 1 
+						第二次找：cycleTimes = Article.indexOf("china",1)	//这里 cycleTimes 的值就成了从一开始找的第二次的位置，比如说是：100
+						第三次找：cycleTimes = Article.indexOf("china",100)	//这里 cycleTimes 的值就成了 100
+						第四次找：...
+						第五次找：....
+						....
+						
+						所以在每一次找到的时候给一个变量 serachNumber 来存，也就是找到一次存一次。
+					*/
+					cycleTimes = Article.indexOf(printfChar,cycleTimes);//3.然后，将定义的1.的变量赋值成这个
+					if(cycleTimes != -1){
+						cycleTimes++;
+						searchNumber++;	
+					}
+				}
+					alert("我共找到" + "【" + printfChar + "】" +" "+ searchNumber + "次");
+			});
+	}
+</script>
+</head>
+
+<body>
+
+<button id="first">点击这里来做简单的数学运算！</button>
+
+<button id="article">点击这里来查找文字！</button>
+
+<div id="all">
+China unveiled plans on Wednesday to upgrade its Internet infrastructure and the development of its logistics industry in rural areas, part of the government's efforts to encourage online spending among rural residents.
+The telecommunication upgrade will involve investment of at least 140 billion yuan ($22.1 billion).
+An executive meeting of the State Council presided over by Premier Li Keqiang decided to allocate more central government funds to building Internet infrastructure and also advocated funding from local governments and social organizations.
+A circular issued after the meeting said the government plans to invest up to 140 billion yuan in the sector by 2020 to provide at least 50,000 villages with Internet access. By then, about 98 percent of the nation's rural areas will be hooked up to the Net.
+The government also promised to improve Internet speed and expand wireless broadband coverage in areas with access to the Net.
+Estimates of China's rural population range from 600 million to 800 million.
+Wednesday's meeting also pledged to expand e-commerce apps in rural areas, especially in promoting agricultural products and trips to the countryside.
+The government will also open up the delivery industry to social investors, encourage mergers and acquisitions, and streamline customs procedures for cross-border deliveries.
+Zeng Chen, an e-commerce expert at the Ministry of Commerce, said online shopping revenues topped 9.8 trillion yuan from January to August, a year-on-year rise of 24.7 percent." + '
+"There is a large market for e-commerce in rural areas and small and medium-sized cities in western China, where residents need the same goods as their urban counterparts but have limited access to such products.
+"E-commerce revenues in third-and fourth-tier cities have shown stronger momentum than in big coastal cities, and we expect increased growth in these areas when local logistics are improved," Zeng said.
+Cross-border e-commerce and shopping conducted via mobile devices are the new growth points for the industry.
+Chinese spent about 90 billion yuan last year on mobile phones and other mobile devices, comprising one third of the total they spent online.
+More than 80 percent of export and import companies in China have opened online businesses.
+
+</div>
+
+</body>
+</html>

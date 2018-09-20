@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>JQ 选择器</title>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				alert($("#menu ul li:even").text());
+			});
+
+
+		</script>
+	</head>
+	<body>
+	<div id="web">
+		<div id="banner">
+			<div id="menu">
+				<ul class="menu">
+					<li>内容一</li>
+					<li>内容二</li>
+					<li>内容三</li>
+					<li>内容四</li>
+					<li>内容五</li>
+				</ul>
+			</div>
+			<div class="left">
+				<em class="prve"><</em>
+			</div>
+			<div class="right">
+				<em class="next">></em>
+			</div>
+		</div>
+	</div>
+
+	</body>
+</html>

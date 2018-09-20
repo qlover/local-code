@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>创建对象</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+
+
+
+
+<script>
+
+
+/* 对象回忆 **/
+
+// 为对象本身添加一个方法 
+/*
+
+Object.alt = function(s){
+	return 'my ' + s;
+};	
+console.log(Object.alt('string'));   // my string
+
+// 为对象原型添加一个方法
+Object.prototype.alt = function(o){
+	return 'my o is' + o.toString();
+};
+var o = new Object();
+console.log(o.alt(o));  // my o is[object Object]
+
+
+*/
+// 为了下面的纯净操作注释掉上面内容
+
+
+/* 创建第一个 ES5 对象  */
+
+
+var obj = Object.create(Object.prototype,{
+    name: {
+		value : 'qrj',
+		enumerable : true,  // 该属性可以被遍历出来
+	  	writable : true,  // 该属性能被重新赋值
+    },
+    age : {
+    	value : 19,
+    	configurable : true , // 该属性能被删除
+	  	enumerable : true ,  // 该属性可以被遍历出来
+    }, 
+    parent : {
+    	value : 'Dad',
+		configurable : false,  // 该属性不被删除
+		writable : false,  // 该属性不能被重新赋值
+		enumerable : false ,  // 该属性不能被遍历出来
+    },  // ES5 支持对象最后一个成员后面跟上逗号
+
+});
+
+
+// 遍历 obj 成员
+for(var k in obj ){
+	// 注意下面不能写成 obj.k 而是要用 obj[k]
+	document.writeln('obj.' + k + '=' + obj[k]);
+}
+// 会发现 parent 这个属性没有遍历出来，是因为 parent 设置了 eunmerable 
+
+
+// 正常打印 obj 对象的成员属性值
+console.log( obj.name.enumerable );   // 不能将属性用作对象
+console.info( obj.name, obj.age, obj.parent );  // qrj 19 Dad
+
+// 试图改变 age 的值
+obj.age = 20;
+console.info( obj.name, obj.age, obj.parent );  // qrj 19 Dad
+
+// 试图改变 name 值
+obj.name = 'qlover';
+console.info( obj.name, obj.age, obj.parent );  // qlover 19 Dad
+
+
+// 试图删除 obj 的一些成员属性
+delete obj.parent;
+delete obj.age;
+console.info( obj.name, obj.age, obj.parent );  // qlover undefined Dad
+// age 属性被删除了
+
+
+
+
+// 上面用了一个 for in 语句来遍历属性
+// 这里用 Object.keys 来替代 for in
+document.write('<br />');
+
+console.log( Object.keys(obj) );
+console.log( Object.getOwnPropertyNames(obj) );
+
+
+
+
+
+
+// observe() 方法
+// 这个方法目前只有在 chrome 最新版本才支持
+
+var o = {};
+
+Object.observe(o,function(changes){
+	changes.forEach(function(change){
+		console.info(change.type, change.name, change.oldValue);
+	});
+});
+o.num = 1;  // 赋值属性 num
+o.num = 10;  // 重写属性 num
+delete o.num; // 删除属性 num
+
+</script>
+</head>
+
+<body>
+
+</body>
+</html>
+
+
+
+
+
+

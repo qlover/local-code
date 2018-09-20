@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>柯里化</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+<script>
+	
+// 第一个柯里化
+
+
+// 这个函数完成了 两个数的和
+function add(a, b){  // 指定需要传入两个参数
+	return a + b;
+}
+console.log( add(2,3) );
+
+
+// 柯里化上面函数就是如下：
+function add2( a ){  // 指定传入一个参数
+	return function( b ){
+		return a + b;
+	}
+}
+
+console.log( add2(2)(3) );   // 还是5 ，注意调方式
+
+
+// 再来个深入点的
+function sum( a, b, c, d){  // 指定传入四个参数的求和
+	return a + b + c + d;
+}
+// console.log( sum(1,2,3,4) );
+
+// 柯里化
+function sum2( a ){	
+	return function( b ){
+		return function( c ){
+			return function( d ){
+				return a + b + c + d;
+			}
+		}
+	}
+}
+//每次调用都返回一个新的函数，该函数接受另一个调用
+//然后又返回一个新的函数，直至最后返回结果，分布求解，层层递进。
+//这里利用了闭包的特点
+console.log( sum2(1) );   // function
+console.log( sum2(1)(2) );  //function
+console.log( sum2(1)(3)(4) );  //function
+console.log( sum2(1)(3)(4)(5) );  // 13,将上面三行代码积累起来返回最后的结果
+
+// 对了也放你发现了，可以来操作 arguments 对象来操作参数
+// 当然继续向下写的放，你得先去把 几个 ES5 迭代的方法弄明白
+
+// 将参数看成一个数组传入
+var add = function ( args ){
+	return args.reduce(function(prev, curr){
+		return prev + curr;
+	});
+}
+var args = [3,3,4,5,6];
+console.log( add( args ) );  // 21
+
+// 来个高端点的，将每一项乘以 10 之后 再相加
+var add = function ( args, multi){
+	return args.map(function(val) {
+		return val * multi;
+	}).reduce(function( a, b){    // 注意这里写法链式
+		return a + b;
+	});
+}
+
+var args = [3,3,4,5,6];
+console.log( add( args, 10 ) );  // 21
+
+
+
+
+
+// 通用柯里化
+var currying = function (fn) {
+    var _args = [];
+    return function () {
+        if (arguments.length === 0) {
+            return fn.apply(this, _args);
+        }
+        Array.prototype.push.apply(_args, [].slice.call(arguments));
+        return arguments.callee;
+    }
+};
+
+var multi=function () {
+    var total = 0;
+    for (var i = 0, c; c = arguments[i++];) {
+        total += c;
+    }
+    return total;
+};
+
+var sum = currying(multi);  
+  
+sum(100,200)(300);
+sum(400);
+console.log(sum());     // 1000  （空白调用时才真正计算）
+
+
+
+
+
+
+
+
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

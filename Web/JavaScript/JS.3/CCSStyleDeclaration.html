@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>style 对象</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+
+</head>
+
+<body>
+
+	<div id="pra">我是一段文本</div>
+
+	<script>
+		// 获取 CSSStyleDeclaration 
+		var p = $('#pra')[0].style;
+		console.log( p );
+		document.write('<ol>');
+		for(var k in p){
+			document.write('<li>'+k+':'+p[k]+'</li>');
+		}
+		document.write('<ol>');
+		// chrome 55.0.2883.87 有 371 个属性与方法
+		// FF 有 574 个属性与方法
+		// opera 43.0.2442.806 有 373
+
+
+	</script>
+
+</body>
+</html>

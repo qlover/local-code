@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>项目</title>
+  <script type="text/javascript" src="me.js"></script>
+  <script type="text/javascript">
+	addEvent(window,'load',function(){
+		/*
+			因每个浏览器的问题，让界面居中的效果是不一样的
+			var top = (document.documentElement.clientWidth - 350)/2;
+			var left = (document.documentElement.clientHeiht - 250)/2;
+		*/
+		$().getId('login').center().resize(function(fn){	//触发浏览器窗口事件
+			$().getId('login').center();		
+		});
+	});
+  </script>
+ </head>
+ <body>
+<button id="btn">登录</button>
+<div id="login" style="width:350px;height:250px;background:#eee;position:absolute;">This is Login!</div>
+</body>
+</html>
+
+
+

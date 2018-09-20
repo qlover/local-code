@@ -1,0 +1,72 @@
+<meta charset="utf-8">
+<title> module </title>
+
+<!-- <script type="module" src="./es6-profile.js" defer></script> -->
+<script type="module" src="./es6-profile.js"></script>
+
+<!-- 直接标签执行 -->
+<script type="module" src="./es6-foo.js"></script>
+
+<!-- 也可以用 标签的形式输入 -->
+<script type="module">
+	// 同样直接在标签中也可以
+	import { firstName, lastName, year } from './es6-profile.js'
+	// 利用标签的加载得到了 profile.js 中输出的变量
+	console.log(firstName);//=> Michael
+	console.log(lastName);//=> Jackson
+	console.log(year);//=> 1958
+
+	// 模块之中，顶层的this关键字返回undefined
+	console.log(this)//=> undefined
+</script>
+
+
+<script>
+
+// 下面说说 ES6 与 CommonJS 加载区别
+// 1. 首先 CommonJS 
+// 两个文件
+// common-lib.js 用为输出
+// common-main.js 作用导入
+// 
+// 将 common-main.js 编译成浏览器认识的
+// $ browserify commonjs-main.js > common-compiled.js
+// 最后引入这个  common-compiled.js
+</script>
+<script src="./common-compiled.js"></script>
+<!-- 
+在 common-compiled.js 中即使调用了 incCounter() 将 count 增加了 1 
+但结果还是 3 3 ，这就是因为 CommonJS 是输出的是一个值的拷贝
+
+
+common-lib.js 模块加载以后，它的内部变化就影响不到输出的 mod.counter 了
+这是因为 mod.counte r是一个原始类型的值，会被缓存
+除非写成一个函数，才能得到内部变动后的值
+
+当一写成函数形式，则结果就是 3 4
+
+// 2. 接下来看 ES6 
+ -->
+
+<!-- 首先将 es6-lib.js 加载 -->
+<script type="module" src="./es6-lib.js"></script>
+<script type="module">
+	// 写在标签中
+	// es6-main.js
+	import { counter, incCounter } from './es6-lib.js';
+	console.log('es6-lib', counter); // 3
+	incCounter();
+	console.log('es6-lib', counter); // 4
+	// ES6 模块输入的变量counter是活的，完全反应其所在模块 es6-lib.js 内部的变化
+</script>
+
+
+<script type="module" src="es6-m1.js"></script>
+<script type="module" src="es6-m2.js"></script>
+<!-- 看 es6-m2.js 中的输出 -->
+
+<script type="module">
+	import { year } from './es6-profile.js';
+	// year 指向的是只读的
+	year = 2000; // TypeError
+</script>

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+	<!-- 栈方法 -->
+	/*
+	var arr =['qrj',17,167];
+	alert(arr);
+	alert(arr.push('中国'));
+	alert(arr);
+	alert(arr.pop());
+	alert(arr);
+	*/
+	<!-- 队列方法 -->
+	/*
+	var arr =['qrj',17,167];
+	alert(arr.shift());
+	alert(arr);
+	alert(arr.shift());
+	alert(arr);
+	alert(arr.shift());
+	alert(arr);
+	if(arr.length == 0){
+		alert('array empty!');
+	}
+	*/
+	<!-- 数组操作方法 -->
+	/*
+	var arr =['qrj',17,167];
+	alert(arr.unshift('中国','四川','地球'));
+	alert(arr);
+	if(arr.length>5){
+		alert("数组长度有 5 个了");
+		arr.length = 3;
+		alert(arr);
+	}
+	*/
+	/*
+	var arr1 = [1,2,3];
+	var arr2 =arr1.concat(4,5,6);
+	alert(arr1);
+	alert(arr2);
+	*/
+	/*
+	var arr= [1,2,3,4,5];
+	alert(arr);
+	arr = arr.concat(6,7,8,9,10);
+	alert(arr);
+	*/
+	
+	/*
+	var arr=[0,1,2,3,4,5];
+	alert(arr = arr.slice(1,2));
+	alert(arr);
+	arr =[0,1,2,3,4,5];
+	alert(arr = arr.splice(1,2));
+	alert(arr);
+	*/
+
+	
+	var arr =['qrj',17,165];
+	var arr2 = arr.splice(1,0,'四川','四川','四川','四川');	
+		//第一个参数表示在第几个下标的位置开始准备插入
+		//第二个参数表示从第一个参数的下标到这个参数的下标的所有元素将会被替换掉，然后
+		//第三个参数以后表示在上参数一到参数二的下标之间替换成那些元素
+		
+
+	alert(arr2);
+	alert(arr);
+	arr =arr.join();
+	alert("After join() method"+"  "+arr);
+	var arrs = arr.split(",");
+	for(var i=0; i<arrs.length; i++){
+		alert(arrs[i]);
+	}	
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

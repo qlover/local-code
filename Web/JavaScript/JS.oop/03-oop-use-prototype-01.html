@@ -1,0 +1,138 @@
+<meta charset="utf-8">
+
+
+<script>
+// constructor 
+(function () {
+	
+	function Person(){ // var Person = function(){}
+
+	}
+
+	// Person = 1000;
+	console.log(new Person());//=> Person is not a constructor
+	// 为什么会出现这个问题，是因为在上一行将 Person 赋值成了 1000
+	// 而本身原本的 Person 变量对象指向的是构造器，赋值后就不再指向构造器，所以会出错
+})(); 
+
+(function () {
+	
+	function Person(){}
+
+	var o = Person;
+	Person = 123;  // 即使改变了原来的 Person 的值
+	// Person 的引用也被 o 存放了下来，所以 Person 构造器并没有被改变
+	console.log(new o())
+
+	// console.log(new Person())
+
+})(); 
+
+</script>
+
+
+
+
+
+<script>
+
+// 使用原型
+(function () {
+	
+	var Person  = function(){ }
+	window.Person = Person;
+
+	Person.prototype.foo = function(){
+		console.log('1111');
+	}
+	var p1 = new Person();
+
+	Person.prototype = {
+		foo : function(){
+			console.log('2222');
+		}
+	}
+	var p2 = new Person();
+
+	p1.foo();
+	p2.foo();
+	// 可见 03-oop-use-prototype-01.ddd
+})(); 
+
+
+
+// 继承 
+(function () {
+	
+	var Person = function(){
+
+	};
+
+	// 该方法用于继承 
+	var extend = function(o1, o2){
+		for(var k in o2){
+			o1[k] = o2[k];
+		}
+	};
+
+	// 在 Person 原型上来继承 
+	extend(Person.prototype, {
+		foo : function(){
+			console.log('111')
+		},
+		bar : function(){
+			console.log('222')
+		}
+	});
+
+
+	var p = new Person();
+
+	p.foo(); //=> 111
+
+})();
+// 上面代码后改造
+(function () {
+	
+	var Person = function(){
+
+	};
+
+	Person.prototype.extend = function(obj){
+		for(var k in obj){
+			this[k]  = obj[k];
+		}
+	}
+
+	Person.prototype.extend({
+		foo : function(){
+			console.log('111')
+		},
+		bar : function(){
+			console.log('222')
+		}
+	});
+	// 但是所继承的对象少了 constructor 属性
+
+	var p = new Person();
+	p.foo();
+	p.bar();
+
+
+})(); 
+
+
+</script>
+
+
+<script>
+(function () {
+	// 将这个一个替转义出来
+	var str = 'asdf<!@#&as lkdn><TM oo casdf<> &';
+
+
+})(); 
+
+
+</script>
+

@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>创建对象</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+
+
+
+
+<script>
+
+
+/* 使用 get 和 set 对象方法*/
+var obj = Object.create(Object.prototype,{
+
+	_name : {
+		 value : 'qrj',
+		 writable : true,
+	},
+
+	_age : {
+		value : 20,
+	},
+	get age(){
+		return this._age;
+	},
+	set name( n){  // 切记这个函数只有一个参数
+		this._name = n;
+	},
+	set age( a){  // 切记这个函数只有一个参数
+		this._age = a;
+	},
+});
+
+// 调用 get 方法直接点 get 方法的函数名就行了
+console.info( obj.name, obj.age  );  // qrj 20
+// 调用 set 方法也是一样，但是参数就不是传入到括号中
+obj.name = 'qlover'; 
+// 但是会发现，上面的 age 不能，因为没有设置 writeable
+console.info( obj.name, obj.age  );  // qrj 20
+
+
+
+// 用字面量方式创建对象，使用 ES5 新特性
+var obj2 = {
+	_Name : 'qrj',
+	_Age : 19,
+
+	set name (n){
+		this._Name = n;
+	},
+
+	get name(){
+		return this._Name;
+	} ,
+
+
+};
+console.info( obj2.name, obj2._Age );
+obj2.name = 'qlover';
+console.info( obj2.name, obj2._Age );
+
+</script>
+</head>
+
+<body>
+
+</body>
+</html>
+
+
+
+
+
+

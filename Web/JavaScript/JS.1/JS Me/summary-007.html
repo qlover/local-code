@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+.backColor { background:#00f; color:#f00;}
+a{ width:100px; height:50px; display:block; float:left; text-align:center; line-height:50px; border:1px solid; cursor:pointer; background:#eee; color:#654;}
+</style>
+<script>
+function handleEvent(e){
+	var ett = e.target.tagName;
+	if(ett=="A"||ett=="P"){
+		//e.type=="mouseover"?e.target.className = "backColor":e.target.className = null;
+		e.type=="mouseover"?e.target.className = "backColor":e.target.className = null;
+		/*if(e.type == "mouseover"){
+			e.target.className = "backColor";
+		}else if(e.type == "mouseout"){
+			e.target.className = null;
+		}*/
+	}
+}
+document.onmouseover = handleEvent;
+document.onmouseout = handleEvent;
+</script>
+</head>
+
+<body>
+<a>导航一</a><a>导航二</a><a>导航三</a><a>导航一</a><a>导航二</a><a>导航三</a> <br /><br />
+<p>Move your mouse here to change the background color</p>
+<p>Move your mouse here to change the background color</p>
+<p>Move your mouse here to change the background color</p>
+<p>Move your mouse here to change the background color</p>
+</body>
+</html>

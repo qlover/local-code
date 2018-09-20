@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>创建对象</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+
+
+
+
+<script>
+
+
+/* ES5 之前的对象 */
+document.write( Object(), Object(undefined), Object(null)  + ' <br />');
+document.write( Object(1), Object('undefined'), Object(false)  + ' <br />');
+document.write( Object([]), Object({}), Object(function(){})  + ' <br />');
+
+
+function isObject(val){
+	return val === Object(val); 
+}
+
+console.log( isObject('string') );
+console.log( isObject([2,4,5]) );
+
+
+
+
+
+/* valueof 方法*/
+
+var o1 = new Object();
+document.write( '<br />' + o1.valueOf() );  // "[object Object]"
+document.write( '<br />' + 1 + o1 );  //  "1[object Object]"
+// js 默认调用了 valueOf() 方法
+// 自定义 valueOf() 方法
+
+o1.valueOf = function(){
+	return 10;
+};
+console.log( 5 + o1);  // 15
+
+/* toSring() 方法*/
+
+var o2 = new Object();
+document.write('<br />' + o2.toString() );  // "[object Object]"
+// 当 o2 在自动转换时会调用的函数
+o2.toString = function(){
+	return 'I was converted.';
+}
+console.log( 'o2 is ' + o2); // "o2 is I was converted."
+
+var arr1 = [1,2,3];
+var str1 = 'I am string.';
+var fun1 = function(){
+	return 'I am function.'
+};
+console.log( arr1.toString() );  //  "1,2,3"
+console.log( str1.toString() );  // "I am string."
+console.log( fun1.toString() );  // "function (){ return 'I am function.'}"
+
+
+// toString 判断数据类型
+document.write( '<br />');
+document.write( '<br />' + Object.prototype.toString.call(2) ); // "[object Number]"
+document.write( '<br />' + Object.prototype.toString.call('') ); // "[object String]"
+document.write( '<br />' + Object.prototype.toString.call(true) ); // "[object Boolean]"
+document.write( '<br />' + Object.prototype.toString.call(undefined) ); // "[object Undefined]"
+document.write( '<br />' + Object.prototype.toString.call(null) ); // "[object Null]"
+document.write( '<br />' + Object.prototype.toString.call(Math) ); // "[object Math]"
+document.write( '<br />' + Object.prototype.toString.call({}) ); // "[object Object]"
+document.write( '<br />' + Object.prototype.toString.call([]) ); // "[object Array]"
+
+// type 函数
+var type = function ( obj ) {
+	var s = Object.prototype.toString.call( obj );
+	return s.match(/\[object (.*?)\]/)[1].toLowerCase();
+
+}
+
+// alert( type([]) );  // array
+// alert( type({}) );  // object
+// alert( type() );  // undefined
+
+
+var typename = ['Null', 'Undefined', 'Object', 'Array', 'String', 'Number',
+ 'Boolean', 'Function', 'RegExp', 'Element', 'NaN',  'Infinite'];
+
+typename.forEach(function (t) {
+    type['is' + t] = function (o) {
+        return type(o) === t.toLowerCase();
+    };
+});
+
+// alert( type.isObject({}) ); // true
+// alert( type.isNumber(NaN) ); // false
+// alert( type.isElement(document.createElement('div')) ); // true
+// alert( type.isRegExp(/abc/) ); // true
+
+
+
+
+
+/* 用 Object.defineProperty() 方法创建对象用属性 */
+
+var o3 = Object.defineProperty({},'name',{
+	value : 'qlover',
+	writeable : true,
+	enumerable : true,
+	configurable : false,
+});
+console.log(o3.name);  // 'qlover'
+
+// Object.defineProperties() 用来一次性创建多个属性
+var o4 = Object.defineProperties({},{
+	name : { value : 'qlover', enumberable : true ,},
+	age : { value : 19, enumberable : true ,},
+});
+
+
+
+
+
+</script>
+</head>
+
+<body>
+
+</body>
+</html>
+
+
+
+
+
+

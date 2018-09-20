@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+<!--  1 -->
+/*var timerID;
+function window_onload(){
+	timerID = setTimeout("alert('Times start');",300);
+	alert("Times over");
+}*/
+<!--  2 -->
+/*var timerID;
+	function window_onload(){
+		timerID = setTimeout("alert('Times start');",3000);
+		alert("Times over");
+	}
+
+	function butStopTimer_onclick(){
+		clearTimeout(timerID);
+		alert("Timer has been cleared");
+	}*/
+<!-- 3 -->
+var change;
+var imgchange;
+var imgchange2;
+var imgNumber = 1;
+var allImg = 3;
+function window_onload(){
+	change = setTimeout("changeImg()",3000);
+}
+function changeImg(){
+	imgNumber++;
+		document.imgchange.src = "img/img_" + imgNumber + ".jpg";
+	if(imgNumber < allImg){
+		setTimeout("changeImg()",3000);
+	}
+	if(imgNumber==3){
+		imgNumber=0;
+		setTimeout("changeImg()",3000);
+	}
+}
+</script>
+
+
+</head>
+
+<body  onload="window_onload()">
+<img align="middle" name="imgchange" src="img/img_1.jpg" style="border:10px solid #000; border-radius:5px;display:block;width:80%;height:auto;margin:10px auto; padding:5px;"/>
+</body>
+</html>

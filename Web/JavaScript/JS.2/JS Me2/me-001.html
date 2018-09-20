@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>库的封装</title>
+  <script type="text/javascript" src="me.js"></script>
+  <script type="text/javascript">
+	/*addEvent(window,'load',function(){
+		//$('input')[0].style.width = 200+'px';
+		var ka = setInterval(function(){
+			var color1 = Math.round(Math.random()*250+5);
+			var color2 = Math.round(Math.random()*255);
+			var color3 = Math.round(Math.random()*255);
+			var speed = ($('#box').offsetLeft)*0.1;
+			if(speed < 40){
+				speed = Math.floor(speed);
+			}else{
+				speed = parseInt(speed);
+				clearInterval(ka);
+			}
+			$('#box').style.left = $('#box').offsetLeft+speed+'px';
+			//$('.par')[0].style.color = 'rgb('+color1+','+color2+','+color3+')';
+		},100);
+	});*/
+	addEvent(window,'load',function(){
+		//alert(byTag('input').tagName);
+		var btn = getName('btn',0);
+		var time = 0;
+
+			var ka = setInterval(function(){
+			var color1 = Math.round(Math.random()*250+5);
+			var color2 = Math.round(Math.random()*255);
+			var color3 = Math.round(Math.random()*255);
+			var speed = ($('#box').offsetLeft)*0.1;
+			if(speed > 40){
+				speed = Math.ceil(speed);
+				clearInterval(ka);
+				return false;
+			}else speed = Math.floor(speed);
+			$('#box').style.left = $('#box').offsetLeft+speed+'px';
+			//$('.par')[0].style.color = 'rgb('+color1+','+color2+','+color3+')';
+		},100);
+
+	});
+  </script>
+ </head>
+ <body>
+  <div style="background:red;width:100px;height:100px;position:relative;" id="box">id</div>
+  <p class="par">闪动的文本</p>
+<form method="post" action="" name="fomr1">
+	<input type="text" name="text" value="文本">
+	<input type="password" name="text" value="密码">
+	<input type="button" name="btn" value="move div">
+</form>
+ </body>
+</html>
+
+
+

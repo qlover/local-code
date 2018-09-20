@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JQ 操作 DOM(事件冒泡)</title>
+<style>
+	#box{ max-width:500px; background:#fba;}
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("body").click(function(){		//点击弹出 该事件
+			alert("body click");
+		});
+		$("#content").click(function(){	//点击弹出 body 事件和该事件
+			alert("content click");
+		});
+		$("span").click(function(){	//点击弹出 body 事件，content 事件和该事件
+			alert("span click");
+			return false;		//阻止了一次事件冒泡
+		});
+		//从内到外就是冒泡相反就是捕获
+
+	});
+</script>
+</head>
+<body>
+	<div id="content" style="width:100px; height:60px; background:#0a0; padding:5px;">
+		外层 div 元素
+		<span style="background:#eee;">内层 span 元素</span>
+		外层 div 元素
+	</div>
+</body>
+</html>

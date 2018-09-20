@@ -1,0 +1,132 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>JS贪吃蛇</title> 
+<style type="text/css"> 
+*{ margin:0; padding:0;}
+table{
+	margin:10px auto;
+	border-collapse:0;
+	border-spacing:0;
+	background:#eee;	
+}
+td{
+	width:15px;
+	height:15px;
+}
+
+
+
+</style> 
+<script type="text/javascript">
+
+var Direction = new function () { 
+	this.UP = 38; 
+	this.RIGHT = 39; 
+	this.DOWN = 40; 
+	this.LEFT = 37;  
+}; 
+
+
+
+function Common(){
+	this.size = 30;
+	this.speed = 100;	
+	this.autoMove = null;
+}
+
+
+
+var Main = new function (){
+	//var control = new Control();
+	window.onload = function(){
+		//Common.size = prompt("请输入游戏大小","30");
+		//Common.speed = prompt("请输入游戏速度","100");
+		//control.Init('pannel');
+		
+
+
+
+	}
+	
+		
+}
+
+
+
+
+function Position(x,y){
+	this.X = x;
+	this.Y = y;
+	
+}
+
+/*
+function Control(){
+	this.snake = new Snake();
+	this.Init = function(id){
+		var html = [];
+		html.push('<table>');
+		for(var x = 0 ; x < Common.size; x++){
+			html.push('<tr>');
+			for(var y = 0; y < Common.size; y++){
+				html.push('<td id="box_'+ x +"_"+ y +' "></td>');	
+			}
+			html.push('</tr>');
+		}
+		html.push('</table>');
+		this.pannel = document.getElementById(id);
+		this.pannel.innerHTML = html.join('');
+	};
+	this.Start = function(){
+		var me = this;
+		
+		
+		Common.autoMove = setInterval(function(){
+				
+				
+		},Common.speed);	
+	};
+	
+}
+
+function Snake(){
+		
+		
+		
+	this.Move = function(){
+		
+			
+	};
+};
+
+
+
+var Main = new function (){
+	var control = new Control();
+	window.onload = function(){
+		Common.size = prompt("请输入游戏大小","30");
+		Common.speed = prompt("请输入游戏速度","100");
+		control.Init('pannel');
+		
+		control.Start();
+	}
+	
+		
+}
+	*/
+	
+	
+	
+
+</script> 
+</head> 
+<body>
+
+<div id="pannel"> </div>
+
+
+
+</body> 
+</html> 

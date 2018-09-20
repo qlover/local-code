@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JQ 窗口拖动</title>
+<style>
+	*{margin:0; padding:0;}
+	#main{ width:100px; height:200px; background:#eee; position:absolute;
+		left:50%; top:50%; /* margin:-100px 0 0 -50px;*/
+	}
+	.title{ height:50px; cursor:move; background:#0f0;}
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+/*
+dis = clcik - L/T
+*/
+	$(function(){
+		/*$(".title").mousedown(function(e){
+			//获取鼠标在 title 点击的坐标的时候的 main 的坐标
+			var disL = $("#main").offset().left;
+			var disT = $("#main").offset().top;
+			//获取鼠标在 title 点击的坐标
+			var clickL = e.pageX;
+			var clickT = e.pageY;
+			//获取鼠标点击坐标与 main 的距离
+			var L = clickL - disL;
+			var T = clickT - disT;
+			$(document).mousemove(function(e){
+				//获取鼠标移动的坐标
+				var moveL = e.pageX;
+				var moveT = e.pageY;
+				//得到 main 移动的坐标（fin = move - L/T）
+				var finL = moveL - L;
+				var finT = moveT - T;
+				$("#main").css("left",finL+"px").css("top",finT+"px");
+			});
+			$(document).mouseup(function(){
+				$(this).unbind("mousemove");
+				$(this).unbind("mouseup");
+			});
+			$(this).mouseout(function(){
+				$(this).unbind("mousemove");
+				$(this).unbind("mouseout");
+			});
+		});*/
+		var maxWidth = document.documentElement.clientWidth || window.innerWidth;
+		var maxHeight = document.documentElement.clientHeight || window.innerHeight;
+		alert(maxWidth+'  '+maxHeight);
+		$(".title").mousedown(function(e){
+			var outL = $("#main").offset().left;
+			var outT = $("#main").offset().top;
+			var disL = e.pageX;
+			var disT = e.pageY;
+			var L = disL - outL;
+			var T = disT - outT;
+			$(document).mousemove(function(evt){
+				var qL = evt.pageX;
+				var qT = evt.pageY ;
+				var finL = qL - L;
+				var finT = qT - T;
+				
+				if(finL <= 0){
+					finL = 0;
+				}
+				if(finT <= 0){
+					finT = 0;
+				}
+				if(finL >= maxWidth-100){
+					finL = maxWidth-100;
+				}
+				if(finT >= maxHeight-200){
+					finT = maxHeight-200;
+				}
+				$("#main").css("left",finL+"px").css("top",finT+"px");
+			});
+			$(document).mouseup(function(){
+				$(this).unbind("mousemove");
+				$(this).unbind("mouseup");
+			});
+			$(this).mouseout(function(){
+				$(this).unbind("mousemove");
+				$(this).unbind("mouseout");
+			});
+		});
+		
+		
+	});
+</script>
+</head>
+<body>
+	<div id="main">
+		<h3 class="title"></h3>
+	</div>
+</body>
+</html>

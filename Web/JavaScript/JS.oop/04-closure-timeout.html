@@ -1,0 +1,72 @@
+<meta charset="utf-8">
+<script>
+	
+
+
+// 看个例子
+(function () {
+
+	for(var i = 0; i < 4; i++){
+		setTimeout(function(){
+			console.log(i); // 每次都打印 4 
+		}, 1000 * i); // 为了解决 setTimeout 队列的问题
+	}
+
+	// for 循环比定时器快执行完成
+	// 所以这个时在一秒后执行 setTimeout i 已经变成 5了
+	
+})(); 
+
+// 解决方法一就是用闭包
+(function () {
+	// 闭包
+	function a(n){
+		setTimeout(function b() {
+			console.log(n);
+		}, 1000 * n);
+	}
+	for(var i = 0; i < 4; i++){
+		a(i);
+	}
+
+	/**
+	 * 解析
+	 *
+	 * 1.调用了 4 次 a() ，每次都传入了不用的参数 i
+	 * 		a(0),a(1),a(2),a(3)，让参数都驻留在了内存中，直到定时器执行完毕
+	 * 2.在每次调用 a() 时，都产生了一个闭包
+	 * 		因为，a() 内部定义了一个函数 b() ，但是定义时，没有执行，
+	 * 		在 1000 * n 秒后才执行，就相当于 c()
+	 * 3.因为，1 调用了 4 次 a() ，传入了不同的参数
+	 * 		又因为 setTimeout() 已队列形式存在，时间不同
+	 * 		不同时间的调用了 a() 函数里面的 b()，
+	 * 		当然不给名字b, 用匿名函数也会成功，是因为 setTimeout()的特殊会自执行
+	 * 
+	 */
+})(); 
+
+// 解决方法一：块级作用域
+(function () {
+	
+	// let 
+	for (let i = 0; i < 5; i++) {
+		setTimeout(function b(){
+			console.log(i);
+		}, 1000 * i);
+	}
+
+	// 私有作用域,表示块级作用域 
+	for (var i = 0; i < 5; i++) {
+		// 这里就有点像前面的函数 b() 作的
+		// 此时也产生了个闭包，就是b表示的这个函数，当然，也可以是匿名的
+		(function b(n) {
+			setTimeout(function(){
+				console.log(n);
+			}, 1000 * n);
+		})(i); 
+	}
+
+})(); 
+
+
+</script>

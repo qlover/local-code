@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>对象冒充方法</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+</head>
+
+<body>
+<button id="btn">click</button>
+<script>
+	
+
+// 深入理解 call() 和 apply()
+
+function log( msg ){
+	console.log( msg );
+}
+log(1);
+log(1,'2');
+
+// 重写 log() 方法
+function log ( ) {
+	console.log.apply( console, arguments );
+}
+log(1);
+log(1,'1');  // 不仅可以改变当前 log() 还可以改变之前的
+// 毕竟 console 对象有点不 一样
+
+
+// 再次重写
+function log () {
+	// 将 arguments 变为数组
+	var args = Array.prototype.slice.call(arguments);
+	args.unshift("消息是:");
+	// 注意，参数二是个数组 args
+	console.log.apply( console, args);
+}
+log(10);
+log(10,'qjr');
+
+
+
+// 点击 btn 这个元素时，改变页面背景
+/*document.body.onclick = function(evt){
+	var _this = this;
+	document.getElementById('btn').onclick =function(){
+		// this.style.background = '#f00';  //改变点击元素的背景
+		_this.style.background = '#f00';
+	};
+}*/
+document.body.onclick = function(evt){
+	document.getElementById('btn').onclick =function(){
+		this.style.background = '#f00';
+	}.bind(this);
+}
+
+
+
+
+
+
+
+var bar = function(){
+	console.log( this.x );
+}
+var x = 10;
+var foo = {
+	x : 5
+};
+var func = bar.bind(this);  // 10
+func();
+var func = bar.bind(foo); // 5
+func();
+
+
+
+
+var foo = {
+    x:3
+}
+var sed = {
+    x:4
+}
+var func = bar.bind(foo).bind(sed);
+func(); //?
+  
+var fiv = {
+    x:5
+}
+var func = bar.bind(foo).bind(sed).bind(fiv);
+func(); //?
+
+
+
+// 　apply、call、bind比较
+var foo = function(){
+	return this.x;
+}
+
+var a ={
+	x:10
+};
+var b ={
+	x:100
+}
+var x = 1000;
+console.log( foo.call(a) );  // 10
+console.log( foo.apply(a) ); //10
+console.log( foo.bind(a)() ); //10
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+/*function fun(a){
+	return a+200;
+}
+alert(fun(50));
+function fun(a){
+	return a+100;
+}
+*/
+
+function sum(){
+	var sum = 0;
+	var argLen = arguments.length;
+	if(argLen >10) return '参数太多了！';
+	if(argLen == 0)return sum;
+	for(var i=0; i < argLen; i++) sum += arguments[i];
+	return sum;
+}
+
+function average(){
+	var avg = 0;
+	var argLen = arguments.length;
+	if(argLen >10) return '参数太多了！';
+	if(argLen == 0) return avg;	
+	for(var i=0,l = argLen; i <l; i++) avg += arguments[i];
+	return avg/argLen;
+}
+
+//alert(addition(111,111,111,111,111));
+
+//alert(sum(50,50,50));
+
+//alert(average(10,10,50,205,0,1));
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

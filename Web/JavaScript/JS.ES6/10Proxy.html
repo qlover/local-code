@@ -1,0 +1,46 @@
+<meta charset="utf-8">
+<title> Proxy </title>
+<script>{
+
+// 对象的代理
+{
+
+	let obj = {
+		name : 'qlover',
+		age : 20,
+	};
+
+	let proxy = new Proxy(obj, {
+		get(target, property, receiver){
+			return 'xxxx';
+		}
+	});
+
+	console.log(proxy.name);//=> xxxx
+	console.log(proxy.age);//=> xxxx
+	// 不论怎么从 proxy 访问， obj 的属性，返回的都被 get() 拦截了
+	
+	// 当前源对象还是没有被改变
+	console.log(obj.name);//=> 'qlover'
+	console.log(obj.age);//=> 20
+
+	console.log(obj.proxy)
+} {
+
+	// 拦截
+	let Foo = function(){}
+
+	let proxy = new Proxy(Foo, {
+		construct(){
+			console.log('not constructor');
+			return [];
+		}
+	});
+
+	console.log(new proxy());//=> not constructor 
+	// 并返回 [] 
+
+
+}
+
+}</script>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>事件</title>
+<style>
+.blue{background:blue;}
+.red{background:red;}
+</style>
+<script type="text/javascript" src="me.js"></script>
+<script>
+/*
+function addEvent(obj,type,fn){
+	if(obj.addEventListener){
+		obj.addEventListener(type,fn,false);
+	}else if(obj.attachEvent){
+		obj.attachEvent('on'+type,function (){
+			fn.call(obj);
+		});
+	}
+}
+function getTarget(evt){
+	var e = evt || window.event;
+	if(e.target){
+		return e.target.tagName;
+	}else if(e.srcElement){
+		return e.srcElement.tagName;
+	}
+}
+function preDef(evt){
+	var e = evt || window.event;
+	if(e.preventDefault){
+		e.preventDefault();
+	}else{
+		e.returnValue = false;
+	}
+}*/
+addEvent(window,'load',function(){
+	var box = document.getElementById('box');
+	addEvent(box,'click',function(evt){
+		var e = evt || window.event;
+		perDef(e);
+		//alert(getTarget(e));
+	});
+});
+
+
+
+
+
+</script>
+</head>
+
+
+<body> 
+	<a href="http://www.baidu.com" id="box">测试DIV</a>
+</body>
+</html>
+
+

@@ -1,0 +1,27 @@
+<meta charset="utf-8">
+<title> 正则表达式 </title>
+<script>
+
+{
+	console.log(/^\uD83D/u.test('\uD83D\uDC2A'));//=> false
+
+}
+
+{
+	let s = 'aaa_aa_a';
+	let r = /a+_/y;
+
+	console.log(r.exec(s))//=> ['aaa_']
+} {
+	console.log(/b/g.exec('abc')); //=> ['b']
+	console.log(/b/y.exec('abc')); //=> null
+}
+
+{
+
+	console.log(/foo.bar/.test('foo\nbar'));//=> false
+	const re = /foo.bar/s;
+	console.log(re.test('foo\nbar'));//=> true
+	console.log(re.dotAll); //=> true
+}
+</script>

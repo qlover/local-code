@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Visited Event</title>
+
+</head>
+
+<body>
+<p id="cl" style="display:inline;">this is paragraph</p>
+<button id="btn">dblClick Me</button>
+<script>
+
+function handle(e){
+	alert("该事件发生名称："+e.type);
+	alert("该事件发生元素："+e.target);
+	if(e.type){
+		var newDate = new Date();
+/*		newDate = newDate.toTimeString();
+		alert("该事件发生时间："+newDate);
+*/		
+		alert("该事件发生时间："+newDate.getHours()+":"+newDate.getMinutes()+":"+newDate.getSeconds());	
+	}
+	alert("该事件发生阶段："+e.eventPhasc);
+	alert("该事件发生处理："+e.currenTarget);
+	alert("该事件是否可以取消默认行为："+e.cancelable);
+	alert("该事件是否可以阻止冒泡："+e.bubble);
+}
+document.getElementById("cl").onclick=function(){
+	handle(event);
+};
+document.getElementById("btn").ondblclick=function(){
+	handle(event);
+};
+</script>
+</body>
+</html>

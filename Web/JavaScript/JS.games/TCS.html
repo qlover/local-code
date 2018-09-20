@@ -1,0 +1,439 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>JS贪吃蛇</title> 
+<style type="text/css"> 
+*{ margin:0; padding:0;}
+table{
+	margin:20px auto;
+	border-spacing:0;
+	border-collapse:0;
+	border:none;
+	background:#eee;
+	border:1px solid #000;
+}
+#pannel table td {  
+width: 15px; 
+height: 15px; 
+font-size: 0; 
+line-height: 0; 
+overflow: hidden; 
+border-radius:10px;
+
+} 
+#pannel table .snake { 
+background-color: #00ff00; 
+} 
+
+
+#selOptions{
+	width:400px;
+	height:300px;
+	background:#eee;
+	position:fixed;
+	top:25%;
+	left:25%;
+	
+}
+#selOptions #main{
+	width:100%;
+	height:100%;
+	background:#fff;
+	position:relative;	
+}
+
+#main .top{
+	width:100%;
+	height:50px;
+	background:#999;
+	
+	}
+	
+#main .top .title{
+	height:50px;
+	position:relative;	
+	cursor:move;
+}
+#main .top h2{
+	line-height:50px;
+	padding-left:20px;
+	padding-right:20px;	
+}
+#main .top .close{
+	position:absolute;
+	right:0.5em;
+	top:0.2em;
+	font-size:2em;
+	cursor:pointer;
+	color:rgba(0,0,0,0.3);
+}
+#main .top .close:hover{
+	color:rgba(0,0,0,0.9);	
+}
+#main .button{
+	width:100%;
+	height:250px;
+	background:#666;
+}
+
+#main .button .content{
+	padding:10px;
+	padding-top:20px;
+	background:#eee;
+	position:relative;	
+}
+#main .button .content .items{
+	margin-bottom:10px;	
+	font-size:14px;
+}
+#main .button .content form input[type=text]{
+	padding:3px;
+	font-size:1em;	
+}
+#main .button .content form input[type=button]{
+	padding:5px 10px;
+	text-align:center;
+	font-size:1em;		
+}
+</style> 
+<script type="text/javascript"> 
+
+
+
+
+</script> 
+</head> 
+<body>
+
+<div id="pannel">
+
+</div>
+
+<div id="selOptions">
+	<div id="main">
+       <div class="top">
+            <div class="title">
+            	<h2>游戏中的参数选择</h2>
+                <span class="close">×</span>
+            </div>
+        </div>
+        
+        <div class="button">
+            <div class="content">
+                <form name="selForm">
+                	<div class="items">游戏速度
+                    	<input type="text" id="speed" placeholder="请输入100~5000之内的整数"  value="100"/>
+                    </div>
+                    <div class="items">游戏背景大小
+   						<select id="size">
+                        	<option value="20">20x20</option>
+                        	<option value="30">30x30</option>
+                            <option value="40">40x40</option>
+                            <option value="">dom 大小</option>                            
+                        </select>                 
+                    </div>
+                     <div class="items">
+                     	<input type="button" id="begin" value="开始" />
+                     </div>   
+                </form>                
+            </div>
+        </div>
+	</div>    
+</div>
+
+
+<script>
+//获取dom 大小对象
+var DOM = function(){
+	this.width = document.documentElement.clientWidth;
+	this.height = document.documentElement.clientHeight;
+}
+var MyDom = new DOM();
+
+var Direction = new function () { 
+	this.UP = 38; 
+	this.RIGHT = 39; 
+	this.DOWN = 40; 
+	this.LEFT = 37;  
+}; 
+
+var Common = function(){
+	this.width = 20;		/*水平方向方格数*/ 
+	this.height = 20;		/*垂直方向方格数*/ 
+	this.speed = 1000;		/*速度 值越小越快*/ 
+	this.autoMove = null;  //用一个变量来存蛇自动移动的interval
+}
+
+
+//1.主函数
+var Main = new function(){
+	var control = new Control();
+	window.onload = function(){
+		document.getElementById('begin').onclick = function(){
+			var speed = document.getElementById('speed').value;
+			var size = document.getElementById('size').value;
+			
+			Common.width = size;
+			Common.height = size;
+			Common.speed = speed;
+			control.Init('pannel');
+			closeselOptions();
+			control.Start(); 
+		};
+			
+	}
+		
+};
+
+function Control(){
+	this.snake = new Snake();
+	this.food = new Food(); 
+	this.Init = function(pid){
+		var html = [];	
+		html.push('<table>');
+		for(var y = 0; y < Common.height; y++ ){
+			html.push('<tr>');
+			for(var x = 0; x < Common.width; x++){
+				html.push('<td id="box_' + x + "_" + y + '"> </td>'); 
+			}
+			html.push('</tr>');
+		}
+		html.push('</table>');
+		this.pannel = document.getElementById(pid);	
+		this.pannel.innerHTML = html.join('');
+	};
+	
+	/*开始游戏 - 监听键盘、创建食物、刷新界面线程*/ 
+	this.Start = function () { 	
+		var me = this;
+		
+		this.MoveSnake = function(evt){
+				var e = window.event || evt;
+				me.snake.setDir(e.keyCode);
+		};
+		
+		document.addEventListener("keydown", this.MoveSnake, false); 
+		
+		this.food.Create();
+		
+		Common.autoMove = setInterval(function (){
+			me.snake.Eat(me.food);
+			me.snake.Move();
+			
+		},Common.speed);
+	};
+};
+
+
+//16.定义蛇
+function Snake(){
+	//46.
+	this.isDone = false;
+
+	this.pos = new Array(new Position());
+	this.dir = Direction.RIGHT; 
+	this.Move = function(){
+		document.getElementById("box_" + this.pos[0].X + "_" + this.pos[0].Y).style.background = ""; 
+		for (var i = 0; i < this.pos.length - 1; i++) { 
+			this.pos[i].X = this.pos[i + 1].X; 
+			this.pos[i].Y = this.pos[i + 1].Y; 
+		} 
+
+		var head = this.pos[this.pos.length - 1]; 
+		
+		switch (this.dir) { 
+			//如向上走
+			case Direction.UP: 
+				head.Y--; 
+				break; 
+			//向右走
+			case Direction.RIGHT: 
+				head.X++; 
+				break; 
+			case Direction.DOWN: 
+				head.Y++; 
+				break; 
+			case Direction.LEFT: 
+				head.X--; 
+				break; 
+		} 
+		this.pos[this.pos.length - 1] = head; 
+		for(var i = 0 ;i < this.pos.length; i++){
+			var isExits = false;
+			
+			for (var j = i + 1; j < this.pos.length; j++){
+				if(this.pos[j].X == this.pos[i].X && this.pos[j].Y == this.pos[i].Y) { 
+					isExits = true; 
+					break; 
+				}
+			}
+			if (isExits) { 
+				this.Over();/*咬自己*/ break;
+			} 
+			
+			var obj = document.getElementById("box_" + this.pos[i].X + "_" + this.pos[i].Y);
+			if (obj){ 
+				obj.style.background = "#f00"; 	//color
+			}else{
+				this.Over();/*移出边界*/
+				break; 
+			}			 
+		}
+		//47.
+		this.isDone = true;
+	};
+	this.Over = function () {
+		//结束的时候一定记得
+		clearInterval(Common.autoMove); 
+		alert("游戏结束！"); 
+		
+	} 
+	this.Eat = function (food){
+		//26.获取当前蛇的头
+		var head = this.pos[this.pos.length - 1];
+		//27.给一个布尔值
+		var isEat = false; 
+		switch(this.dir){
+			case Direction.UP: 
+				if (head.X == food.pos.X && head.Y == food.pos.Y + 1) isEat = true; 
+				break; 
+			case Direction.RIGHT: 
+				if (head.Y == food.pos.Y && head.X == food.pos.X - 1) isEat = true; 
+				break; 
+			case Direction.DOWN: 
+				if (head.X == food.pos.X && head.Y == food.pos.Y - 1) isEat = true; 
+				break; 
+			case Direction.LEFT: 
+				if (head.Y == food.pos.Y && head.X == food.pos.X + 1) isEat = true; 
+				break;	
+		}
+		
+		if (isEat) { 
+		
+			//52.
+			this.pos[this.pos.length] = new Position(food.pos.X, food.pos.Y); 
+			food.Create(this.pos); 
+		}
+	};
+	this.setDir = function (direction){
+		//做判断
+		switch(direction){
+			case Direction.UP: 
+				if (this.isDone && this.dir != Direction.DOWN) { 
+					this.dir = direction; this.isDone = false; 
+				} 
+				break; 
+			case Direction.RIGHT: 
+				if (this.isDone && this.dir != Direction.LEFT) { 
+					this.dir = direction; this.isDone = false; 
+				} 
+				break; 
+			case Direction.DOWN: 
+				if (this.isDone && this.dir != Direction.UP) { 
+					this.dir = direction; this.isDone = false; 
+				} 
+				break; 
+			case Direction.LEFT: 
+				if (this.isDone && this.dir != Direction.RIGHT) { 
+					this.dir = direction; this.isDone = false; 
+				} 
+				break; 			
+		}			
+	};
+		
+}
+
+
+//显示与隐藏参数窗口
+function closeselOptions(){
+	document.getElementById('selOptions').style.display = 'none';	
+}
+function openselOptions(){
+	document.getElementById('selOptions').style.display = 'block';	
+}
+
+//关闭掉参数窗口按钮
+document.getElementsByClassName('close')[0].onclick = closeselOptions;
+
+//28.创建一个食物对象
+function Food(){
+	this.pos = new Position(); 
+	this.Create = function (pos){
+		document.getElementById("box_" + this.pos.X + "_" + this.pos.Y).style.background = "#f00";
+		var x = 0, y = 0, isCover = false; 
+		
+		
+		do { 
+			x = parseInt(Math.random() * (Common.width - 1)); 
+			y = parseInt(Math.random() * (Common.height - 1)); 
+			isCover = false; 
+			if (pos instanceof Array) { 
+				for (var i = 0; i < pos.length; i++) { 
+					if (x == pos[i].X && y == pos[i].Y) { 
+						isCover = true; 
+						break; 
+					} 
+				} 
+			} 
+		} while (isCover); 
+		this.pos = new Position(x, y);
+		//35.给随机食物上色
+		document.getElementById("box_" + x + "_" + y).style.background="#0e0"; 
+
+			
+			
+	};
+}
+
+function Position(x,y){
+	this.X = 0; 	//将定位中的X坐标初始为0
+	this.Y = 0; 	//将定位中的Y坐标初始为0
+	if (arguments.length >= 1){ 
+		this.X = x; 
+	}
+	if (arguments.length >= 2){ 
+		this.Y = y; 
+	}
+}
+
+var sel = document.getElementById('selOptions');
+var title = sel.getElementsByClassName('title')[0];
+
+title.onmousedown = function(evt){
+	var e = window.event || evt;
+	//获取鼠标点击的坐标
+	var leftPosition = e.clientX;
+	var topPosition = e.clientY;
+	//获取移动目标的坐标
+	var leftCoordinate = sel.offsetLeft;		
+	var topCoordinate = sel.offsetTop;	
+	//获取鼠标到移动目标内部的距离 
+	var leftDistance = leftPosition - leftCoordinate;
+	var topDistance = topPosition - topCoordinate;
+	document.onmousemove = function(evt){
+		var e = window.event || evt;	
+		//获取鼠标当前移动的坐标
+		var nowLeftPosition = e.clientX; 
+		var nowTopPosition = e.clientY;
+		//获取当前鼠标坐标减去鼠标到移动目标内部的距离 
+		var Left = nowLeftPosition - leftDistance;
+		var Top = nowTopPosition - topDistance;
+		sel.style.left = Left +'px';
+		sel.style.top = Top + 'px';
+	};
+	document.onmouseup = function(){//当鼠标点上时
+		this.onmouseup = null;
+		this.onmousemove = null;
+		
+	};
+	return false;
+};	
+
+
+
+
+
+</script>
+</body> 
+</html> 

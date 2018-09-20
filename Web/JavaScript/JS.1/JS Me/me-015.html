@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+p{ background:#333; clear:#fff;}
+</style>
+<script>
+	window.onload = function(){
+		/*var radius = prompt("Give the radius of the circle","");
+		var area = (Math.PI)*radius*radius;
+		alert("The final result is about:"+ parseInt(area));
+*/	
+	/*	var myNumber = 45.5;
+		var myNumber2 = 45.49;
+		alert(Math.round(myNumber));	//return 46
+		alert(Math.round(myNumber2));	//return 45
+	*/	
+	
+	var diceThrow;
+	for(var i=0; i < 1; i++)
+	{
+		diceThrow = (Math.floor(Math.random()*6)+1)
+		document.write("This random number is :" +"<p style=\"background:#333;color:#fff;display:block; font-size:2em;width:30px;text-align:center;\">" +diceThrow + "</p>");	
+	}
+
+
+	
+}
+</script>
+</head>
+
+<body>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>A JS applaction(change)</title>
+<script>
+window.onload = function(){
+function checkPrint(checkText)
+{
+	var checkChar = /[^0-9\d]/g;
+	return !(checkChar.test(checkText));
+}
+	var checkarea = document.getElementById("checkarea");
+	var changarea = document.getElementById("changarea");
+	var startarea = document.getElementById("startarea");
+	//产生三个不同的全局颜色随机数
+	var numberColor = Math.round(Math.random()*250);
+	var numberColor2 = Math.round(Math.random()*250);
+	var numberColor3 = Math.round(Math.random()*250);
+	var color = "rgb("+numberColor+","+numberColor2+","+numberColor3+")";
+	var Lefts = 20;	//初始化左边距的距离 
+	changarea.style.background = color;
+	changarea.style.marginLeft = Lefts+"px";	
+	do{	
+		var movePX = prompt("Please enter you need to move(margin-left)	PX (Now, the must be +Integer):","");
+		if((checkPrint(movePX) == true)) {/*alert("输入是数字")*/;break;}
+		alert("输入的不是一个有效的数字，请重新输入");
+	}while((checkPrint(movePX) == false));
+	if(!(movePX<=35) || (movePX ==0)){
+		alert("你输入的范围过了标准，将设为默认值");movePX = 1;
+	}
+	checkarea.onclick = function()
+	{
+		changeColorAndDistance(movePX,changarea);		
+	}
+	//主函数
+	function changeColorAndDistance(movePX,objarea)
+	{
+		try{
+			var numberColor = Math.floor(Math.random()*250);
+			var numberColor2 = Math.floor(Math.random()*250);
+			var numberColor3 = Math.floor(Math.random()*250);
+			var windowLeft = screen.width;	//获取屏幕的宽度
+			var color = "rgb("+numberColor+","+numberColor2+","+numberColor3+")";
+			var changareaLeft = getLeft(objarea);	//获取 div 的左边距
+			var summaryLeft ;	//div 移动的距离
+			objarea.style.background = color;
+			Lefts ++;
+			for(var i=0;i <movePX;i++){
+				Lefts += i;
+			}	
+			summaryLeft = Lefts+i;
+			//结束就是这个了			
+			objarea.style.marginLeft = summaryLeft + "px";	
+			//移动距离大于屏幕宽度
+			if(summaryLeft > windowLeft -500){
+				//alert("宽度过了");
+				objarea.style.marginLeft = 20+ "px";
+				Lefts = 20;
+			}
+			//位置初始化
+			startarea.onclick = function(){
+				objarea.style.background = color;
+				objarea.style.marginLeft = "20px";
+				Lefts = 20;
+				summaryLeft = 20;
+			}
+		}
+		catch(error)
+		{
+			alert("error is :" +  error);
+		}
+			
+	}
+<!--  定义获取坐标的函数 -->	
+function getAbsPoint(e)
+{
+    var left = e.offsetLeft;
+    var top = e.offsetTop;
+    while(e = e.offsetParent)
+    {
+        left += e.offsetLeft;
+        top += e.offsetTop;
+    }
+    alert('left:'+left+ ' ' +'top:'+top);
+};	
+<!-- 定义获取屏幕左边距的函数 -->
+function getLeft(L)
+{
+	var left = L.offsetLeft;
+	while(L = L.offsetParent)
+	{
+		left += L.offsetLeft;
+	}
+	return left;
+}
+<!-- 定义获取屏幕上边距的函数 -->
+function getTop(T)
+{
+	var top = T.offsetTop;
+	while(T = T.offsetParent)
+	{
+		top += L.offsetTop;
+	}
+	return top;
+}
+}
+</script>
+</head>
+<body>
+<style>
+*{margin:0; padding:0; cursor:default;}
+#checkarea{ border:2px solid #f00; display:block; font-size:15px;width:300px; height:50px; line-height:50px;text-align:center;position:fixed; margin:10px 0 0 20px; background:#eee;border-radius:5px;box-shadow:3px 5px #000;-webkit-border-radius:5px;-webkit-box-shadow:3px 5px #000;-moz-border-radius:5px;-moz-border-radius:5px;	-ms-border-radius:5px;	-ms-box-shadow:3px 5px #000;}
+#checkarea:active{margin-left:23px;	margin-top:15px; box-shadow:none;-webkit-box-shadow:none;-moz-box-shadow:none;	-ms-box-shadow:none;}
+#startarea{ width:150px; height:50px; line-height:50px; text-align:center; border:2px solid #f00; position:fixed; right:300px; margin-top:10px; border-radius:5px;box-shadow:-3px 5px #000; -webkit-border-radius:5px; -webkit-box-shadow:-3px 5px #000; -ms-box-shadow:-3px 5px #000; -ms-border-radius:5px; -mos-border-radius:5px; -mos-box-shadow:-3px 5px #000}
+#startarea:active{ right:303px; margin-top:15px; box-shadow:none; -webkit-box-shadow:none; -ms-box-shadow:none; -mos-box-shadow:none;}
+#changarea{ width:500px; height:500px; border:1px solid; margin:100px auto; background:rgb(255,255,255); position:fixed;}
+</style>
+	<a id="checkarea" onselectstart="return false">点击这改变下面盒子的颜色并移动它的位置</a>
+    <a id="startarea" onselectstart="return false">盒子位置初始</a>
+	<div id="changarea"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

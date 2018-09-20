@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<!--<script>
+function createDocument(){		//定义一个函数 
+		var xmlDoc;	//这个变量是创建 XML DOM 的一个临时变量
+
+//下面的 if 语句检查是否存在 window.ActiveXObject 来判断是否是 IE 浏览器，
+//如果条件为 truee,创建一个 versions 数组的版本字符串
+		if(window.ActiveXObject){	
+
+			var versions=			
+			[
+				"Msxml2.DOMDocument.6.0",
+				"Msxml2.DOMDocument.3.0"	
+			];	//用数组来创建两个版本字符串
+			
+//下面的添加顺序很重要，因为需要最新版本行检测 ，所以让 Msxml2.DOMDocument.6.0 存储下标 0
+			
+			//遍历这个数组
+			for(var i =0; i < versions.length; i++){
+//这个 try 语句如果创建对象失败，则代码的执行转移到 catch 块，而 catch 不做任何处理，循环迭代 
+//versions 的下一个索引，并尝试使用另一个 MSXML 版本字符串来创建另一个 ActiveXObject 对象
+//当然，如果还是失败，则退出循环，并返回 null
+				try{
+					xmlDoc = new ActiveXObject(versions[i]);			
+
+					return xmlDoc;
+
+				}catch(error){
+					//do nothing here
+					alert(error);
+				}
+			}
+		}
+		return null;
+	}
+function xmlDoc_readyStateChange()
+	{
+		if(xmlDoc.readyState == 4){
+			alert("XML file loaded!");
+		}
+		
+	}
+	var xmlDoc = createDocument();
+	xmlDoc.onreadystatechange = xmlDoc_readyStateChange;
+	xmlDoc.load("myfile.xml");	
+</script>
+-->
+
+</head>
+
+<body>
+<div id="all"></div>
+
+
+<script>
+function createDocument(){
+		var xmlDoc;
+		try{
+			if(window.ActiveXObject){
+				var versions = [
+					"Msxml2.DOMDocument.6.0",
+					"Msxml2.DOMDocument.3.0"
+				];				
+				for(var i=0; i<versions.length; i++){
+					
+					try{
+						xmlDoc = new ActiveXObject(versions[i]);
+						return xmlDoc;
+					}catch(error){
+						alert(error);
+					}
+	
+				}
+			}
+	//下面就是添加的代码
+	//检查 implementation 对象和 implementation.createDocument() 方法是否存在，如果存在，就使用
+	//document,implementation.createDocument() 方法为支持 DOM 的浏览器创建 XML DOM 对象
+	//并将该 DOM 对象返回给调用方
+			else if(document.implementation && document.implementation.createDocument){
+				xmlDoc = document.implementation.createDocument("","",null);
+				return xmlDoc;
+			}
+		}catch(err){
+			alert(err);
+		}	
+		return null;
+	}
+/*function getDailyMesage(){
+	var messages = xmlDoc.getElementsByTagName("daily");
+	var dateobj = new Date();
+	var today = dateobj.getDay();
+	return messages[today].firstChild.nodeValue;
+}
+*/
+function getDailyMesage(){
+	var messages = xmlDoc.getElementsByTagName("daily");
+	var mesArray = new Array();
+	for(var a=0; a<messages.length; a++){
+		messages[a].firstChild.nodeValue;
+		mesArray[a]=messages[a].firstChild.nodeValue;
+	}
+	mesArray =mesArray.join("<br>");
+	return mesArray;
+}
+
+//实现 JS 来访问 motd.xml 文档中的所有的 daily 标记中的文本值
+	var xmlDoc = createDocument();
+	xmlDoc.async = false;
+	xmlDoc.load("motd.xml");
+	document.getElementById("all").innerHTML = getDailyMesage();
+	
+	
+</script>
+</body>
+</html>

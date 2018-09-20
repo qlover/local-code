@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+	window.onload = function(){
+/*		try
+		{
+			try
+			{
+				ablurt("This code has an error.");
+				
+			}catch(exception)
+			{
+				var eName = exception.name;
+				if(eName == "TypeError" || eName == "ReferenceError")
+				{
+					alert("Inner try...catch can deal with this error");
+				}else{
+					throw exception;
+				}
+			}
+		
+		}catch(exception)
+		{
+			alert("Error the inner try...cathc could not handle occurred");
+		}	*/	
+		try{
+			alert("An exception will occur");
+		}catch(exception){
+			alert(exception);
+		}finally{
+			alert("Whatever happens this line will execute");
+		}	
+	
+	}
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+
+
+
+
+

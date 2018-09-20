@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+
+	var imgTimes=1;
+	var allImg = 3;
+	var summaryTime;
+	summaryTime = setInterval("changeImg()",4000);
+
+
+function changeImg(){
+	imgTimes++;
+	document.imgchange.src='img/img_'+ imgTimes+'.jpg';
+	if(imgTimes == 3){
+		imgTimes = 0;
+	}
+}	
+</script>
+</head>
+<body>
+<img align="middle" name="imgchange" src="img/img_1.jpg" style="border:10px solid #000; border-radius:5px;display:block;width:80%;height:auto;margin:10px auto; padding:5px;"/>
+</body>
+</html>

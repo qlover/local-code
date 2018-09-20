@@ -1,0 +1,257 @@
+<meta charset="utf-8">
+<title> 函数 </title>
+<script>{
+
+// 默认参数
+{
+	let Point = function(x = 0,  y = 0 ){
+		this.x = x;
+		this.y = y;
+	}
+	console.log(new Point());
+
+
+	// 解构的默认值
+	function foo({x, y = 5}){
+		console.log(x, y);
+	}
+	foo({});//=> undefined 5
+
+}
+
+// 参数位置
+{
+	function foo (a, b = 10, c) {
+		console.log(a, b, c);
+	}
+	foo(1,10);//=> 1 10 undefined
+	foo(1, null, 10); //=> 1 null 10
+	foo(1, undefined, 10); //=> 1 10 10
+}
+
+// length
+{
+	console.log( (function foo (a, b =10, c) { }).length );//=> 2
+	console.log( (function foo (...c) { }).length );//=> 0
+}
+
+
+// 作用域 
+{
+
+	let a = 10;
+	function foo (a, b = a) {
+		console.log(a, b);
+	}
+	foo();//=> undefined undefined
+	foo(10);//=> 10 10
+	foo(10, 100);//=> 10 100
+	// 函数并不会认函数外部的成员
+
+	let bar = 'outer';
+	function foo2 (func = x => bar) {
+		console.log(func === bar);
+		// console.log(func() === bar() );
+	}
+	foo2();
+} {
+
+
+}
+
+
+// reset 运算符与扩展运算符
+{
+	function add (... v) {
+		let sum = 0;
+		v.map( v2 => sum += v2);
+		return sum;
+	}
+	console.log(add(1,2));//=> 3
+	console.log(add(1,2,3));//=> 6
+	console.log(add(1,2,3,4));//=> 10
+	console.log(...[1,2,3,4]);//=> 1 2 3 4
+}
+
+// 严格模式
+{
+	// ES2016 中这会报错
+	function foo (a, b = 2) {
+		"use strice";
+		return b;
+	}
+	foo();
+}
+
+// name 属性
+{
+	let foo = function(){}
+	function bar(){}
+	console.log(foo.name);//=> foo
+	console.log(bar.name);//=> bar
+} {
+	console.log((new Function).name );//=> anonymous
+}
+// 箭头函数
+{
+
+	// ES6 箭头函数
+	// 一个参数
+	let f = v => v;
+
+	// 有多个参数时
+	let f2 = (a, b) =>  a + b;
+	console.log(f2(1,2)); //=> 3
+	let f3 = (a, b) => {return a + b};
+	console.log(f3(1,2)); //=> 3
+
+	// f2 和 f3 是一种形式只是表现不同
+
+	// 没有参数要用括号代替
+	let f4 = () => this;
+	console.log(f4());
+
+	// 如果直接返回一个对象
+	let f5 = () => ({a:1});
+	console.log(f5().a);//=> 1
+} {
+	// this 绑定
+	function Timer() {
+		this.s1 = 0;
+		this.s2 = 0;
+		// 箭头函数
+		setInterval(() => this.s1++);
+		// 普通函数
+		setInterval(function() {
+			this.s2++;
+		});
+	}
+
+	var timer = new Timer();
+
+	setTimeout(() => console.log('s1: ', timer.s1));//=> 1
+	setTimeout(() => console.log('s2: ', timer.s2));//=> 0
+} {
+	// ES6
+	function foo(){
+		setTimeout(() => {
+			console.log(this.id)
+		});
+	};
+	foo({id : 1});//=> undefined
+	foo.call({id : 1});//=> 1
+} {
+	// ES5
+	function foo(){
+		setTimeout(function(){
+			console.log(this.id)
+		})
+	}
+	foo({id : 1});//=> undefined
+	foo.call({id : 1});//=> undefined	
+} {
+
+	function foo() {
+		return () => {
+			return () => {
+				return () => {
+					console.log('id:', this.id);
+				};
+			};
+		};
+	}
+	// 只有一个this，就是函数foo的this
+
+} {
+	// 不存在的变量
+	let foo = () => {
+		console.log(arguments);
+	};
+	//foo();//=> ReferenceError: arguments is not defined
+	
+	// 不能 new
+	//new foo();//=> TypeError: foo is not a constructor
+} {
+	// 函数的嵌套
+	let insert = (value) => ({
+		into: (array) => ({
+			after: (afterValue) => {
+				array.splice(array.indexOf(afterValue) + 1, 0, value);
+				return array;
+			}
+		})
+	});
+} {
+	// 管道机制
+	const pipeline = (...funcs) =>
+		val => funcs.reduce((a, b) => b(a), val);
+	const plus1 = a => a + 1;
+	const mult2 = a => a * 2;
+	const addThenMult = pipeline(plus1, mult2);
+
+	console.log(addThenMult(5))//=> 12
+}
+
+
+// 绑定 this 
+// 双冒号运算符
+{
+
+} 
+
+// 尾递归
+{
+	function factorial(n) {
+		if (n === 1) return 1;
+		return n * factorial(n - 1);
+	}
+
+	console.log(factorial(5)) // 120
+	// 复杂度 O(n)
+} {
+	function factorial(n, total) {
+		if (n === 1) return total;
+		return factorial(n - 1, n * total);
+	}
+
+	console.log(factorial(5)) // 120
+	// 复杂度 O(1)
+} {
+	// 而用尾递归则
+	function tailFactorial(n, total) {
+		if (n === 1) return total;
+		return tailFactorial(n - 1, n * total);
+	}
+
+	function factorial(n) {
+		return tailFactorial(n, 1);
+	}
+
+	console.log(factorial(5)) // 120
+} {
+	// 另一种就是柯里化
+	function currying(fn, n) {
+		return function(m) {
+			return fn.call(this, m, n);
+		};
+	}
+
+	function tailFactorial(n, total) {
+		if (n === 1) return total;
+		return tailFactorial(n - 1, n * total);
+	}
+
+	const factorial = currying(tailFactorial, 1);
+
+	factorial(5) // 120
+} {
+	// 而 ES6 则是
+	function factorial(n, total = 1) {
+		if (n === 1) return total;
+		return factorial(n - 1, n * total);
+	}
+
+	factorial(5) // 120
+}
+
+}</script>

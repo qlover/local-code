@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>my function </title>
+<script>
+
+//工厂模式
+/*
+function createObject(name){
+	var obj = new Object();
+	obj.name = name;
+	obj.run = function () {
+		return this.name + '运行中...';
+	};
+	return obj;
+};
+function createObject2(name){
+	var obj = new Object();
+	obj.name = name;
+	obj.run = function () {
+		return this.name + '运行中...';
+	};
+	return obj;
+};
+var box1 = createObject('qrj');
+var box2 = createObject2('you');
+//alert(box1.name+"  "+box1.run());
+//alert(box2.name+"  "+box2.run());
+alert(box1 instanceof Object);
+alert(box2 instanceof Object);
+
+*/
+
+//构造函数
+/*
+function Box (name){
+	this.name = name;
+	this.run = function (){
+		return this.name+ '运行中....';
+	};
+};
+
+function Box2 (name){
+	this.name = name;
+	this.run = function (){
+		return this.name+ '运行中....';
+	};
+};
+
+var obj1 = new Box('qrj');
+var obj2 = new Box2('you');
+//alert(obj1.name +"  "+obj1.run());
+//alert(obj2.name +"  "+obj2.run());
+alert(obj1 instanceof Box);
+alert(obj2 instanceof Box);
+*/
+
+
+//对象冒充
+	function Box(name){
+		this.name = name;
+		this.run = function (){
+			return this.name+ '运行中....';
+		};
+	};
+	var o = new Object();
+	Box.call(o,"maiker");
+	alert(o.run());
+
+
+
+
+
+
+
+
+
+</script>
+</head>
+
+<body>
+
+
+</body>
+</html>

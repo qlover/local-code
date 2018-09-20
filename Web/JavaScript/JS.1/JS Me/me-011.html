@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#article{border:10px solid rgba(0,0,0,0.5); width:300px; height:400px; background:rgba(200,200,200,0.8);  margin:0 auto; padding:10px; overflow:auto;}
+#foundChar{outline:none; border:2px solid rgba(30,30,30,1); width:70px; height:50px; cursor:pointer; margin-left:300px; font-size:10px;}
+</style>
+<script>
+	window.onload = function(){
+		var foundChar = document.getElementById("foundChar");
+		var Article = document.getElementById("article");
+		var addArticle = Article.innerHTML;
+		var getText = document.getElementById("getText");
+		foundChar.onclick = function(){
+			foundArticle();
+		}
+function foundArticle(){	
+		var startString = addArticle ;
+	do{	
+		var printString = prompt("请在这段文章中输入你想要查找的字符","");
+		if(printString == "")
+		{
+			alert("请输入一个字符！");
+			foundArticle();
+		}else if( printString == null) return false;	
+		else break;
+	}while(pritString == "");
+		var saveSearch  = 0;	
+		var saveSearchNumber = 0;	
+		while(saveSearch != -1)//没有找到就循环一次 直到找到最后一个停下循环
+		{
+			saveSearch = startString.indexOf(printString,saveSearch);//变量的值是可以改变的，不是第一次定义的值就是那个值,所以在这里就是在找到第一个的基础上，继续向下找，直到找到下一个，然后就双在这个的基础上向下找，依次循环，直到找到最后一个，停止循环
+			if(saveSearch != -1)
+			{
+				saveSearch++;
+				saveSearchNumber++;
+			}	
+		}
+		alert("我共找到" + printString + "," + saveSearchNumber + "次");	
+}	
+			/*var myString = "Hello Marry. How are you marry";	
+			var ontherString = prompt("请在这里面"+myString+"输入你要查找的字符","");
+			var foundString = myString.indexOf(ontherString);
+			if(foundString == -1)
+			{
+				alert("我没能找到这个 " + ontherString + "字符！");
+			}else
+			{
+				alert("我找到这个" + ontherString + "字符了");
+			}*/
+			
+			//alert(myString.lastIndexOf("Marry"));
+	
+	
+	
+		}
+</script>
+</head>
+
+<body>
+<p id="alltext">This is a new String!</p>
+<input type="text" value="www.com.cn"  id="atr"/>
+<button id="getText">点击这里获取文本</button>
+
+<button id="foundChar">点击这里查找文字</button>
+<div id="article" >
+China unveiled plans on Wednesday to upgrade its Internet infrastructure and the development of its logistics industry in rural areas, part of the government's efforts to encourage online spending among rural residents.
+The telecommunication upgrade will involve investment of at least 140 billion yuan ($22.1 billion).
+An executive meeting of the State Council presided over by Premier Li Keqiang decided to allocate more central government funds to building Internet infrastructure and also advocated funding from local governments and social organizations.
+A circular issued after the meeting said the government plans to invest up to 140 billion yuan in the sector by 2020 to provide at least 50,000 villages with Internet access. By then, about 98 percent of the nation's rural areas will be hooked up to the Net.
+The government also promised to improve Internet speed and expand wireless broadband coverage in areas with access to the Net.
+Estimates of China's rural population range from 600 million to 800 million.
+Wednesday's meeting also pledged to expand e-commerce apps in rural areas, especially in promoting agricultural products and trips to the countryside.
+The government will also open up the delivery industry to social investors, encourage mergers and acquisitions, and streamline customs procedures for cross-border deliveries.
+Zeng Chen, an e-commerce expert at the Ministry of Commerce, said online shopping revenues topped 9.8 trillion yuan from January to August, a year-on-year rise of 24.7 percent." + '
+"There is a large market for e-commerce in rural areas and small and medium-sized cities in western China, where residents need the same goods as their urban counterparts but have limited access to such products.
+"E-commerce revenues in third-and fourth-tier cities have shown stronger momentum than in big coastal cities, and we expect increased growth in these areas when local logistics are improved," Zeng said.
+Cross-border e-commerce and shopping conducted via mobile devices are the new growth points for the industry.
+Chinese spent about 90 billion yuan last year on mobile phones and other mobile devices, comprising one third of the total they spent online.
+More than 80 percent of export and import companies in China have opened online businesses.
+
+</div>	
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

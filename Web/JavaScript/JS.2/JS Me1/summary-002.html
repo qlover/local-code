@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户名登录的检测</title>
+<style>
+*{ margin:0; padding:0;}
+#check_up_box { width:300px; height:200px; background:#eee; border:1px solid; position:fixed; top:50%; margin-top:-100px; left:50%; margin-left:-150px; display:none;}
+#check_up_box .title{ width:100%; height:25px; background:#bbb; position:relative; font-weight:bolder;}
+#check_up_box h2{font-size:15px;  font-family:'微软雅黑'; display:inline; padding-left:15px;}
+#check_up_box .title span{  display:black; font-size:20px; position:absolute; right:0;  margin:2px 5px 0 0; cursor:pointer;}
+#check_up_box #content{ width:300px; height:90px;}
+#check_up_box #content .tips{ width:250px; margin:0 auto; height:30px;}
+#check_up_box #content .login_form{ width:250px; height:120px; margin:0 auto;}
+#check_up_box #content .login_form .login_input{ width:100%; height:40px;}
+#check_up_box #content .login_form .login_input span{width:80px; text-align:right;
+ display:block; position:absolute; line-height:40px;}
+ #check_up_box #content .login_form .login_input #submit{ width:80px; height:30px; position:absolute; left:20px;}
+ .login_input span em{ font-size:15px; font-style:normal;}
+.login_input input{width:130px; float:right; height:20px; display:block; margin:10px 15px 0 0; padding:0 5px;}
+.dis{font-size:15px;}
+</style>
+<script>
+onload=function(){
+	var nameArray = ['admin'];
+	var passwordArray = ['admin'];
+	var name = document.loginform.name;
+	var pass = document.loginform.password;
+	document.getElementById("check_up_box").onselectstart=function(){return false;};
+	document.getElementById("btnarray").onclick=function(){
+		alert("user:"+nameArray +'\n'+"password:"+passwordArray);
+	};
+	var reg = /\s*|\s*$/g;
+	<!-- Validation() -->
+	function Validation(val,saveArray){
+		var val_val = val.value;
+		saveArray[saveArray.length]=val_val;
+		val.value= '';
+		return false;
+	}
+	<!--操作 Validation() -->
+	document.getElementById("submit").onclick=function(){
+		for(var i=0; i<nameArray.length; i++){
+			if(nameArray[i]==name.value){
+				alert(name.value +' 该用户名已经被注册了');
+				return false;
+			}
+		}
+		var pval = pass.value;
+		if(name.value ==''){
+			alert(name.name+" is empty");
+			Empty(name,pass);
+			return false;
+		}else if(pass.value ==''){
+			alert(pass.name+" is empty");
+			Empty(name,pass);
+			return false;
+		}	
+		if(pval.length <7){
+			alert("你的密码太短了，换一个吧。");
+			return false;
+		}else if(pval.length >20){
+			alert("你的密码太长了，换一个吧。");
+			return false;
+		}	
+		
+		Validation(name,nameArray);
+		Validation(pass,passwordArray);
+		return false;
+	};
+	document.getElementById("check_up").onclick=function(){	
+		/*if(Check(name,nameArray)&&Check(pass,passwordArray)){
+			alert('登录成功！');
+		}*/
+		var current;
+		for(var i=0; i<nameArray.length;i++){
+			if(name.value == nameArray[i])	current = i;
+		}
+		for(var n=0; n <passwordArray.length;n++){
+			if(pass.value==passwordArray[current]){
+				alert('登录成功！');
+				Empty(name,pass);
+				return false;
+			}else{
+				alert('密码不正确');
+				return false;
+			}
+		}
+		return false;
+	};
+	<!-- Check() -->
+	function Check(vall,arr){
+		var vall = vall.value;
+		for(var i=0; i<arr.length; i++){
+			if(vall==arr[i]){
+				return true;
+			}
+		}
+		return false;
+	}
+	<!-- Empty() -->
+	function Empty(val0,val1){
+		val0.value = '';
+		val1.value = '';
+	}
+	document.getElementById("close").onclick=function(){
+		Empty(name,pass);
+		check_up_box.style.display='none';
+	};
+	document.getElementById("login").onclick=function(){
+		Empty(name,pass);
+		check_up_box.style.display='block';
+	};
+}
+</script>
+</head>
+
+<body>
+<button id="btnarray" style="margin:30px 0 0 200px; width:200px; height:50px;">弹出数组</button>
+<button id="login" style="margin:30px 0 0 200px; width:200px; height:50px;">登录
+</button>
+<div id="check_up_box">
+	<div class="title">
+		<h2>登 录</h2>
+		<span id="close">×</span>
+	</div>
+	<div id="content">
+		<div class="tips"></div>
+		<div class="login_form">
+			<form id="loginform" name="loginform">
+				<div class="login_input">
+						<span><em>用户名:</em></span>
+						<input type="text" name="name" class="dis"/>
+				</div>
+				<div class="login_input">
+						<span><em>密码:</em></span>
+						<input type="password" name="password" class="dis"/>	
+				</div>
+				<div class="login_input">
+					<span>
+						<input type="submit" id="submit" value="注册"/>
+					</span>
+					<input id="check_up" type="button" value="登录" style="width:80px;height:30px;"/>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
+
+

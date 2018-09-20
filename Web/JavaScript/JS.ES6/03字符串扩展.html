@@ -1,0 +1,226 @@
+<meta charset="utf-8">
+<title> 字符串扩展 </title>
+<script>
+
+{	
+	// 码点在\u0000~\uFFFF之间的字符
+	console.log("\u0061")
+	// 也可将码点放于 {} 中
+	console.log("\u20BB7");//=> ₻7
+	console.log("\u{20BB7}")//=> 𠮷
+
+} {
+	// 理神奇的还可以利用这一点，做到可变变量
+	let hello = 123;
+	console.log(hell\u{6F});//=> 123
+	// 大括号表示法与四字节的 UTF-16 编码是等价的
+} {
+	// 因为右与四字节的 UTF-16 编码是等价的
+	// 所以，共有 6 种方法
+	console.log('\z' === 'z' );  // true
+	console.log('\172' === 'z');  // true
+	console.log('\x7A' === 'z');  // true
+	console.log('\u007A' === 'z');  // true
+	console.log('\u{7A}' === 'z');  // true
+
+} {
+
+	// codePointAt()
+	// String.fromCodePoint()
+	// 	fromeCharCode() 用于从码点返回对应字符，但不能识别32位的UTF-16字符（Unicode编号大于0xFFFF）
+	// 	String.fromCodePoint方法，可以识别0xFFFF的字符，弥补了String.fromCharCode方法的不足。在作用上，正好与codePointAt方法相反
+	// at()
+	// normalize()
+	// 	用来将字符的不同表示方法统一为同样的形式，这称为Unicode正规化
+	// includes()
+	// startsWith()
+	// endsWith()
+	// repeat()
+	// padStart()
+	// padEnd()
+	// String.raw()
+
+} {
+	console.log(String.fromCharCode(0x20BB7)); //=> ஷ
+	console.log(String.fromCodePoint(0x20BB7)); //=> 𠮷
+
+} {
+	// 字符串的 Iterator 接口
+	for (let cp of 'world') {
+		console.log(cp)
+	}
+
+	// 该接口最大的优点就是可以识别码点
+	let text = String.fromCodePoint(0x20BB7);
+	for (let i = 0; i < text.length; i++) {
+		console.log(text[i]);
+	}// 结果则是 � � 
+
+	for (let i of text) {
+		console.log(i) //=> 𠮷
+	}
+
+} {
+	// at() --> 目前只是一个草案
+	console.log('abc'.charAt(0))
+	// console.log('abc'.at(0))
+} {
+	// normalize()
+	console.log('\u01D1'==='\u004F\u030C');//=> false
+	console.log('\u01D1'.length); //=> 1
+	console.log('\u004F\u030C'.length);//=> 2
+
+	console.log('\u01D1'.normalize() === '\u004F\u030C'.normalize()); //=> true
+
+}
+
+
+// 模块字符串
+{
+	let x = 10;
+	let y = 20;
+	console.log(`x is ${x}`)
+	console.log(`y is ${y}`)
+} {
+
+	let a = 'hello';
+	// alert`hello`; //=> hello
+	// alert`${a}`; //=> ,
+} {
+	// 嵌套模块
+	const tmpl = addrs => `
+		<table>
+		${addrs.map( addr => ` 
+			<tr><td>${addr.first}</td></tr>
+			<tr><td>${addr.last}</td></tr>
+		`).join('')}
+		</table>
+	`;
+	const data = [
+		{ first: '<Jane>', last: 'Bond' },
+		{ first: 'Lars', last: '<Croft>' },
+	];
+	console.log(tmpl(data));
+	/*
+		<table>
+			<tr><td><Jane></td></tr>
+			<tr><td>Bond</td></tr>
+			<tr><td>Lars</td></tr>
+			<tr><td><Croft></td></tr>
+		</table>
+	*/
+	// 嵌套的作用
+} {
+	// 引用模板字符串本身
+	let str = 'return ' + '`hello ${name}`';
+	let func = new Function('name', str);
+	console.log(func('php'));//=> hello php
+
+} {
+	// 模板编译
+	
+	// 1. 通用模板字符串
+	var template = `<ul>
+		<% for(var i=0; i < data.supplies.length; i++) { %>
+		<li><%= data.supplies[i] %></li>
+		<% } %></ul>`;
+
+	// 2. 编译该模板字符串
+	// var evalExpr = /<%=(.+?)%>/g;
+	// var expr = /<%([\s\S]+?)%>/g;
+	// template = template
+	// 	.replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
+	// 	.replace(expr, '`); \n $1 \n  echo(`');
+
+	// template = 'echo(`' + template + '`);';
+
+	// 3. 模板封装
+	let script1 = `
+	(function(data){
+		let output = "";
+		function echo(html){
+			output += html;
+		}
+		${ template };
+
+		return output;
+	});
+	`
+
+	// 将上面的 2， 3 封装成一个编译函数
+	let compile = function ( template ) {
+		var evalExpr = /<%=(.+?)%>/g;
+		var expr = /<%([\s\S]+?)%>/g;
+
+		template = template
+			.replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
+			.replace(expr, '`); \n $1 \n  echo(`');
+
+		template = 'echo(`' + template + '`);';
+
+		var script =`(function parse(data){
+			var output = "";
+			function echo(html){
+				output += html;
+			}
+			${ template }
+			return output;
+		})`;
+
+		return script;
+	};
+
+	let parse = eval(compile(template));
+	console.log(parse({ supplies: [ "broom", "mop", "cleaner" ] }));
+	// 可见结果
+
+}
+
+
+// 模板标签
+// 它可以紧跟在一个函数名后面
+// 标签模板其实不是模板，而是函数调用的一种特殊形式
+// 相当于模板字符串是标签（函数）的参数
+{
+
+	let a = 5;
+	let b = 10;
+
+	function tag(s, v1, v2) {
+		console.log(s[0]);
+		console.log(s[1]);
+		console.log(s[2]);
+		console.log(v1);
+		console.log(v2);
+	}
+
+	tag `Hello ${ a + b } world ${ a * b} !!`;
+	//=> hello
+	//=> world
+	//=> !!
+	//=> 15
+	//=> 50
+}
+
+// raw 属性
+{
+	console.log`123`;
+
+	function tag (strings) {
+		console.log(strings, strings.raw);
+		// 该数组的成员与strings数组完全一致
+	}
+	tag`First line\nSecond line`;
+
+	// 参数 strings 与 strings.raw 中的字符串，是一样的
+	// 唯一的区别就是 将转义字符串转义了
+}
+
+
+// String.raw()
+{
+	console.log(String.raw`Hi\n${1+2}`);
+	console.log(String.raw`Hi\u000A`);
+
+}
+</script>

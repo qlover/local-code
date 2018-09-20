@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>sort</title>
+  <style>
+ td{
+ 	padding: 0;
+ 	width:22px;
+ 	text-align: center;
+ 	font-size: 14px;
+}
+ 
+  </style>
+  <script src="js/Arrays.js"></script>
+  <script>
+	function pntArr(str,arr){
+		var t = [],len = arr.length;
+		if(str != undefined) t += "<table><tr><td style='width:auto;'>"+ str +"</td>";
+		else t += "<table><tr>";
+		for(var i=0; i < len; i++){
+			t += "<td>"+ arr[i] +"</td>";
+		}
+		t += "</tr></table>";
+		document.documentElement.innerHTML += t;
+	}
+	function ranArr(len,max){
+		var arr = [];
+		var m = max || 100;
+		for(var i=0; i < len; i++){
+			arr[i]= Math.round(Math.random()*m) ;
+		}
+		return arr;
+	}
+
+	var arr = ranArr(15),t;
+	
+
+	pntArr('开始',arr);
+	var len = arr.length;
+	//冒泡排序
+function bubbleSort(arr){
+	for(var i=1; i < len; i++){
+		for(var n=0; n < len-i; n++){
+			if(arr[n] > arr[n+1]){
+				t = arr[n+1];
+				arr[n+1]=arr[n];
+				arr[n]=t;
+			}
+		}
+	}
+}
+	//选择排序
+function selectSort (arr) {
+	for(var i=0; i < len-1; i++){
+		//存放最大单元值和下标
+		var max = arr[0];
+		var pos = 0;
+		//必定会得到最大的单元
+		for(var n=0; n < len -i; n++){
+			if( arr[n] > max){
+				max = arr[n];
+				pos = n;
+			}		
+		}
+		//与最后一个单元交换
+		t = arr[pos];
+		arr[pos] = arr[n-1];
+		arr[n-1] = t;
+	}
+}
+
+
+	//快速排序.方案一
+	function quickSort(array,left,right){	
+		var key = array[left];
+		var z,y,t;
+		y = right;
+		z = left;
+		if(left < right){
+			//如果在操作一个数组中从左边找单元的下标
+			while(z<y){
+				//如果找到了比 key 小的数则不循环，
+				while( array[y] >= key && y > z) y--;
+				array[z] = array[y];
+				//如果找到了比 key 大的数则不循环
+				while( array[z] <= key && y > z) z++;
+				array[y] = array[z];
+			}
+			//归位
+			array[z] = key;
+			quickSort(array,left,y-1);  //递归左边，这里是先把左边排好了再排右边的，切记
+			quickSort(array,y+1,right); //递归右边		
+		}else return ;   //如果找的数组中只有一个单元则就表示已经是最后一个单元了
+	}
+	
+
+	//快速排序.方案二,这是一种外排
+	function quickSort_2(array){
+		if(array.length <= 1) return array;
+		var key = array[0];
+		var leftArr = [];
+		var rightArr = [];
+		for(var i=1; i < array.length; i++){
+			if(array[i] >= key){
+				rightArr.push(array[i]);
+			}else{
+				leftArr.push(array[i]);
+			}
+		}
+
+		return quickSort(leftArr).concat([key],quickSort(rightArr));
+	}
+	//用函数递归来重复实现上面的代码
+	//quickSort(arr,0,len-1);
+
+
+	//插入排序
+	function inserSort(array){
+		var len = array.length;
+		//从第二个单元开始循环
+		for(var i = 1 ; i < len ; i++){
+			var key = array[i];    //将当前单元作为插入比较的单元
+			//因为是从第二个单元开始循环，所以就要从这之前一个单元开始比较
+			//所以 n = i-1   ,因为还要考虑到如果循环第一次时
+			//第二个单元就比第一个单元大的情况，所以要大于等于 0
+			for(var n = i - 1; n >= 0; n--){
+				//用获取到的 插入单元来与前面所有单元比较
+				//如果有大于 插入单元的，就让它向后移动一个单元，把它的位置留下，好让下一个单元向后移，或者让插入单元插进来
+				if( array[n] > key){		
+					array[n+1] = array[n];
+				}
+				//否则就说明前面的都比 key 小了，就不用比了，直接结束这趟循环
+				else{ break; }      
+			}
+			//把插入单元插到这个空的位置，就表示在当前插入单元之前的都比它小，后面的都比它大
+			array[n+1] = key;
+		}
+	}
+
+	//希尔排序
+	function shellSort(array){
+		var len = array.length;
+		var mid = Math.floor(len/2);
+		while( mid >= 1){
+			 // 第一次基准数分组单元
+  			// 第二次基准数，用于插入排序
+			for(var i = mid ; i < len; i++){
+			    // 第一次基准数前后一一比较
+			    // 第二次基准数插入排序比较
+			    // 一定注意每次完成后一到循环后 n -= mid,而不是 n--
+				// 至于为什么就就是为了实现后面与之前面所有比较
+				for(var n = i - mid; n >= 0; n-=mid ){
+					//如果前面比前面大则交换
+					if( array[n] >= array[mid+n] ){
+						var t = array[n];
+						array[n] = array[n+mid];
+						array[n+mid] = t;
+					}
+				}
+			}
+			// 两倍减小增量
+			mid = Math.floor(mid/2);
+		}
+	}
+
+
+
+/* 堆排序 */
+// 思路一
+function heapSort( arr ){
+	// 获取整个数组长度
+	var len = arr.length;
+
+	// 堆化数组函数
+	// heap() 方法只能堆化一次，也就是堆化一个指定的小堆
+	// 传入当前堆叶节点 nowInd 
+	// 传入堆化时的长度 L
+	function heap( nowInd, L ){
+		// 2 * n + 1 < len   获取得有效下标位置
+		for(var n = nowInd; 2 * n + 1 < L; n = pos){
+			// 默认左节点
+			var pos = 2 *n + 1;   // 存放每个小堆最大子节点的下标
+
+			// 如果右边比左边大，则就是右边最大
+			// 但是判断之前要先一下这个叶节点下有没有右节点  pos < L - 1
+			if( pos < L-1 && arr[pos+1] > arr[pos]){
+				pos+=1;
+			}
+
+			// 如果最大子节点与父节点比较
+			if( arr[pos] > arr[n] ){
+				var t = arr[pos];
+				arr[pos] = arr[n];
+				arr[n] = t;
+			}
+			// 否则就不找这个堆了，找下一个堆
+			else break;
+		}
+	}
+
+	// 堆化每一个小堆,到根节点
+	for(var i = Math.floor(len / 2); i >= 0; i--){
+		// 循环调用堆化小堆
+		heap( i, len);
+	}
+
+	// 堆排序
+	for(var i = len-1; i >= 0; i--){
+		// 根节点与当前的节点交换
+		var t = arr[0];
+		arr[0] = arr[i];
+		arr[i] = t;
+		// 每次将范围向上缩小
+		heap(0, i);
+	}
+}
+
+
+	//var newArr = quickSort(arr);  //因为这种办法是返回的一个新数组，所以要一个新数组来接收值
+	//arr = newArr;
+	//inserSort(arr);
+	// shellSort(arr);
+	heapSort(arr);
+
+
+	pntArr('结束',arr);
+
+</script>
+
+<h2>二分查找</h2>
+
+<script>
+
+
+
+/**
+ *
+ *  二分查找
+ *
+ */
+
+
+	var ar = [1, 3, 4, 5, 2, 6, 9, 7, 8, 0 ];
+	//  0 3 5 4 1 2 7 6 8 9
+	// 二分查找
+	function binarySearch( array, search, begin, end ){
+		if( end < begin ) return false;
+		var mid = Math.floor( (begin + end) / 2),
+			midVal = array[mid];
+		// 极端一
+		if( search == midVal ){
+			return  true;
+		}
+		// 左边
+		else if( search > midVal){
+			var re = binarySearch(array, search, mid + 1, end );
+		}
+		// 右边 
+		else{
+			var re = binarySearch(array, search, begin, mid - 1);	
+		}
+		return re;
+	}
+
+
+
+
+
+/** 
+* 下面演示函数
+* 
+**/
+document.body.innerHTML += "<h1>演示函数</h1>";
+
+/** **/
+
+// call() 和 apply()
+
+function color(){
+	return "blue";
+}
+
+function Yet(){
+	this.color = function(){
+		return "yellow";
+	};
+}
+
+var o = {
+	color : function(){
+		return "red";
+	}
+}
+
+var Y = new Yet();
+var Y2 = new Yet();
+console.log( window.color() ); 
+console.log( Y.color() );
+console.log( o.color() );
+console.log( color.call(o) );  // 全局 color() 被  o 调用
+console.log( o.color.call(Y) );  // o 的 color() 被  Y 对象调用
+console.log( color.call(Yet) );  // 全局的 color() 被  Yet 构造器调用
+console.log( Y2.color() );  // o 的 color() 被  Y 调用
+
+
+
+</script>
+ </head>
+ <body>
+ 
+ 
+ 
+</body>
+</html>
+
+
+
+
+
+

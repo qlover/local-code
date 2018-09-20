@@ -1,0 +1,88 @@
+<meta charset="utf-8">
+<title> Promise </title>
+
+<img id="image" src="" alt="">
+
+<script>{
+
+
+{
+	function timeout(ms) {
+		return new Promise((resolve, reject) => {
+			setTimeout(resolve, ms, 'done');
+		});
+	}
+
+	timeout(100).then((value) => {
+		console.log(value);
+	});
+}
+
+
+{
+	let promise = new Promise(function(res, rej){
+		console.log('promise1')
+		res();// 一旦建立，就执行 reslove() 
+	});
+	promise.then(function(){
+		console.log('done1')
+	})
+
+}
+
+// 异步加载图片
+{
+	function loadImageAsync(url) {
+		return new Promise(function(resolve, reject) {
+			var image = new Image();
+
+			image.onload = function() {
+				resolve(image);
+			};
+
+			image.onerror = function() {
+				reject(new Error('Could not load image at ' + url));
+			};
+
+			image.src = url;
+		});
+	}
+
+	loadImageAsync('http://local.web.com/layer.png').then(function(img){
+		console.log('图片加载成功', img);
+		//=> 图片加载成功 <img src=​"http:​/​/​local.web.com/​layer.png">​
+
+	}, function(e){
+		console.log('图片加载失败', e)
+	})
+
+}
+
+// 图片加载
+{
+	// http://local.web.com/layer.png
+	const loadImage = function(path){
+		return new Promise(function(res, rej){
+			let image = document.querySelector('#image');
+			image.onload = res;
+			image.onerror = rej;
+			image.src = path;
+		});
+	}
+
+	loadImage("http://local.web.com/layer.png").then(()=> {
+		//alert('图片加载成功')
+	}).catch(() => {
+		//alert('图片加载失败')
+	});
+}
+
+{
+// async 关键字
+// 该关键字可以将函数变成异步执行
+	let f = () => console.log('now');
+	(async () => f())();
+	console.log('next');
+}
+
+}</script>

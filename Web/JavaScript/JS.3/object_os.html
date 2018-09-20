@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>对象操作</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+<script>
+
+
+// 有一个用户类
+var protoUser = {
+	name : '',
+	age : 0,
+	email : ''
+};
+
+// 命名函数表达式
+var createUser =  function createUser(name, age, email ){
+	return {
+		name : name || protoUser.name,
+		age  : age || protoUser.age,
+		email : email || protoUser.email
+	};
+}
+
+
+
+// 常规的作法也放会这样
+var user1 = createUser('qlover',18,'myused@sina.com');
+console.log(user1.name, user1.age, user1.email, typeof user1);
+
+// 但是，对于函数来说，这样作何不更好
+var user2 = createUser({
+	name : 'hone',
+	age : 19,
+	email : 'hone@sina.com'
+});
+console.log(user2.name, user2.age, user2.email, typeof user2);
+// 如果仔细观察的话会发现上面有不同
+
+
+
+/* 函数的 name 属性*/
+function Func(){
+	this.name = 'abc';
+};
+
+var f = new Func();
+// name 而从堆空间 new 出来的对象 name 只当作一个成员
+console.log( f.name );
+// 函数本身是有 name 属性值的
+// 函数的名字
+console.log( Func.name );
+
+console.log("-----------------------------");
+
+// console.log( Object.keys(Function.prototype) );
+document.write( Object.getOwnPropertyNames(Function.prototype) );
+console.log( Object.getOwnPropertyNames(Function.prototype) );
+// =>length,name,arguments,caller,apply,bind,call,toString,constructor
+console.log( Object.keys(Func));
+console.log( Object.getOwnPropertyNames(Func));
+
+
+
+
+
+
+
+
+</script>
+</head>
+
+<body>
+
+</body>
+</html>
+
+
+
+
+
+

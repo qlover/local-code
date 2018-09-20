@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>原型</title>
+<script>
+	//临时中转函数
+	function obj(o){			
+		function F(){};		
+		F.prototype = o;	
+		return new F();		
+	}
+
+	//寄生函数
+	function createObject(be_inherited,inherit){
+		var f = obj(be_inherited.prototype);
+		inherit.prototype = f;		
+						
+	}
+
+	//Box 对象
+	function Box(name){
+		this.name = name;
+	}
+	
+	//Box 原型
+	Box.prototype.run = function(){
+		return this.name + '运行中...';
+	}
+
+	//对象冒充
+	function Desk(name){
+		Box.call(this,name);	
+	}
+
+	//通过寄生组合继承来实现继承，
+	createObject(Box,Desk);	//在此就替代了 前面该有的 原型链
+	var desk = new Desk('qrj');
+	alert(desk.run());
+	//alert(desk.constructor);
+
+
+
+
+
+
+
+
+</script>
+</head>
+
+<body>
+
+
+</body>
+</html>

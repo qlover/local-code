@@ -1,0 +1,46 @@
+<meta charset="utf-8">
+<title> 函数 </title>
+<script>{
+
+
+{
+	// 属性简写
+	var foo = 'xxx';
+	var baz = {foo}; // var baz = {foo: foo}
+	console.log(baz); //=> {foo: "xxx"}
+	// 方法简写
+	var obj = {
+		// 并且也不会因为 class 是关键字就不能使用
+		class(){
+			console.log(`it's class`);
+		},
+	};
+	obj.class();//=> it's class
+
+	function getPoint() {
+		var x = 1;
+		var y = 10;
+		return { x,	y };
+	}
+
+	console.log(getPoint().x);//=> 1
+} {
+
+	let propKey = 'foo';
+	let obj = {
+		[propKey] : 100
+	}
+	console.log(obj.foo);//=> 100
+	console.log(obj[foo]);//=> undefined
+	console.log(obj['foo']);//=> 100
+	console.log(obj.propKey);//=> undefined
+	console.log(obj[propKey]);//=> 100
+}
+
+
+
+
+
+
+
+}</script>

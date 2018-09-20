@@ -1,0 +1,349 @@
+<meta charset="utf-8">
+<script>
+	
+// 提供一个可以得到一个对象的所有成员的方法
+(function () {
+	var getProp = function(obj){
+		console.log(Object.getOwnPropertyNames(obj) );
+	};
+	window.getProp = getProp;
+})(); 
+
+
+
+
+
+(function() {
+	// 构造函数
+	function Demo() {
+		console.log(this);
+	}
+	// Demo(); //=> window
+	// new Demo(); //=> Demo
+
+	var d = new Demo(); // 只要 new 就会执行构造函数
+	// JS 也像 java 是支持创建名对象
+
+	console.log('----');
+
+	// 解释 new 运算符
+
+	// 先一本正经的创建一个构造函数，其实该函数与普通函数并无区别
+	var Person = function(name, age) {
+		this.name = name;
+		this.age = age;
+		this.getName = function() {
+			return this.name;
+		}
+	}
+
+	// 将构造函数以参数形式传入
+	function New(func) {
+
+		// 声明一个中间对象，该对象为最终返回的实例
+		var res = {};
+		if (func.prototype !== null) {
+
+			// 将实例的原型指向构造函数的原型
+			res.__proto__ = func.prototype;
+		}
+
+		// ret为构造函数执行的结果，这里通过apply，将构造函数内部的this指向修改为指向res，即为实例对象
+		var ret = func.apply(res, Array.prototype.slice.call(arguments, 1));
+
+		// 当我们在构造函数中明确指定了返回对象时，那么new的执行结果就是该返回对象
+		if ((typeof ret === "object" ||
+				typeof ret === "function") &&
+			ret !== null) {
+			return ret;
+		}
+
+		// 如果没有明确指定返回对象，则默认返回res，这个res就是实例对象
+		return res;
+	}
+
+	// 通过new声明创建实例，这里的p1，实际接收的正是new中返回的res
+	var p1 = New(Person, 'tom', 20);
+	console.log(p1.getName());
+
+	// 当然，这里也可以判断出实例的类型了
+	console.log(p1 instanceof Person); // true
+})();
+
+
+
+
+
+
+
+
+/**
+ * ES5 的面向对象中，有一些比较重要的概念
+ *
+ * 1.原型
+ * 		prototype： 类指向的原型属性
+ * 		constructor： 原型指向的类（构造器）
+ * 		__proto__： 实例指向的原型对象 
+ * 2.原型链
+ * 3.继承
+ * 
+ * *| JS 所有的类的父类都是 Object() 
+ * 
+ */
+
+
+// 1.原型
+// 
+// JS 中一个类就是一个构造函数
+// 当一个类(构造函数)存在后，会自动创建一个与之独立的原型对象
+// 		比如：function Person(){} 这个类，就有
+// 			Person.prototype 这个原型
+// 			
+// 这样当这个类被实例化后，就是被 new 一次后
+// 这个被 new 的对象就拥有了类(构造函数)中的成员
+// 	如果类中没有则会去找这个类的原型中的成员
+// 	
+(function (win) {
+
+	// 创建 Person 类
+	var Person = function Person(n, a){
+		// 这个 this 表示 Person 
+		// *|只要一 new 就会执行该构造函数中的内容
+		this.name = n;
+		this.age = a;
+	};
+
+	// 当Person 类被创建就会产生一个 pototype 属性
+	// 该属性就是表示其原型 
+
+	// 函数本身就有 ["length", "name", "arguments", "caller", "prototype"]
+	// 这些属性，函数也是对象，所以构造函数也如此
+	win.getProp(Person);
+
+
+	// Person 原型属性
+	var pp = Person.prototype;
+	// 会发现 pp 里面只有一个 constructor 
+	win.getProp(pp);
+
+	/**
+	 * 虽然类和原型是相互独立的，
+	 * 但是他们两个可以用 prototype 和 constructor  来相互访问
+	 * 
+	 */
+	
+	// 类访问原型属性，当然也是一个对象
+	console.log(Person.prototype);  //=>Object {constructor: function}
+	// 原型访问类
+	console.log(Person.prototype.constructor); // 返回 Person 函数体
+
+	// 并且这两个属性是可以一直调用下去的
+	
+	console.log(Person.prototype.constructor.prototype);
+	//=>Object {constructor: function}
+	// 指向原型又指向构造器最后又指向了原型
+
+
+})(window); 
+
+
+console.log('----------');
+(function (win) {
+	
+	var Person = function Person(n,a){
+		// 为实例提供两个属性和一个方法
+		this.name = n;
+		this.age = a;
+		this.say = function(){
+			// 方法最好返回结果
+			return 'I am '+ this.name +', year is:'+this.age;
+		};
+	};
+
+	// 再提供一个静态方法
+	Person._type = 'human';
+
+
+	// 实例化对象
+	var p1 = new Person('qlover',18);
+	var p2 = new Person('home', 19);
+
+	/* 
+		改变 p1 对象的 age 值
+		会只修改 Person new 出来的这个对象的 age 
+		而不会改变其它对象的 age 值
+	*/
+	console.log(p1.age);
+	p1.age = 20;
+	console.log(p1.say())
+	console.log(p2.say())
+
+
+	// 为原型添加一个成员 ,让所有的实例化的类都共享原型中的成员
+ 	// 当然直接在类中给实例添加成员是不行的，只有在源代码中写
+	// 所以在原型属性中添加
+	Person.prototype.sex = '男';
+
+	/*
+	 	虽然改变了 p2 对象的 sex， 但是 p2 和 p1 一样
+		类中是没有 sex 属性的，所以都会先从类中开始找再去原型中找
+		因为 p2 实例中没有 sex ，所以 p2.sex 则会为 p2 实例添加一个 sex
+		所以 p2 就直接在实例中找到了 sex ，就不需要去原型找了
+		而 p1 没有，所以要去原型找
+	 */
+	p2.sex = '女';
+	console.log(p1.sex); //=> 男
+	console.log(p2.sex); //=> 女
+
+})(window); 
+
+
+// 但是如果 Person 原型中也没有 sex 那向那找？
+
+// 2.原型继承
+// JS 每个对象都是基于原型继承的
+// 
+// JS 的所有对象的父类都是 Object, 所以可以想像 Person.prototype 也是 Object
+// 的子类，那么，Person 原型对象也是 Object 的一个实例
+// 		（JS 在自动创建  Person 的原型对象时，底层做了这样一段 
+// 			Person.prototype = new Object()
+// 	也就是说， Person 原型中的所有成员是由自己所定义和 Object 里面所有的成员
+// 	从而说明了 Person 类继承了 Object() 
+// 	
+// 	实例继承了类（构造器）也继承了 __proto__ 指向的原型对象
+console.log('====原型继承=====');
+(function () {
+	
+	function Person(){ }
+
+	var p = new Person();
+
+	// 1.声明构造器 Person()
+	// 2.自动创建 Person.prototype 原型属性
+	// 3.new Person() 
+	// 4.自动将 new Person()指向 Person.prototype 原型属性r的原型对象
+	// 5.将 new Person() 引用给了 p
+	Person.prototype.name = 'qlover';
+
+	console.log(p.name);   //=> qlover
+	// 但是切记，此时实例 p 并没有 name 属性
+	// 而这个属性是实例 p 的原型对象上的属性
+
+})(); 
+
+// 字面量对象
+(function () {
+	// 先来看个例子
+	var o1 = new Object();
+	var o2 = {};
+	console.log(o1 === o2); //=> false
+
+	// 之所以会这样，是因为 o1 显示的 new Object()
+	// 而 o2 隐式的 new Object()
+	// 但它们都继承自 Object.prototype
+	console.log( o1.__proto__ === o2.__proto__);//=> true 
+
+	// Object.prototype === o1.__proto__  => true
+	// Object.prototype === o2.__proto__  => true
+	// o1.__proto__ === o2.__proto__ 	  => true
+})(); 
+
+
+
+// 3. 原型链
+// 	所以，如果  Person 原型中也没 sex 就向 Object 类找
+// 	当然 Object 类没有找到就向 Object.prototype 找，再没有就不解释了
+// 	
+// 	这个寻找的过程就是形成了原型链
+console.log('===原来链=====');
+(function () {
+	
+	var Person = function Person(n,a){
+		// 为实例提供两个属性和一个方法
+		this.name = n;
+		this.age = a;
+		this.say = function(){
+			// 方法最好返回结果
+			return 'I am '+ this.name +', year is:'+this.age;
+		};
+	};
+
+	/*
+	 * 类(构造器)中的 prototype 指向原型对象
+	 * 原型对象的 constructor 指向类(构造器)
+	 * 实例的 __proto__ 指向该对象原型
+	 * 
+	 */
+
+	// 再提供一个静态方法
+	Person._type = 'human';
+	// 实例化对象
+	var p1 = new Person('qlover',18);
+	var p2 = new Person('home', 19);
+
+	// 将 sex 挂载到 Object 上
+	console.log(Object.prototype)
+	// Object === Object.prototype.constructor
+	console.log(Object); //=> function Object(){}
+
+	// 因为原型链， sex 从 Object 原型对象来
+	Object.prototype.sex = '男';
+	p2.sex = '女';
+	console.log(p1.sex); //=> 男
+	console.log(p2.sex); //=> 女
+
+})(); 
+
+
+/**
+ * 三个属性： prototpye constructor __proto__
+ * 		__proto__ 每个对象都会有，每个实例都会有, 返回该类的原型对象
+ * 
+ */
+console.log("=============");
+(function () {
+	// Person 类
+	var Person = function Person( ){
+
+	};
+
+	// Person 原型属性
+	var pp = Person.prototype;
+
+	// Person 原型对象的构造器
+	var ppc = Person.prototype.constructor;
+	
+	// 实例化对象
+	var p1 = new Person('qlover', 18);
+
+	// 实例的原型对象
+	var _pp = p1.__proto__;
+
+	console.log( Person.prototype === p1.__proto__ );//=> true 
+
+
+	console.log(Person); //=> 类就是一个构造器
+	console.log(pp);
+	console.log(ppc);
+	console.log(p1);
+	console.log(_pp);
+
+
+
+	var res = [Person, pp, ppc, p1, _pp];
+
+	res.forEach(function(v) {
+		console.info( _pp ==  v);
+	});
+
+})(); 
+
+
+
+
+
+
+
+
+
+</script>

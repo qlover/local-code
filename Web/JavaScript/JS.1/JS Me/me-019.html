@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+window.onload = function(){
+	function Check(checkText)
+	{
+		var checkChar = /[^a-z\d]/gi;
+		return !(checkChar.test(checkText));
+	}
+	var inputPas = document.getElementById("pas");
+	var check = document.getElementById("check");
+	check.onclick = function(){
+		if(Check(inputPas.value) == true){
+			alert("没有异常的字符");
+		}else {
+			alert("有异常的字符");
+		}
+	}
+	
+}
+</script>
+</head>
+
+<body>
+	<p>请输入你的密码：<input id="pas" type="password"/></p>
+    <p><input id="check" type="button" value="Check"/>
+</body>
+</html>

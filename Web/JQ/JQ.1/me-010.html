@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JQ 操作 DOM</title>
+<style>
+	#box{ max-width:500px; background:#fba;}
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	$(function(){
+		document.onselectstart =function(){ return false;};
+		alert('请在页面加载完毕后，在文档中点击鼠标不放并拖动鼠标');
+		$(document).mousedown(function(e){
+			$("#msg span:first").text("X: "+ e.pageX +",Y: "+ e.pageY);
+				$(this).mousemove(function(e){
+				$("#msg span:last").text("X: "+ e.pageX +",Y: "+ e.pageY);
+			});
+			$(this).mouseup(function(){
+				$("#msg span").text("");
+				$(this).unbind("mousemove");	//清除掉指定事件
+				$(this).unbind("mouseup");
+				
+				/*$(this).unbind();//清除掉所有事件*/
+			});
+		});
+		
+	});
+</script>
+</head>
+<body>
+	<div id="msg">
+		<h5>您按下鼠标的坐标为：</h5>
+		<span></span>
+		<h5>您当前鼠标的坐标为：</h5>
+		<span></span>
+	</div>
+</body>
+</html>

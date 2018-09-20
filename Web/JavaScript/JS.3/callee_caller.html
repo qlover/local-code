@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>callee and caller</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+<script>
+	
+
+function fun1(a, b, c){
+    return arguments.callee === fun1;
+}
+function fun2(a, b){
+    return arguments.callee === fun1;
+}
+console.log( fun1() );  // true
+console.log( fun2() );  // false
+
+
+/* callee 递归 */
+
+var recursion = function( n ){
+    return n > 1 ? n * arguments.callee(n-1) : 1;
+};
+console.log( recursion(5) );
+
+
+// callee.length
+function fun3(a, b, c, d){
+    return [ arguments.length, arguments.callee.length ];
+}
+console.log( fun3() );  // [0,4]  => 没有实参，但有 4 个形参
+console.log( fun3(1,2) );  // [2,4]  => 2 个实参，同样有 4 个形参
+
+
+
+
+/* caller */
+var caer =  function(){
+
+    return this;
+};
+
+console.log( caer() );  // window
+console.log( caer.call(caer) );  // caer(){}
+
+// 重写 caer()
+caer = function(){
+    if( caer.caller == null ){
+        console.log( 'global' );
+    }else{
+        console.log( caer.caller );
+    }
+};
+var transfer = function(){
+    caer();
+};
+caer();   // global, 因为 caer() 是在 window 下被调用
+transfer();  // transfer(){}，在另一个函数中被调用
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

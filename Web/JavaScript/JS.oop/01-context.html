@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<script>
+	
+// 声明函数 fun1
+function fun1(){
+	// 声明变量 a
+	var a = 100;
+
+	// 声明函数fun2
+	function fun2(){
+		return a;
+	}
+
+	return fun2;
+
+}
+
+// 调用函数 fun1 生成 fun1 执行上下文
+var result = fun1();
+
+// result() 调用 fun2() 生成了 fun2 执行上下文
+console.log( result() );
+
+
+
+
+
+</script>

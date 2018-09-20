@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<div id="messageContainer">
+this ...
+</div>
+<script>
+function createDocument(){
+	var xmlDoc;
+	try{
+		if(window.ActiveXObject){
+			var versions = [
+				"Msxml2.DOMDocument.6.0",
+				"Msxml2.DOMDocument.3.0"
+			];
+			for(var i=0; i< versions.length; i++){
+				try{
+					xmlDoc = new ActiveXObject(versions[i]);
+					return xmlDoc;
+				}catch(error){
+					alert("Have a flase!");
+				}
+			}
+		}else if(document.implementation && document.implementation.createDocument){
+			xmlDoc = document.implementataion.createDocument("","",null);
+			return xmlDoc;
+		}
+	}
+	catch(err){
+		alert("error is :"+ err);
+	}	
+	return xmlDoc;
+}
+
+function getDailyMesage(){
+	var messages = xmlDoc.getElementsByTagName("daily");
+	var dateobj = new Date();
+	var today = dateobj.getDay();
+	return messages[today].firstChild.nodeValue;
+}
+	var xmlDoc = createDocument();
+	xmlDoc.async = false;
+	xmlDoc.load("motd.xml");
+	document.getElementById("messageContainer").innerHTML = getDailyMessage();
+</script>	
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<meta charset="utf-8">
+
+
+<script>
+	
+
+/* 方法一，直接用函数定义类 */
+
+function Person( pn, pa ){
+	console.log('Person 构造器被调用了');  // 只要是对象就有构造器
+
+	// 实例属性和方法
+	this.name = pn;
+	this.age = pa;
+
+	this.say = function(){
+		console.log('My name is :'+ this.name +' age is :'+ this.age);
+	};
+
+	// 静态方法
+	Person._type = '人类';
+	Person.hello = function(){
+		console.log('我是一个静态方法');
+	}
+
+}
+
+
+// 实例化第一个对象
+var p1 = new Person('qlover', 18);
+p1.say();
+Person.hello();
+
+console.log(document.constructor);
+console.log(typeof document);
+console.log(p1 instanceof Person);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

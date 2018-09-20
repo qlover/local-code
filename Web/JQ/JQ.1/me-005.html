@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>JQ 选择器</title>
+		<style>
+			div{ 
+				width:100px; height:100px; 
+				background:#bbb;
+				margin:5px;
+				float:left;
+			}
+			.hide{
+				display:none;
+			}
+		</style>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("button:first").click(function(){
+					alert("页面中有"+$("div:visible").length+"个显示的 div\n 有"+$("div:hidden").length+"个不显示的 div");
+					alert('将那个不显示的 div 在两秒内显示出来');
+					$("div:hidden").css("background","#f00").show(2000);	//因为可以连缀，所以还可以加上颜色
+				});
+			});
+
+
+		</script>
+	</head>
+	<body>
+		<button>click me</button>
+		<div id="btn">这是一个id 为 btn 的div</div>
+		<div id="btn">这是一个id 为 btn 的div</div>
+		<div class="hide">这个不显示的 div</div>
+	</body>
+</html>

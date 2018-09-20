@@ -1,0 +1,60 @@
+<meta charset="utf-8">
+<title> Symbol </title>
+<script>{
+
+{
+	let a = Symbol();
+	let s = Symbol('s');
+
+	console.log(a);//=> Symbol()
+	console.log(s);//=> Symbol(s)
+	console.log(typeof s);//=> symbol
+
+
+	let b = Symbol('b');
+	let c = Symbol('c');
+	console.log(b === c);//=> false
+} {
+
+	let age = Symbol('age');
+	let getAge = Symbol('getAge');
+
+	let obj = {
+		[age] : 20,
+		age : 19,
+		[getAge](){
+			return this[age]
+		},
+		getAge(){
+			return this.age;
+		},
+
+	};
+	console.log(obj[age]);//=> 20
+	console.log(obj.age);//=> 19
+	console.log(obj[getAge]());//=> 20
+	console.log(obj.getAge());//=> 19
+} {
+
+	let s = Symbol('s');
+	console.log(s.toString());//=> Symbol(s)
+	console.log(!s);//=> fasle
+	console.log(typeof s === 'object');//=> false
+}
+
+
+// Symbol.for()
+{
+	let s1 = Symbol.for('s');
+	let s2 = Symbol.for('s');
+	console.log(s1 === s2);//=> true
+
+	let s3 = Symbol.for('ss');
+	let s4 = Symbol('ss');
+	console.log(Symbol.keyFor(s3));//=> ss
+	console.log(Symbol.keyFor(s4));//=> undefined
+
+}
+
+
+}</script>

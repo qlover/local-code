@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>DOM Attr Application(this document is error)</title>
+</head>
+
+<body>
+<button id="addBorder">给表格添加 border</button>
+<table id="myTable" border="5" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>This is a table</td>
+        <td>
+        	<ul>
+            	<li>one</li>
+                <li>two</li>
+                <li>there</li>
+            </ul>
+        </td>
+	</tr>
+</table>
+<form name="fomr1">
+    <p>姓名：<input name="name" /></p>
+    <p>密码：<input name="password" /></p>	
+    <select style="width:100px;" name="select">
+        <option>one</option>
+        <option>two</option>
+        <option>theer</option>
+    </select>
+    
+</form>
+<script>
+
+	var myTable = document.getElementById("myTable");
+	var addBorder = document.getElementById("addBorder");
+	addBorder.onclick=function(){	
+		myTable= myTable.removeAttribute("border");
+		myTable= myTable.removeAttribute("cellpadding","0");
+		myTable= myTable.removeAttribute("cellspacing","0");
+	}
+/*	alert("表格的 id 属性"+"  "+myTable.getAttribute("id"));
+*/	
+
+
+
+</script>
+
+
+</body>
+</html>

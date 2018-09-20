@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<button id="btn">Click Me</button>
+<script>
+<!-- 1 -->
+/*function handle(e){
+	switch(e.type){
+		case "dblclick" : alert("your event is 【ondblclick】");break;
+		case "click" : alert("your event is 【onclick】");break;
+	}
+}
+
+document.getElementById("btn").onclick=function(){
+	handle(event);
+};
+document.getElementById("btn").ondblclick=function(){
+	handle(event);
+};
+*/
+<!-- 2 -->
+var i=0;
+function handle(e){
+	if(i==5){
+		alert("you click have 5 times");
+		i=0;
+		return false;
+	}
+	switch(e.type){
+		case "dblclick" : alert("your event is 【ondblclick】");break;
+		case "click" : alert("your event is 【onclick】");break;
+	}
+	i++;
+}
+var clickBtn =document.getElementById("btn").onclick=handle;
+var dblclickbtn = document.getElementById("btn").ondblclick=handle;
+</script>
+</body>
+</html>

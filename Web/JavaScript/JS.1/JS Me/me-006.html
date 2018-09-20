@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+	window.onload = function()
+	{
+		var btn = document.getElementById("btn");		
+		function addNumber()
+		{
+				var Title = new Array("输入第一个加数","输入第二个加数","你输入的有问题，请输入一个数字");
+				var FirstNumber = prompt(Title[0],"");		
+			if( FirstNumber != parseInt(FirstNumber))
+			{
+				for(var i=0; FirstNumber != parseInt(FirstNumber); i++)
+				{
+					FirstNumber = prompt(Title[2],"");
+				}
+			}		
+				var SecondNumber = prompt(Title[1],"");
+			if( SecondNumber != parseInt(SecondNumber))
+			{
+				for(var i=0; SecondNumber != parseInt(SecondNumber) ; i++)
+				{
+					SecondNumber = prompt(Title[2],"");
+				}	
+			}
+				var overNumber = parseInt(FirstNumber) + parseInt(SecondNumber);				
+				alert(FirstNumber + " + " + SecondNumber + " = " +overNumber);
+		}	
+		
+		btn.onclick = function(){
+				alert("输入两个数字相加");
+			for(var i=1; i>0; i++)
+			{
+				addNumber();
+					
+					var Continue = confirm("你还要加吗?");
+					i = 1;
+					if(Continue)addNumber();
+					else{return false;}				
+			}
+		}	
+	}
+	
+</script>
+<style>
+#btn{width:166px; height:30px; border:1px solid #000; outline:none; cursor:pointer; color:#500; background:#131313; border-radius:10px; box-shadow:1px 2px 1px #888;}
+#btn:active{background:#fff; color:#131313; margin-top:3px; margin-left:3px;}
+</style>
+</head>
+
+<body>
+	<button id="btn">点击这里来做加法</button>
+
+</body>
+</html>

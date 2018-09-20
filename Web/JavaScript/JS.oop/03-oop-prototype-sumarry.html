@@ -1,0 +1,124 @@
+<meta charset="utf-8">
+<script>
+// 类的解析
+(function () {
+	console.log('--【类解析】--');
+	console.log(Function);
+	var fp = Function.prototype;    // Function 类的原型
+	var fc = Function.constructor;  // Function 类的构造器
+	var f_p = Function.__proto__;	// Function 类的实例原型
+	console.log(fp);
+	console.log(fc);
+	console.log(f_p);
+	console.log('-----');
+
+
+	var Person = function Person(){
+
+	};
+	var pp = Person.prototype;// Person 类的原型
+	var pc = Person.constructor;// Person 类的构造器
+	var p_c = Person.__proto__;// Person 类的实例原型
+
+	var p1 = new Person();
+	console.log(Person);
+	console.log(pp); //=>Object {constructor: function Person(){}, __proto__: Object}
+	console.log(pc); //=>function Function() { [native code] }
+	console.log(p_c); //=> function () { [native code] }
+
+
+	console.log('----------');
+	// Person 类指向的构造器与 Function 类恒等
+	console.log(pc === fc);  
+
+	// Function 类的与实例原型恒等
+	console.log(fp === f_p);  
+	var f = new Function();
+	console.log( f.__proto__ === f_p);//=> true
+
+	// Person 实例指向的原型与 Function 类的原型和 Function 实例指向的原型恒等
+	console.log( p_c === fp, p_c === f_p); //=> true true
+
+
+})(); 
+
+
+// 原型解析
+(function () {
+	
+	console.log('--【原型解析】--');
+	console.log(Function.prototype);
+
+	var fp = Function.prototype.prototype;    // Function 原型的原型
+	var fc = Function.prototype.constructor;  // Function 原型的构造器
+	var f_p = Function.prototype.__proto__;	// Function 原型的实例原型
+
+	console.log(fp);  // 
+	console.log(fc);  // 不存在 undefined
+	console.log(f_p); // 与 Object 的原型恒等
+	console.log('-----');
+
+
+	var Person = function Person(){
+
+	};
+	var pp = Person.prototype.prototype;// Person 原型的原型
+	var pc = Person.prototype.constructor;// Person 原型的构造器
+	var p_c = Person.prototype.__proto__;// Person 原型的实例原型
+
+
+	console.log(pp); // 不存在
+	console.log(pc)  // Person 类
+	console.log(p_c) // 与 Object 恒等
+
+})(); 
+
+
+
+// 对象解析
+(function () {
+	console.log('--【对象解析】---');
+	// Function 实例
+	var f = new Function();
+
+	var Person = function Person(){
+
+	};	
+	// Person 实例
+	var p = new Person();
+
+	var obj = new Object();
+	console.log(f.prototype );
+	console.log(f.constructor);
+	console.log(f.__proto__);
+	console.log(p.prototype);  // 不存在
+	console.log(p.constructor); 
+	console.log(p.__proto__);
+
+})(); 
+
+// 解析总结
+(function () {
+	console.log('--【总结】---');
+	var Person = function Person(){
+
+	};
+
+	var f = new Function();
+	var p = new Person();
+	var o = new Object();
+
+
+	// 实例的指向原型恒等类的原型
+	console.log(f.__proto__  === Function.prototype );
+	// 原型的指向构造恒等类本身
+	console.log(Function.prototype.constructor == Function);
+	
+
+})(); 
+
+
+// 构造函数创建的对象 继承自 构造函数的原型属性
+// 构造函数创建的对象 继承自 该对象的原型对象
+
+</script>

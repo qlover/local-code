@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+/*#p1{background:#00f; display:block; width:100px; font-size:20px; font-family:"黑体"; color:#fff;}*/
+</style>
+<script>
+	window.onload = function(){
+	function style(x){
+		x.style.background = "#0ff";
+		x.style.display="table";
+		x.style.width= "150px";
+		x.style.fontSize="20px";
+		x.style.color="#111";
+		x.style.fontFamily ="黑体";
+		x.style.fontWeight="bold";
+	}
+		alert("This window!");
+		var p1Style = document.getElementById("p1");
+		p1.innerHTML = "Hello World!";
+		style(p1);
+	}
+</script>
+</head>
+
+<body>
+	
+    <p id="p1"></p>
+
+</body>
+</html>

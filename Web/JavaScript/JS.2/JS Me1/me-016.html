@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>me.js 文件测试</title>
+<style>
+.blue{background:blue;}
+.red{background:red;}
+</style>
+<script type="text/javascript" src="me.js"></script>
+<script type="text/javascript">
+
+addEvent(window,'load',function(){
+	var btn = document.getElementById('btn');
+	addEvent(btn,'click',function(evt){
+		var text = document.forms[0].myText;
+		//trim(text);
+		checkLetter(text.value);
+	});
+});
+
+
+</script>
+</head>
+
+
+<body> 
+<form name="myForm">
+	<input type="text" id="a" name="myText" placeholder="Please enter you charset" value="   adsfasd    ">
+</form>
+	<button id="btn">click me</button>
+</body>
+</html>
+
+

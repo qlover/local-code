@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JQ 操作 DOM</title>
+<style>
+	#box{ max-width:500px; background:#fba;}
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	$(function(){
+		/*$("#btn").click(function(){
+			var flag = $(".content").is(":hidden");		//is() 方法是一个用来判断给定的 JQuery 对象是否符合选择器
+			if(flag){
+				$(".content").show(100);
+			}else{
+				$(".content").hide(100);
+			}
+		});	*/
+		/*
+		$("#btn").hover(function(){
+			$(".content").show(100);
+		}, function(){
+			$(".content").hide(100);
+		});
+		*/
+
+		
+		$("#btn").toggle(function(){
+			$(".content").show(100);
+		}, function(){
+			$(".content").hide(100);
+		});
+		
+
+
+	});
+</script>
+</head>
+<body>
+	<button id="btn">JQuery 是什么</button>
+	<div class="content">
+		jQuery 是继 Prototype 之后又一个优秀的 JavaScript 库，它是由John 研发的...
+	</div>
+</body>
+</html>

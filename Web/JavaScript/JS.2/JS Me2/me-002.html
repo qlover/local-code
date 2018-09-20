@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>封装</title>
+  <script type="text/javascript" src="me.js"></script>
+  <script type="text/javascript">
+	addEvent(window,'load',function(){
+		/*$().getId('box').css('color','red').html('this my Object').css('background','pink');
+		$().getTag('p').css('color','red').css('background','black').html('改变');
+		alert($().getId('box').html());
+		alert($().getId('box').css('color'));
+		alert($().getClass('red').css('color'));*/
+		$().getClass('red','b').getElement(1).css('color','red');
+
+
+
+	});
+  
+  </script>
+ </head>
+ <body>
+	<div id="box">box</div>
+<div id="a">
+	<p class="red">段落</p>
+	<p class="red">段落</p>
+	<p class="red">段落</p>
+</div>
+<div id="b">
+	<p class="red">段落</p>
+	<p class="red">段落</p>
+	<p class="red">段落</p>
+</div>
+</body>
+</html>
+
+
+

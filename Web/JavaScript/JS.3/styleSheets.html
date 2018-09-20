@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>style 对象</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+
+</head>
+
+<body>
+<style> 
+body{
+	background: rgb(240,240,240);
+}
+</style>
+	<div id="box" style="font-size:16px;background:#eee;" >我是一段文本</div>
+
+	<script>
+		// 获取 StyleSheetList 
+		var p = document.styleSheets;
+
+		for(var k in p){
+			document.write('<br />');
+			document.write(k+'->'+p[k] );
+		}
+		console.log( p );
+		
+
+
+
+	</script>
+
+</body>
+</html>

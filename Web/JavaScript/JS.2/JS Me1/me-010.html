@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>my object</title>
+<script>
+/*
+	var box = new Object();
+	box.name = 'Lee';
+	alert(box.name);
+*/
+/*	var box = 'Lee';
+	box.age = 28;
+	alert(box.age);
+	*/
+	/*var box = 'Lee';
+	var box2 = box;
+	alert(box2);
+	alert(box);
+*/
+/*
+	function fun(num){
+		num+= 10;
+		return num;
+	}
+	var num = 50;
+	alert(fun(num));
+*/
+	var myMath = {
+		Sum : function(){
+			var sum = 0;
+			var al = arguments.length;
+			if(al == 0 ) return sum;
+			for(var i=0; i < al ; i++){
+				sum += arguments[i];
+			}
+			return sum;
+		},
+		Avg : function(){
+			var avg = 0;
+			var al = arguments.length;
+			if (al == 0) return avg;
+			for(var i= 0; i <al; i++){
+				avg += arguments[i];
+			}
+			return avg/al;
+		},
+		Power : function(num,pow){
+			var o = Math.floor(pow);
+			var p = num;
+			var result = 1;
+			if(!parseInt(pow)){
+				return 'pow is not a Integer';
+			}
+			if(o > 0){
+				for(var i=1; i <o; i++ ){
+					p *= num;
+				}
+				result = p;
+				return result;
+
+			}else if (o < 0){
+				for(var n=-1; n > o; n--){
+					p *= num;
+				}
+				result = '1/'+p;
+				return result;
+			}else{
+				return result;
+			}
+		},
+		Sqr : function (num){
+			return Math.sqrt(num);
+		}
+	};
+	var n = 10;
+	var u = 200;
+	var m = 300;
+	var str = 'This is my text!';
+	//alert(String.length);
+	//alert(myMah.Avg(n,u,m,54,654,654,87));
+	//alert(myMath.Power(u,n));
+	//alert(myMath.Sqr(9));
+
+</script>
+</head>
+
+<body>
+
+
+</body>
+</html>

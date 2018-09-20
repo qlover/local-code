@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>JQ 选择器</title>
+		<style>
+			
+		</style>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("button:first").click(function(){
+					var num = $("select :selected").length;
+					alert(num);
+				});
+				$("button:nth-child(2)").click(function(){
+					//因为获取到是一个集合，所以直接用 val() 方法当然不行
+						//要用循环来遍历，当然这个是 JQ 就不用了
+						//在 JQ 中有个遍历的方法叫 each() 而且这个函数还帮我们解决了 作用哉的问题
+						//也就是说在 each() 函数内部 this 表示遍历的当前的 DOM 元素对象，千万不要理解成了 jQuery 对象
+					//alert($("select :selected").val());
+					$("select :selected").each(function(){
+						alert(this.value);
+					});
+				});
+			});
+
+
+		</script>
+	</head>
+	<body>
+		<button>获取选中项的个数</button>
+		<button>获取选中项的值</button>
+		<select multiple="multiple">
+			<option>one</option>
+			<option>two</option>
+			<option>three</option>
+			<option>four</option>
+			<option>five</option>
+		</select>
+	</body>
+</html>

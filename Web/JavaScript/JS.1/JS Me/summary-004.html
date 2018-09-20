@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>迭代正则表达式中的字符</title>
+<script>
+<!-- 我最喜欢用的 map()方法 -->
+/*function Iteration(value)
+{
+	var result = value;
+	return result;
+}
+	var myString = "The years were 2010, 2011 and 2012";
+	var myRegExp = /\b\d{4}\b/g;	
+	alert(myString);
+	var resultsArray = myString.match(myRegExp);
+	alert("找到的年份是："+resultsArray.map(Iteration));
+*/
+<!-- every()&&some() 只是用于测试所以就不做了 -->
+<!-- filter() -->
+//当然这里就只能找到小于今年的年份了
+/*	var myString = "The years were 2010, 2011 and 20a12";
+	var myRegExp = /\b\d{4}\b/g;	
+	alert(myString);
+	var resultsArray = myString.match(myRegExp);
+	function Ireration(value){
+		var resultArray = false;
+		if(value <= 2015)
+		{
+			resultArray = true;
+		}
+		return resultArray;
+	}	
+	if(resultsArray.some(Ireration))
+	{
+		var result = resultsArray.filter(Ireration);
+		alert(result);
+	}
+*/
+
+<!-- forEach() -->
+/*	var myString = "The years were 2010, 2011 and 2012";
+	var myRegExp = /\b\d{4}\b/g;	
+	alert(myString);
+	var resultsArray = myString.match(myRegExp);
+	function Ireration(value){
+		var result = value;
+		alert(result);
+	}	
+resultsArray.forEach(Ireration);
+	*/
+</script>
+</head>
+
+<body>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

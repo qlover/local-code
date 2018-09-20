@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JQ 操作 DOM</title>
+<style>
+	#box{ max-width:500px; background:#fba;}
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//1.在文档中创建一个 <p id="par">段落</p> 样式的一个节点
+		//2.将刚才创建的节点加入到 #box 中
+		//$("#box").append($("<p id='par'>段落</p>"));
+		$("<p id='par'>段落</p>").appendTo($('#box'));
+	});
+</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

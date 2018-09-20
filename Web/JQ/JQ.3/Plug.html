@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试 jQuery 插件</title>
+	<script src="../Lib/jquery.js"></script>
+	<script src="jquery-hello.js"></script>
+</head>
+<body>
+	
+	<h2>我是 JQ 插件</h2>
+	
+	<script>
+		
+	$('h2').css('color', '#0f0');
+	$('h2').hello();  // 没有该方法就去 jquery.fn 添加一个 hello 
+
+	</script>
+
+</body>
+</html>

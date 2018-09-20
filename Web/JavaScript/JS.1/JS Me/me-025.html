@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<!--	
+	<p ondblclick="handle(event)">Paragraph</p>
+	<script>
+	function handle(e){
+		alert(e.type);
+	}
+	</script>
+-->
+<!--
+<p ondblclick="handle(event)">Paragraph</p>
+	<h1 onclick="handle(event)">Heading</h1>
+	<span onmouseover="handle(event)">Special Text</span>
+	<script>
+	function handle(e){
+		if(e.type == "mouseover"){
+			alert("You moved over the Special Text");
+		}
+	}
+	</script>
+-->    
+	<p>this is parapraph!<p>
+	<script>
+	function handleEvent(e){
+		if(e.target.tagName =="P"){
+			alert("该元素是 P ");
+		}else{
+			alert("该元素是页面空白");
+		}
+	}
+	document.onclick = handleEvent;		
+	</script>
+
+<!--	<p id="p">Paragraph</p>
+	<h1 id="h1">Heading</h1>
+	<span id="span">Special Text</span>
+	<script>
+	function handle(e){
+		if(e.type == "mouseover"){
+			alert("You moved over the Special Text");
+		}
+	}
+	document.getElementById("p").ondblclick = handle;
+	document.getElementById("h1").onclick = handle;
+	document.getElementById("span").onmouseover = handle;
+	</script>
+-->    
+</body>
+</html>

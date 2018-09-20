@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>对象冒充方法</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+<script>
+	
+
+/*
+class Ao{
+	public $name = '奥迪';
+	public $money = '200万元';
+	public setName = function(){
+	
+	}
+
+}
+*/
+// 下面的写法相当于上面的 php 的写法
+var Ao = function(){};
+// 直接写入原型
+Ao.prototype = {
+	name : '奥迪',
+	money : '200万元',
+	setName : function( ne ){
+		this.name = ne;
+	},
+	getName : function(){
+		return this.name;
+	},
+	val : function(ne, mey ){
+		this.name = ne;
+		this.money = mey;
+		return this.name+'值'+this.money;
+	},
+
+};
+
+var Bmw = function(){};
+Bmw.prototype = {
+	name : '宝马',
+	money : '500万元',
+	getName : function(){
+		return this.name;
+	},
+	val : function(ne, mey ){
+		this.name = ne;
+		this.money = mey;
+		return this.name+'值'+this.money;
+	},
+};
+var a = new Ao();
+var b = new Bmw();
+console.log( a.getName() );  // 奥迪
+// 这时 c.getName 内部的 this 等于 b 这个对象了
+console.log( a.getName.call(b));  // 宝马
+console.log( a.getName.apply(b));  // 宝马
+
+
+// call() 和 apply() 的不同
+// 后面传递参数的方式
+console.log(a.val.call(b,'宝马','400万元'));
+console.log(a.val.apply(b,['宝马','400万元']));
+
+
+function car(en, mey){
+	return en+'值'+mey+'元';
+}
+// 三种打开方式都一样
+console.log( car('奔驰','200万') );
+console.log( window.car.call(this, '奔驰','200万') );
+console.log( window.car.apply(this, ['奔驰','200万'] ) );
+
+
+
+
+// 扩展 call() 和 apply()
+var a1 = ['奥迪',200];
+// 后面参数可以更多
+var a2 = ['黑色','四个轮胎','.....'];
+function info( ){
+	var str = '';
+	for(var i=0;i < arguments.length;i++)
+		str += arguments[i];
+	return str;
+}
+console.log( info(a1) );  //奥迪，200
+console.log( info.call(this, [a1,a2]) );  // 奥迪，200，黑色，四个轮胎,.....
+
+
+// 常见例子
+var a1 = ['奥迪',200];
+var a2 = ['黑色','四个轮胎','.....'];
+var a3 = Array.prototype.push.apply(a1,a2);
+console.log( a1 ); // 奥迪，200，黑色，四个轮胎,....
+
+// 经常用的就是 slice() 方法
+// slice() 方法是获取数组中的内容，而类数组是不能用这个方法的
+function fun(a, b, c){
+	for(var i=0; i<arguments.length; i++){
+		console.log( arguments.slice(i) );
+	}
+}
+
+fun(1,2,4);  //  arguments.slice is not a function
+// 重写方法
+function fun(a, b, c){
+	var _slice = Array.prototype.slice;
+	for(var i=0; i<arguments.length; i++){
+		console.log( _slice.call(arguments,i) );
+	}
+}
+fun(1,2,4);  // 打印正常
+
+
+
+
+
+
+
+
+
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

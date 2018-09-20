@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户名登录的检测</title>
+<style>
+.blue{background:blue;}
+.red{background:red;}
+</style>
+<script>
+window.onload = function(){
+	/*var time = 1;
+	document.getElementById('box').onclick = function(){
+		if(time==1){
+			box.className = 'blue';time=0;
+		}else if(time==0){
+			box.className = 'red';time=1;
+		}
+		return false;
+	}*/
+/*
+	document.getElementById('box').onclick = toRed;
+	function toRed(){
+		this.className = 'red';
+		this.onclick = toBlue;
+	}
+	function toBlue(){
+		this.className = 'blue';
+		this.onclick = toRed;
+	}
+	*/
+
+	function addEvent(obj,type,fn){		//传递三个参数
+						//一是事件对象，二是事件类型，三是事件绑定函数
+		var saved = null;		//用于保存上一个事件
+		//判断事件是否在在
+		if(typeof obj['on'+ type] == 'function'){
+			saved = obj['on'+ type];
+		}
+		obj['on'+ type] = function(){
+			if(saved) saved();
+			fn.call(this);
+		}
+	}
+	var box = document.getElementById('box');
+	addEvent(box,'click',function(){
+		alert('Hello');
+	});
+
+}
+</script>
+</head>
+
+
+<body> 
+
+	<button id="box">测试DIV</button>
+</body>
+</html>
+
+

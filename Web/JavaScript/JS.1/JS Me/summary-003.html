@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#myParagraph{ background:#444; color:#fff;}
+#displayPar{width:200px; height:100px; padding:20px; border:1px solid #000; background:#eee; position:absolute; left:30%; top:100px;}
+</style>
+<script>
+window.onload = function()
+{
+	
+<!-- Split method application -->	
+//拆分字符,作为数组
+	var colorArray = new Array("#f00","#0f0","#00f","#ff0","#0ff","#f0f");
+	var colorLen = colorArray.length;
+	var colorRandom = Math.floor(Math.random()*6);
+	var displayPar = document.getElementById("displayPar");
+	//	document.body.style.background = colorArray[colorRandom];
+	var myParagraph = document.getElementById("myParagraph").innerHTML;
+	//alert(myParagraph);
+	myParagraph = myParagraph.split(".");
+	var myParagraphLen = myParagraph.length;
+	var newArray = new Array();
+	var a=0;
+	for(var i=0; i< myParagraphLen-1; i++)
+	{
+		//alert(myParagraph[i]);
+		var Ordinal_number = myParagraph[i].split(" ");
+		for(var n=0; n < Ordinal_number.length; n++)
+		{
+			//alert(Ordinal_number[n]);
+			if(n == 3)
+			{
+					newArray[a] = Ordinal_number[n];
+					//alert(newArray[a]);
+					a++;
+			}
+		}
+		
+	}
+	var linkMyParagraph = newArray.join("<br>");
+	displayPar.innerHTML = linkMyParagraph;
+	var displayContnet = displayPar.innerHTML;
+	displayContnet = displayContnet.split("<br>");
+	displayPar.style.color = colorArray[colorRandom];
+/*	for(var i=0; i < displayContnet.length; i++)
+	{
+		alert(displayContnet[i]);
+	}		
+*/	
+	
+	
+/*	alert(newArray[0]);
+	alert(newArray[1]);
+	alert(newArray[2]);
+	alert(newArray[3]);
+*/
+
+function checkPrint(text)
+{
+	var zc = /[^\d]/gi; 
+	return !(zc.test(text));
+}
+while(1)
+{
+	var myself = prompt("Please enter a number","");
+		if(checkPrint(myself) == true){
+			alert("输入是数字");
+		}else{
+			alert("输入不是数字");
+		}
+		if(myself == "break" || checkPrint(myself) == true)
+		{
+			break;
+		}
+}	
+}	
+</script>
+</head>
+
+<body>
+
+	<p id="myParagraph">This is my first paragraph.This is my second paragraph.This is my thrid paragraph.This is my fourth paragraph.</p>
+    <p id="what_we_did">Yestarday,we watched the movies through the night.</p>
+    <div id="displayPar">
+    </div>
+    <div id="main_article">
+    	Chrysanthemum tea, a new specialty of Wuyuan county, Jiangxi province, recently showed its charm to its admirers from nation wide. A major tea-tasting party inviting more than 200 poets, painters and scholars around China was held in the county last week. Chrysanthemum tea was introduced into Wuyuan, a key tourism destination in Jiangxi, in recent years and some local breeds were later nurtured. The move is to boost tourism in the area via the remarkable chrysanthemum garden scene and cultural events like tea tastings. Chrysanthemum tea also has medicinal value: It will help prevent sickness including ear ringing, headache and giddiness; hypertension and high cholesterol can also be relieved. Wuyuan is commonly considered to own one of China’s most beautiful countryside scenes, and ancient Huizhou culture was well-preserved in the region.
+    </div>
+</body>
+</html>

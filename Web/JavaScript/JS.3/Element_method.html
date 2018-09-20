@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>style 对象</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+
+</head>
+
+<body>
+
+	<div id="box"></div>
+
+	<script>
+		// 获取 CSSStyleDeclaration 
+		var p = document.getElementById('box'); // 因为获取元素就是获取 Element 对象
+		document.write('<ol>');
+		for(var k in p){
+			document.write('<li>'+k+':'+p[k]+'</li>');
+		}
+		document.write('<ol>');
+
+
+	</script>
+
+</body>
+</html>

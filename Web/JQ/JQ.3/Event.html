@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试 jQuery 事件对象</title>
+	<script src="../Lib/jquery.js"></script>
+	<script>
+		$(document).ready(function(event) {
+			console.log('begin event',event);
+			$.each(event, function(k, v) {
+				console.log("event['"+ k +"']=>"+event[k]);
+			});
+		});
+	</script>
+</head>
+<body>
+	
+
+
+
+</body>
+</html>

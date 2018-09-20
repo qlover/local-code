@@ -1,0 +1,274 @@
+<meta charset="utf-8">
+<script>
+
+
+// 面向对象
+// Object 类，Object() 构造器
+// 所有类的父类
+// JS 使用 Oject 类来创建自定义对象时无需定义构造器
+
+(function () {
+
+	/*
+		Object.hasOnwProperty() 被所有对象继承
+		Object.constructor Object 类本身的构造器
+		Object.prototype  Object 的原型对象
+	 */
+	var obj = new Object();
+	obj.name = 'I am Object';
+
+	// json 属于 Object 的实例化
+	var j = {
+		'name' : 'qlover',
+		'age' : 19,
+		'sex' : '男'
+	};
+
+
+})(); 
+
+
+
+// 静态成员 ==> 类名.成员 
+(function () {
+	// 类名直接用的，就是静态成员
+	var ClassOne = function(){
+		ClassOne.human++;
+	};
+	ClassOne.human = 0;
+	ClassOne.getHuman = function(){
+		return ClassOne.human;
+	};
+	var co1 = new ClassOne();
+	var co2 = new ClassOne();
+	var co3 = new ClassOne();
+	var co4 = new ClassOne();
+	var co5 = new ClassOne();
+	console.log('ClassOne 被实例化了'+ ClassOne.getHuman() +'次')
+
+
+	console.log(Math);
+
+})(); 
+
+
+
+// 闭包
+(function () {
+	
+	function fn1(){
+		var i = 1;
+		return i; // 只是返回了 i 的值
+	}
+	var j = fn1(); // 1
+	// 但是在 fn1 内部 i 已经消失了
+
+	function fn2(){
+		var i = 100;
+		function fn3(){
+			console.log(i+=1);// 将局部变量 i 驻留在了内存中
+			// 没有在内存中被销毁
+		}
+		return fn3; // 返回 fn3 的首地址
+		// 但此时，fn3 首地址被返回,有了首地址就可以执行函数体
+	}
+
+	var fn4 = fn2(); // fn4 等于了 fn2 返回的 fn3 的首地址
+	fn4(); // 执行一次 => 100
+
+	fn4();
+
+
+	// 深入理解下
+	// 在全局作用域下，执行了 fn2() ，并又产生了 fn2() 的作用域
+	// 在执行 fn2() 时定义了 fn3() ，并且 fn3() 又拥有自己的作用域
+	// 当 fn2() 执行完成后把 fn3 首地址返回给了全局变量，同时
+	// 在全局变量中 fn4 就访问了 fn3 的作用域
+	// 又因为作用域的关系,上层不能访问下层域,只有是下层域访问上层域
+
+})(); 
+
+
+
+
+// 私有成员
+(function () {
+	
+	function Person(n){
+		// 局部变量,私有
+		var type = 'human';
+		// 实例属性,公有
+		this.name = n;
+	}
+	// 静态属性
+	Person.type = '男';
+
+	var p1 = new Person('qlover');
+	console.log(p1.type); //=> undfined
+	console.log(p1.name);
+
+	// 即便是可以表示私有成员,但是因为构造器也是一个函数
+	// JS 中,每当一个函数执行完成里面的变量都会被销毁
+	// 之所以会出现 undefined 就是因为这个
+
+})(); 
+
+(function () {
+	
+	function Person(n){
+		var type = 'human';
+		this.name = n;
+
+		// 为私有成员添加公共接口
+		// 并且该接口也实现了闭包的特性
+		// 同时也用了作用域链，该函数用上了上层变量，那么就不会被回收
+		this.setType = function(t){
+			type = t;
+		};
+
+		this.getType = function(){
+			return type;
+		}
+	}
+	// 静态属性
+	Person.type = '男';
+
+	var p1 = new Person('qlover');
+	console.log(p1.getType()); //=> human
+	console.log(p1.name);
+
+
+})(); 
+
+
+
+
+
+// 对象冒充
+// call() apply() bind()
+// 使用指定的对象调用当前函数
+(function () {
+	
+	var Person = function(n){
+		this.name = n;
+	}
+	function say(){
+		console.log('hello '+this.name);
+	}
+	var p = new Person('qlover');
+
+	say.call(p); // 让 say 被 p 调用
+
+
+})(); 
+
+
+
+// 继承
+
+// 方式一：扩展 Object 原型对象
+(function () {
+	
+	// Java 和 PHP 的继承都比较好懂，毕竟语法上都差不多
+	// 但是， JS 中继承有点不同
+
+
+
+	// 因为原型链的关系，如果当前对象没就向上找，至到 Object 的原型
+	// 所以，可以为 Object.protoype 添加一个方法
+
+	Object.prototype.extends = function(parentObject ){
+		for(var k in parentObject){
+			this[k] = parentObject[k];
+		}
+	}
+
+	// 定义父类
+	var Person = function Person(n, a){
+		this.name = n;
+		this.age = a;
+		this.say = function(){
+			console.log(this.name + this.age);
+		};
+	}
+
+	// 定义子类
+	var Man = function(){
+		this.type = '男人';
+	}
+
+	var m = new Man();
+	/**
+	 * 因为，在 JS 中，直接用类名只是表示一个构造器
+	 * 如果直接写 Person() 为变成 function Person(n, a){}
+	 * 所以，要new 一个这样的实例出来，当作继承的类
+	 * 并且实例的 __proto__ 和 原型的 constructor 指向一致
+	 */
+	m.extends(new Person('qlover', 18));
+
+	m.say();  // 继承了 Person 类
+
+})(); 
+
+
+// 方式二：call() 、 apply()
+(function () {
+	
+	// 定义父类
+	var Person = function Person(n, a){
+		this.name = n;
+		this.age = a;
+		this.say = function(){
+			console.log(this.name + this.age);
+		};
+	}
+
+	// 子类
+	var Student = function Student(num, name, age){
+		// 将 Person 中的 this 变成 Student 的 this
+		// 就实现了为 Student 添加实例了
+		// 写在前面为了能让子类重写父类方法
+		Person.call(this, name, age);
+
+		this.num = num;
+		this.say = function(){
+			console.log(this.num+this.name+this.age);
+		}
+	}
+
+	var stu = new Student(1,'home', 18);
+	stu.say();  
+})(); 
+
+
+// 方式三：原型继承
+// 并且这种方式极力推荐
+(function () {
+	
+	// 定义父类
+	var Person = function Person(n, a){
+		this.name = n;
+		this.age = a;
+		this.say = function(){
+			console.log(this.name + this.age);
+		};
+	}
+
+	// 子类
+	var Student = function Student(num){
+		this.num = num;
+		this.speak = function(){
+			console.log(this.num+this.name+this.age);
+		}
+	}
+
+	Student.prototype = new Person('hone', 21);
+	var stu = new Student(2);
+	// 本身 Student 没有 say 方法，
+	// 所以会去该类的 原型找，在原型找到就直接用
+	stu.say();
+	stu.speak();
+
+})(); 
+
+</script>

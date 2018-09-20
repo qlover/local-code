@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>变更提升</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+<script>
+
+// 用一个私有环境模拟全局环境
+(function(){
+
+	console.log(func());
+	console.log(i);
+	var i =10;
+	function func(){
+		var i2 = 100;
+		return i2;
+	}
+
+	console.log(func());
+
+})();
+
+
+
+</script>
+</head>
+
+<body>
+
+</body>
+</html>
+
+
+
+
+
+

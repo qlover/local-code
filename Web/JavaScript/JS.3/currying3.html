@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>柯里化</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+<script>
+	
+
+// 复习一遍前面知识
+function log(a, b){
+    a = a || '';
+    b = b==undefined?';':b;
+    var args = Array.prototype.slice.call(arguments);
+    console.log.call(console, a, b);
+
+}
+function toArray( obj ){
+    return Array.prototype.slice.call( obj);
+}
+// 这样定义函数不会让函数提升
+var func = function(fn, a, b){
+    return fn(a, b);
+};
+var add = function (a, b) {
+    return a + b;
+};
+
+var mod = function (a, b){
+    return a % b;
+};
+
+var dvd = function(a, b){  
+    return a / b;
+};
+
+// 简单的函数式使用方法
+log( func(add,5,4) );
+log( func(mod,15,200) );
+log( func(dvd,15,200) );
+
+// 重写 func 
+func = function(fn, a, b){
+    return fn.call(fn,a,b);   // 是等于上面所写的
+};
+log( func(add,3,5) );
+log( func(mod,15,200) );
+log( func(dvd,15,200) );
+
+
+
+// 函数返回函数
+
+log('函数返回函数');
+var reFun = function(fn, a, b ){
+    return function(){  // 注意返回函数没有参数
+        return fn(a,b);
+    };
+};
+
+var quad = function(a, b){
+    return a * a + b * b;
+};
+
+log( reFun(quad,3,4) ) ;  // function( ){ }
+log( 'reFun(quad,3,4)()  ==  quad(3,4):' , reFun(quad,3,4)()  ==  quad(3,4));  // true
+log( 'reFun(quad,3,4)()  ===  quad(3,4):' , reFun(quad,3,4)()  ===  quad(3,4));  // ture 
+log( reFun(quad,3,4)() );  // 25
+
+
+
+// 重写 reFun()
+log('重写 reFun()');
+reFun = function( fn, a ){  // 注意这两个参数
+    return function( b ){
+        return fn( a, b );
+    };
+};
+
+// 这下要改变上面的代码
+
+//log( reFun(quad(2,3)()) );  // 报错，因为 上面把第二个参数改在了第返回函数中
+// 要改变 quad() 函数参数，但是，用自己的还改变别人的就不好了
+/* 
+ * 分析每个操作代表什么
+ * reFun =>  function( fn, a ){}
+ * reFun() =>  function( b ){}      // 不知道看出来没括号就是返回的函数带的参数
+ * reFun()()  => fn(a, b) 报错 因为，参数 fn() 函数没有     // 后面的第二个括号就是调用最后返回的函数
+ * reFun(quad)   => fuction( b ){} 
+ * var sre = quad(2,3); reFun(sre)   => function( b ){}
+ * sre = reFun  =>  function(fn, a){}
+ * sre = reFun()  =>  function(b ){}
+
+ **/
+ // 所以有上面的解析，这一下就明白了
+var sre = reFun();
+log( reFun );
+log( reFun() );
+// log( reFun()() );
+var sre = quad(2, 3);
+log( reFun(sre) ); 
+
+// 下面就不同了
+sre = reFun();   // sre = function( b ){}
+sre = reFun(quad, 3);  // sre = function(fn, a){}  并且再看 sre()  == function( b ){}
+// 在注意 function(fn, a){}() 写法就等于 function( b ){ } 了
+// fn = quad 
+// a = 3
+
+// 这里原理上 sre() => function( b ){}  但是，因为没有传入参数所以执行不了最后的 fn(a, b) 
+// 结果才是 NaN
+log('', sre(4) == reFun(quad,3)(4)  );
+log( sre(4) );   // 所以结果就是 25 神奇了
+
+
+// 所以柯里化就来了
+// 上文的 reFun() 方法就是手工去定论参数创建的柯里化函数
+// 下文中的 curry()　方法就用来辅助柯里化的函数
+
+
+log('------------------------');
+// 这里在上面柯里化的最终理解,不知道是否跟你一样
+// 下面来实现一个让数组每一项平方
+
+
+// 核心方法
+var subCurry = function(fn){
+    // 获取数组原型的 slice 方法
+    var slice = Array.prototype.slice;
+    // 因为 arguments 是类数组不支持原型数组 slice 方法,所以需要重找 this
+    // 后面参数1 表示从第1 arguments 的第 1 个元素获取到最后一个元素
+    // 参数对应 slice() 方法的参数
+    var _args = slice.call(arguments, 1);
+    // 此时 _args 变为了一个数组,所以下面要用 apply() 重指 this 
+    return function(){
+        return fn.apply(null, _args.concat(slice.call(arguments)) );
+    };
+
+};
+
+var square = function(a){
+    return a * a;
+};
+var sum = function(a){
+    return a + a;
+};
+
+// 暂时改造下 foreach ,因为本人原因喜欢用 foreach 
+// 但 forEach 不会返回一个数组,而是原数组中操作
+var foreach = function(fn, list){
+    return list.map(fn);
+};
+log( foreach(square,[1,2,3,4]) );
+log( foreach(square,[1,2,3,4,5,6,7,8]) );
+log( foreach(sum,[1,2,3,4,5,6,7,8]) );
+
+// 柯里化 square
+var testSquare = subCurry(foreach, square);
+var testSum = subCurry(foreach, sum);
+log( testSquare([1,2,3,4,5,6,7,8]) );   // 一样得到最后的值
+log( testSum([1,2,3,4,5,6,7,8]) );   // 一样得到最后的值
+// 缩小了函数的适用范围，但同时提高函数的适性
+
+
+
+
+
+
+
+log('---------------');
+// 再来一个，将传入参数连接成一个数组
+var coc = function(a, b, c){
+    return [a,b,c];
+};
+
+log( coc(1,2,3) );
+log( subCurry(coc,1,2,3)() );
+log( subCurry(coc,1,2)(3) );
+log( subCurry(coc,1)(2,3) );
+log( subCurry(coc)(1,2,3) );
+// 你会惊奇的发现上面的写法全都可以达到效果
+
+
+
+
+
+log('======');
+// 柯里化和洞
+
+var sendAjax = function(url, data, options ){
+
+};
+// 也许我们想要定义一个新的函数，我们部分提供SendAjax函数特定的Options
+// 但是允许url和data可以被指定。
+var sendPost = function(url, data){
+    return sendAjax(url, data, { 
+        type : 'post',
+        contentType : 'application/json'
+    });
+};
+
+// 也可以使用约定的下划线方式
+var sendPost = sendAjax( _, _, ) {
+        type : 'post',
+        contentType : 'application/json'  
+} );
+
+// 但是原生JS 是不支持的，所以需要定义
+
+// 定义之前需要把占位符定义成一个全局变量
+
+var _ = {};  // 定义占位符
+
+// 定义新的柯里化
+var curry = function (fn, lenght, args, holes ){
+    length = length || fn.length;
+    args = args || [];
+    holes = holes || [];
+    return function(){
+        var _args = args.slice(0),
+            _holes = holes.slice(0),
+            argStart = _args.length,
+            holeStart = _holes.length,
+            arg, i;
+        for(i = 0; i < arguments.length; i++) {
+            arg = arguments[i];
+            if(arg === _ && holeStart) {
+                holeStart--;
+                _holes.push(_holes.shift()); // move hole from beginning to end
+            } else if (arg === _) {
+                _holes.push(argStart + i); // the position of the hole.
+            } else if (holeStart) {
+                holeStart--;
+                _args.splice(_holes.shift(), 0, arg); // insert arg at index of hole
+            } else {
+                _args.push(arg);
+            }
+        }
+        if(_args.length < length) {
+            return curry.call(this, fn, length, _args, _holes);
+        } else {
+            return fn.apply(this, _args);
+        }
+    }
+}
+
+var f = curry(function(a, b, c) { return [a, b, c]; });
+var g = curry(function(a, b, c, d, e) { return [a, b, c, d, e]; });
+ 
+// all of these are equivalent
+log( f("a","b","c") );
+log( f("a")("b")("c") );
+log( f("a", "b", "c") );
+log( f("a", _, "c")("b") );
+log( f( _, "b")("a", "c") );
+//=> ["a", "b", "c"]
+ 
+// all of these are equivalent
+log( g(1, 2, 3, 4, 5) );
+log( g(_, 2, 3, 4, 5)(1) );
+log( g(1, _, 3)(_, 4)(2)(5) );
+
+
+
+
+
+
+</script>
+</head>
+
+<body>
+
+</body>
+</html>
+
+
+
+
+
+

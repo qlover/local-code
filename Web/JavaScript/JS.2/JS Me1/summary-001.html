@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{margin:0; padding:0;}
+#buttom_box{width:300px; height:200px; background:#eee; position:fixed; bottom:-200px; right:50px; text-align:center;  color:#f00;}
+#buttom_box .title{ background:#bbb; width:100%; height:30px; font-size:20px; font-weight:bolder;}
+#buttom_box span{ width:20px; height:20px; display:block;  float:right; margin:5px 5px 0 0; background:#aaa;}
+#buttom_box #content{width:100%; height:170px; line-height:170px;}
+#buttom_box #content .con{ float:left; margin-left:10px;}
+#buttom_box .close{ cursor:pointer;}
+</style>
+
+</head>
+
+<body>
+
+<div id="buttom_box">
+	<div class="title">
+		<a class="con"></a>
+		<span class="close">×</span>
+	</div>	
+	<div id="content">
+		This is advertisment notice!
+	</div>		
+</div>
+<script>
+
+	var bbox = document.getElementById("buttom_box");
+	var box_title_con = document.getElementsByClassName("con")[0];
+	var bbox_offtop = bbox.offsetTop;
+	document.getElementsByClassName("close")[0].onclick=function(){
+		//alert("closeed");
+		bbox.style.display = "none";
+	};
+	var boxmove;
+	//alert(bbox_offtop);
+	alert("Please wait for five minutes.");
+	if(bbox_offtop >536){
+		setTimeout("boxmove = setInterval('move()',5)",500);	
+		//alert(" > 573");
+	}
+function move(){
+	if(bbox_offtop == 536){
+		clearInterval(boxmove);
+		return null;//alert("overed");
+	}
+	bbox_offtop--;
+	setmove = setTimeout(function (){
+				box_title_con.innerHTML = bbox_offtop;
+				bbox.style.top = bbox_offtop+"px";
+		},10);
+}
+</script>
+</body>
+</html>

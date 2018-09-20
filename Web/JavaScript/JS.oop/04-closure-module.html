@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+
+
+<script>
+	
+
+// 模块就像 python 中有模块
+// 可以直接导入，导入后就可以用该模块中的方法
+// 而，JS 中模块是没有像 python 中的语法，只能模拟
+
+(function () {
+	
+	var a = 10;
+	var b = 20;
+	function foo(){
+		console.log(a + b);
+	}
+
+	// 只给外界一个可访问的接口
+	window.foo = foo;
+
+})(); 
+
+window.foo(); //=> 30
+
+
+
+</script>

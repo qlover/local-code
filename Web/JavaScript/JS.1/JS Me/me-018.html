@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+/*	var myString = "Paul,JeanPaul,Paula,Pauline,paul,Paul";	
+	alert("初始这字符串是：" + myString);
+	var myRegExp = /\wPaul\b/gi;
+	myString = myString.replace(myRegExp,"Mike");
+	alert("最后的字符串是：" + myString);
+*/
+
+window.onload = function(){
+
+
+/*	var myString = "JavaScript,VBScript and perl";
+	
+//现要将这个字符串中含有 Script 的字符找出来,并用 xxxx 代替出来 
+	
+	var myRegExp = /\b(Java)?(VB)?Script\b/g;
+	alert("初始这字符串是：" + myString);
+	myString = myString.replace(myRegExp,"JS");
+	alert("最后的字符串是：" + myString);
+*/
+	var myString = "007,007,001,002,002,003,002,004";
+	var myRegExp = /(\d+),\1/g;
+	alert("初始这字符串是：" + myString);
+	myString = myString.replace(myRegExp,"ERROR");
+	alert("最后的字符串是：" + myString);
+
+}
+</script>
+</head>
+
+<body>
+</body>
+</html>

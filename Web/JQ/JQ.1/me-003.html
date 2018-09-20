@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>JQ 选择器</title>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				alert($('.one').text());
+				alert($('#btn').text());
+				alert($('div').text());
+				alert($('*').text());
+				alert($('span').text());
+				alert($('span,#btn').text());	//选择 span 和 id=btn 的元素
+			});
+
+
+		</script>
+	</head>
+	<body>
+		<div class="one">one</div>
+		<div id="btn">btn</div>
+		<div>div</div>
+		<h3>h3</h3>
+		<span>span</span>
+	</body>
+</html>

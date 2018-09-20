@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>柯里化</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="js/jquery.js"></script>
+<![endif]-->
+<script src="js/main.js"> </script>
+<script>
+
+
+// 柯里化延迟执行
+
+function adder(){
+    var _args = [];
+    return function(){
+        if( arguments.length === 0 ){
+            // a 表示数组遍历的当前项
+            // b 表示数组遍历的下一项
+            return _args.reduce(function(a, b){
+                return a + b;
+            });
+        }
+        // [].push   ===  Array.prorotype.push
+        [].push.apply( _args, [].slice.call(arguments));
+        return arguments.callee;   // 这里是个新点，可见 callee 和 caller
+    };
+};
+// adder 是函数本身而 adder() 是函数返回的第一层函数 
+// 当然 adder()() 是函数返回的第二层函数
+var sum = adder();
+console.log( sum );
+sum(10)(20)(30);
+console.log( sum() );    // 60
+console.log( sum(40) );
+console.log( sum());  // 100
+// 这个就是一个延迟处理，只有最后一次调用才用结果
+
+
+// 高阶函数乐趣
+
+// 把原生的 prototype 方法放到公共函数库中
+
+var demethodize = function(fn ){
+    return function(){
+        var args = [].slice.call(arguments, 1);
+        return fn.apply(arguments[0], args);
+    };
+};
+
+// String.prototype
+var split = demethodize(String.prototype.split);
+var slice = demethodize(String.prototype.slice);
+var indexOfStr = demethodize(String.prototype.indexOf);
+var toLowerCase = demethodize(String.prototype.toLowerCase);
+ 
+// Array.prototype
+var join = demethodize(Array.prototype.join);
+var forEach = demethodize(Array.prototype.forEach);
+var map = demethodize(Array.prototype.map);
+
+// 试例
+console.log( ('abc,cba,zxc,qwe,asd').split(',') );  //=> ["abc","def"]
+console.log( split("abc,cba,zxc,qwe,asd", ",") );   //=> ["abc","def"]
+console.log( ["a","b","c"].join(" ") );  //=> "a b c"
+console.log( join(["a","b","c"], " ") );  // => "a b c"
+// 是不是很神奇
+
+
+
+// 管理参数顺序
+var ignoreFirstArg = function (fn) {
+    return function(){
+        var args = [].slice.call(arguments,1);
+        return fn.apply(this, args);
+    };
+};
+ 
+// 颠倒函数参数顺序
+var reverseArgs = function (fn) {
+    return function(){
+        return fn.apply(this, [].slice.call(arguments).reverse());
+    };
+};
+
+
+
+
+// 组合函数
+
+// compose(f1, f2, f3..., fn)(args) == f1(f2(f3(...(fn(args...)))))
+var compose = function () {
+    var fns = arguments,
+        length = arguments.length;
+    return function () {
+        var i = length;
+        // 按相反顺序
+        while ( --i >= 0 ) {
+            arguments = [fns[i].apply(this, arguments)];
+        }
+        return arguments[0];
+    };
+};
+ 
+ 
+// sequence(f1, f2, f3..., fn)(args...) == fn(...(f3(f2(f1(args...)))))
+var sequence = function () {
+    var fns = arguments,
+        length = arguments.length;
+    return function () {
+        var i = 0;
+        // 正常顺序
+        while ( i++ < length ) {
+            arguments = [fns[i].apply(this, arguments)];
+        }
+        return arguments[0];
+    };
+};
+
+function square(i){
+    return i * i;
+}
+function sqrt(i){
+    return Math.sqrt(i);
+}
+
+// compose(f1, f2, f3..., fn)(args) == f1(f2(f3(...(fn(args...)))))
+var abs = compose(sqrt, square);
+console.log( abs(-10) );
+abs = compose(sqrt, square)(-5);
+console.log(abs);
+
+
+
+
+
+
+
+console.log("--------------------");
+
+/*
+ 在 private 里面的window 是传入的全局 window
+ 所以，在内部改变的 window 也是改变的是全局的 window 
+*/
+var private = (function(window, undefined ){
+    window.$ = "private jQuery";
+    console.log($); //=> private jQuery
+
+})(window);
+console.log($); //=> privte jQuery
+// 改变了全局的 $ 变量
+window.$ = "global jQuery";
+console.log($); //=> global jQuery
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</head>
+
+<body>
+
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>项目</title>
+  <script type="text/javascript" src="me.js"></script>
+  <script type="text/javascript">
+	addEvent(window,'load',function(){
+	$().getId('box').hover(function(){
+			$(this).css('background','#0f0');
+			$().getTag('ul').show();
+		},function(){
+			$(this).css('background','#565');
+			$().getTag('ul').hide();
+		});
+	
+	});
+  
+  </script>
+ </head>
+ <body>
+
+<div id="box" style="width:200px;background:#565;position:relative;">隐藏/显示
+	<ul style="display:none;positoin:absolute;left:0;padding:0;margin:0;background:#999;">
+		<li>一</li>
+		<li>二</li>
+		<li>三</li>
+	</ul>
+</div>
+</body>
+</html>
+
+
+
