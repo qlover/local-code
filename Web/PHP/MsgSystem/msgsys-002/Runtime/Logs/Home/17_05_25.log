@@ -1,0 +1,69 @@
+[ 2017-05-25T08:34:48+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001162s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002202s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0107s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','I am very happy!','2017-05-25 08:34:48','qlover') [ RunTime:0.1460s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001370s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001544s ]
+
+[ 2017-05-25T08:34:54+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/quit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001801s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002884s ]
+NOTIC: [8] Undefined index: msgsys_upass D:\Web\PHP\MsgSystem\msgsys-002\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001829s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002018s ]
+
+[ 2017-05-25T08:35:26+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/checkName.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001545s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002577s ]
+SQL: SHOW COLUMNS FROM `msg_user` [ RunTime:0.0105s ]
+SQL: SELECT * FROM `msg_user` WHERE ( uname='hone' )  [ RunTime:0.0009s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001554s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001722s ]
+
+[ 2017-05-25T08:35:30+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/checkName.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001292s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002245s ]
+SQL: SHOW COLUMNS FROM `msg_user` [ RunTime:0.0103s ]
+SQL: SELECT * FROM `msg_user` WHERE ( uname='home' )  [ RunTime:0.0008s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001635s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001804s ]
+
+[ 2017-05-25T08:36:01+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001184s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002078s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0092s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('87','My name is Home, I am very happy!','2017-05-25 08:36:01','home') [ RunTime:0.0670s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='home' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001482s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001645s ]
+
+[ 2017-05-25T08:37:46+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/quit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002598s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004028s ]
+NOTIC: [8] Undefined index: msgsys_upass D:\Web\PHP\MsgSystem\msgsys-002\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001829s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002001s ]
+
+[ 2017-05-25T08:38:21+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/quit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001448s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002540s ]
+NOTIC: [8] Undefined index: msgsys_upass D:\Web\PHP\MsgSystem\msgsys-002\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001436s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001597s ]
+

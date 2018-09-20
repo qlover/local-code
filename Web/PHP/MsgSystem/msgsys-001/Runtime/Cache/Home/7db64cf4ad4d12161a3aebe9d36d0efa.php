@@ -1,0 +1,157 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>留言板系统</title>
+	<link rel="stylesheet" href="<?php echo HOME_CSS;?>reset.css" />
+	<link rel="stylesheet" href="<?php echo HOME_CSS;?>style.css" />
+</head>
+<body>
+<section id="wrap">
+	<section id="content">
+		<div class="item">
+			<!-- 留言板 -->
+			<div class="items">
+				<dl class="list">
+					<dd class="top">admin</dd>
+					<dd class="mid">hello, I am admin.</dd>
+					<dd class="bot">
+						<span class="zan ">赞</span>
+					</dd>
+				</dl>
+			</div>
+	
+			<!-- 留言板 -->
+		</div>
+
+	</section>
+
+	<section id="info">
+		<section id="user-info">
+			<p>当前用户: <?php echo UNAME; ?></p>
+			<p>当前用户 ID: <?php echo UID; ?></p>
+			<p><input id="login-out" type="button" name="login-out" value="退出" /></p>
+		</section>
+		<section id="register-info">
+			<form action="">
+				<p>用户名：<input type="text" name="uname"> <span class="tip"></span></p>
+				<p>密码：<input type="password" name="upassword" ></p>
+				<p><input id="register" type="submit" value="注册" name="register"></p>
+			</form>
+		</section>
+		<section id="login-info">
+			<form action="">
+				<p>用户名：<input type="text" name="uname"> <span class="tip"></span></p>
+				<p>密码：<input type="password" name="upassword" ></p>
+				<p><input id="login" type="submit" value="登录" name="login"></p>
+			</form>
+		</section>
+	
+		<section id="cont-info">
+			<form action="">
+				<textarea name="text" id="contText">
+					
+				</textarea>
+				<p><input id="message" type="submit" value="留言"></p>
+			</form>
+		</section>
+		<section id="show-info">
+			
+		</section>
+
+
+	</section>
+</section>
+<script src="<?php echo HOME_JS;?>jquery.js"></script>
+<script>
+$(function(){
+	// alert(document.cookie);
+	$('#contText').val('');
+
+	$('#register,#login').on('click', function(event) {
+		return false;
+		event.preventDefault();
+	});
+
+	/**
+	 * 注册
+	 */
+	// 校验用户名
+	$('#register-info input[name="uname"]').on('blur', function(e) {
+		var that = $(this);
+		if( that.val() == '' ) {
+			that.siblings('.tip').text('用户名不能为空');
+			return false;
+		}
+		$.post('index.php/home/Index/checkName', {
+			'uname': that.val()
+		}, function(data) {
+			that.siblings('.tip').text(data);
+		});
+	});
+
+	// 注册
+	$('#register').on('click', function() {
+		if( $('#register-info input[name="uname"]').val() == '' ) {
+			$('#show-info').text('用户名不能为空');
+			return false;
+		}
+
+		$.post('index.php/home/Index/register', {
+			'uname' : $('#register-info input[name="uname"]').val(),
+			'upass' : $('#register-info input[name="upassword"]').val()
+		}, function(data) {
+			$('#show-info').text(data);
+			// console.log(data);
+		});
+		return false;
+	});
+
+
+	/**
+	 * 登录
+	 */
+	$('#login').on('click', function() {
+	 	if( $('#login-info input[name="uname"]').val() == '' ) {
+			$('#show-info').text('用户名不能为空');
+			return false;
+		}
+	 	$.post('index.php/Home/Index/login',{
+			'uname' : $('#login-info input[name="uname"]').val(),
+			'upass' : $('#login-info input[name="upassword"]').val()	 		
+		}, function(data) {
+			$('#show-info').text(data);
+			// alert(data);
+			// console.log(data)
+	 	});
+	 	return false;
+	});
+
+
+	// 登出
+	$('#login-out').on('click', function() {
+		$.post('index.php/home/Index/loginOut', function(data) {
+			console.log(data);
+		});
+	});
+
+
+
+	/**
+	 * 留言部分
+	 */
+	
+	$('#message').on('click', function() {
+		$.post('index.php/Home/Index/msg', {
+			'text': $('#contText').val()
+		}, function(data) {
+			console.log(data);
+		});
+		return false;
+	});
+
+
+});
+</script>
+</body>
+</html>

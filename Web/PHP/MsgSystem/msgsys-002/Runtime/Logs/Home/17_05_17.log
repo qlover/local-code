@@ -1,0 +1,11 @@
+[ 2017-05-17T18:26:34+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001386s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002461s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0119s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('1','我今天很高兴','2017-05-17 18:26:34','admin') [ RunTime:0.1087s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='admin' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001838s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002034s ]
+

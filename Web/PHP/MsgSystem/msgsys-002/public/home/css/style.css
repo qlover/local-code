@@ -1,0 +1,128 @@
+@charset 'utf-8';
+/* 每一条留言 */
+#content .item .items {
+	margin: 5px;
+	padding: 5px;
+	border: 1px solid #fff;
+}
+
+.items .list .top {
+
+}
+
+.items .list .mid {
+	border: 1px solid #333;
+	padding: 4px;
+	text-indent: 2em;
+}
+
+.items .list .bot {
+	height: 40px;
+	line-height: 40px;
+
+}
+.items .list .bot .zan {
+	display: block;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	margin: 5px;
+	border: 1px solid #000;
+	cursor: pointer;
+	text-align: center;
+	float: right;
+}
+
+
+/*留言*/
+#message {
+	padding: 10px auto;
+}
+
+#message textarea {
+	display: block;
+	margin: 30px auto 20px;
+	width: 60%;
+	height: 150px;
+	resize: none;
+	font-size: 1.5em;
+	font-weight: bolder;
+}
+#message #msgBtn {
+	width: 70px;
+	height: 30px;
+	text-align: center;
+	display: block;
+	margin: auto;
+}
+
+h2 {
+	text-align: center;
+}
+/* 注册 */
+#register {
+	width: 500px;
+	margin: 50px auto;
+}
+
+
+/* 登录 */
+#login {
+	width: 500px;
+	margin: 50px auto; 
+}
+#login p {
+	margin: 10px auto;
+}
+#login input[type="submit"] {
+	padding: 3px 7px;
+}
+
+
+#quitBtn{
+	display: block;
+	width: 40px;
+	margin:auto 5px;
+	text-align: center;
+}
+
+#to-top {
+	position: fixed;
+	right: 20px;
+	bottom: 50px;
+	width: 50px;
+	height: 80px;
+	text-align: center;
+	border: 1px solid #ff0;
+	color: #fff;
+	cursor: pointer;
+	background: #000;
+	opacity: .2;
+}
+
+#to-top:hover {
+	background: #eee;
+	opacity: .8;
+	color: #000;
+}
+
+.flick {
+	transition: 400ms;
+	background: #f00;
+}
+
+.tip {
+	color: #900;
+	font-size: 13px;
+}
+.hid{
+	display: none;
+	/*position: absolute;
+	top:-999px;*/
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}

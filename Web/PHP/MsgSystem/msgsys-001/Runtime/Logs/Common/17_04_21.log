@@ -1,0 +1,36 @@
+[ 2017-04-21T00:05:42+08:00 ] 127.0.0.1 /msgsys-001/index.php/Index/index/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000037s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001178s ]
+ERR: 无法加载模块:Index
+
+[ 2017-04-21T00:06:05+08:00 ] 127.0.0.1 /msgsys-001/index.php/Index/index/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001707s ]
+ERR: 无法加载模块:Index
+
+[ 2017-04-21T00:06:31+08:00 ] 127.0.0.1 /msgsys-001/index.php/Index/index/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000040s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001179s ]
+ERR: 无法加载模块:Index
+
+[ 2017-04-21T00:06:52+08:00 ] 127.0.0.1 /msgsys-001/index.php/Index/index/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000044s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001238s ]
+ERR: 无法加载模块:Index
+
+[ 2017-04-21T00:06:59+08:00 ] 127.0.0.1 /msgsys-001/index.php/Index/index/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000077s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002028s ]
+ERR: 无法加载模块:Index
+
+[ 2017-04-21T00:07:30+08:00 ] 127.0.0.1 /msgsys-001/index.php/Index/index/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000055s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001429s ]
+ERR: 无法加载模块:Index
+

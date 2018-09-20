@@ -1,0 +1,94 @@
+[ 2017-05-24T18:51:09+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/checkName.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001781s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003281s ]
+SQL: SHOW COLUMNS FROM `msg_user` [ RunTime:0.1196s ]
+SQL: SELECT * FROM `msg_user` WHERE ( uname='admin' )  [ RunTime:0.0017s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002472s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002684s ]
+
+[ 2017-05-24T18:51:11+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/checkName.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002303s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003639s ]
+SQL: SHOW COLUMNS FROM `msg_user` [ RunTime:0.0153s ]
+SQL: SELECT * FROM `msg_user` WHERE ( uname='admin' )  [ RunTime:0.0006s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002133s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002351s ]
+
+[ 2017-05-24T18:51:13+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/checkName.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002073s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003631s ]
+SQL: SHOW COLUMNS FROM `msg_user` [ RunTime:0.0097s ]
+SQL: SELECT * FROM `msg_user` WHERE ( uname='qlover' )  [ RunTime:0.0008s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001592s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001771s ]
+
+[ 2017-05-24T18:51:19+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/checkName.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.008183s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.009299s ]
+SQL: SHOW COLUMNS FROM `msg_user` [ RunTime:0.0094s ]
+SQL: SELECT * FROM `msg_user` WHERE ( uname='cd' )  [ RunTime:0.0010s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001527s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001686s ]
+
+[ 2017-05-24T18:51:36+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/checkName.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001708s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002913s ]
+SQL: SHOW COLUMNS FROM `msg_user` [ RunTime:0.0100s ]
+SQL: SELECT * FROM `msg_user` WHERE ( uname='zzx' )  [ RunTime:0.0008s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001546s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001705s ]
+
+[ 2017-05-24T18:52:00+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/Index/checkName.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002102s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003974s ]
+SQL: SHOW COLUMNS FROM `msg_user` [ RunTime:0.0098s ]
+SQL: SELECT * FROM `msg_user` WHERE ( uname='zzx' )  [ RunTime:0.0005s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001585s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001752s ]
+
+[ 2017-05-24T18:53:36+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002628s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003969s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0116s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('84','love me like ','2017-05-24 18:53:35','zzx12') [ RunTime:0.2442s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='zzx12' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001826s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002079s ]
+
+[ 2017-05-24T18:53:44+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001826s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002948s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0108s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('84','Love me like I love you.','2017-05-24 18:53:44','zzx12') [ RunTime:0.0593s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='zzx12' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001730s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002003s ]
+
+[ 2017-05-24T18:54:30+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001700s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002903s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0125s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('84','Love me like I love you.
+I love you very much!','2017-05-24 18:54:30','zzx12') [ RunTime:0.0540s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='zzx12' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001759s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001942s ]
+

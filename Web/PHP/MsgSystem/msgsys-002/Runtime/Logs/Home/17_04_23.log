@@ -1,0 +1,220 @@
+[ 2017-04-23T00:01:08+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002262s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003613s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0102s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','qlover8000','2017-04-23 00:01:08','qlover') [ RunTime:0.0723s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0016s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002497s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002715s ]
+
+[ 2017-04-23T00:04:20+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001461s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002428s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0098s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','qlover9000','2017-04-23 00:04:20','qlover') [ RunTime:0.0501s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001516s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001683s ]
+
+[ 2017-04-23T00:04:41+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001408s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002923s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0099s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','qlover1000','2017-04-23 00:04:41','qlover') [ RunTime:0.0798s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0008s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001564s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001727s ]
+
+[ 2017-04-23T00:05:07+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001858s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003156s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0094s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','qlover12000','2017-04-23 00:05:07','qlover') [ RunTime:0.0735s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002393s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002584s ]
+
+[ 2017-04-23T00:05:14+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001305s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002289s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0111s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','qlover12000','2017-04-23 00:05:14','qlover') [ RunTime:0.0750s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002176s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002383s ]
+
+[ 2017-04-23T00:16:05+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003011s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004061s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0101s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('1','qlover13000','2017-04-23 00:16:05','admin') [ RunTime:0.0684s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='admin' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0012s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003642s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003867s ]
+
+[ 2017-04-23T00:18:56+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002633s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005189s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0100s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('1','admin14000','2017-04-23 00:18:56','admin') [ RunTime:0.0622s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='admin' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002064s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002240s ]
+
+[ 2017-04-23T00:20:18+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.006104s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.009803s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0106s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('1','admin1500','2017-04-23 00:20:18','admin') [ RunTime:0.0513s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='admin' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0008s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002022s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002249s ]
+
+[ 2017-04-23T00:21:01+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002733s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004256s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0102s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('1','admin16000','2017-04-23 00:21:00','admin') [ RunTime:0.2698s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='admin' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0012s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002541s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002787s ]
+
+[ 2017-04-23T00:24:05+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001444s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002291s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0093s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('1','admin17000','2017-04-23 00:24:04','admin') [ RunTime:0.4744s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='admin' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0022s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001715s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001863s ]
+
+[ 2017-04-23T00:25:33+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001710s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003551s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0096s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','qlover13000','2017-04-23 00:25:33','qlover') [ RunTime:0.0716s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0013s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001741s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001943s ]
+
+[ 2017-04-23T00:26:33+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002004s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003235s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0108s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','qlover14000','2017-04-23 00:26:32','qlover') [ RunTime:0.0670s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0008s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001911s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002075s ]
+
+[ 2017-04-23T00:27:15+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001441s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002359s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0095s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','qlover15000','2017-04-23 00:27:15','qlover') [ RunTime:0.0594s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001987s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002176s ]
+
+[ 2017-04-23T00:27:36+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001365s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002517s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0107s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','qlover16000','2017-04-23 00:27:36','qlover') [ RunTime:0.0911s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002719s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002923s ]
+
+[ 2017-04-23T00:32:24+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001900s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003094s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0102s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','qlover17000','2017-04-23 00:32:23','qlover') [ RunTime:0.1267s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002096s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002283s ]
+
+[ 2017-04-23T00:34:18+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001050s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001828s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0080s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','qlover1800','2017-04-23 00:34:18','qlover') [ RunTime:0.0838s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0007s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001210s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001337s ]
+
+[ 2017-04-23T00:34:34+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001802s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002996s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0101s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','qlover1900','2017-04-23 00:34:34','qlover') [ RunTime:0.0512s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0008s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001975s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002153s ]
+
+[ 2017-04-23T00:37:17+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001742s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002823s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0082s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('2','qlover200000','2017-04-23 00:37:17','qlover') [ RunTime:0.0640s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='qlover' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0007s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001550s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001686s ]
+
+[ 2017-04-23T00:38:28+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001545s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002799s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0097s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('1','admin20000','2017-04-23 00:38:28','admin') [ RunTime:0.0665s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='admin' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0011s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002521s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002793s ]
+
+[ 2017-04-23T13:56:18+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001855s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003534s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0184s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('1','admin30000','2017-04-23 13:56:18','admin') [ RunTime:0.2332s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='admin' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0271s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002664s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002996s ]
+

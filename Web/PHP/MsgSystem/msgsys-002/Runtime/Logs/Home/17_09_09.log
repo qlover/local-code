@@ -1,0 +1,40 @@
+[ 2017-09-09T15:27:28+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002092s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003411s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0129s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('1','today,is 2017-09-09','2017-09-09 15:27:26','admin') [ RunTime:0.0877s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='admin' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0009s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003626s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003902s ]
+
+[ 2017-09-09T15:28:06+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/quit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001159s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002060s ]
+NOTIC: [8] Undefined index: msgsys_upass D:\Web\PHP\MsgSystem\msgsys-002\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001776s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001899s ]
+
+[ 2017-09-09T17:39:52+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/quit.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001264s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002066s ]
+NOTIC: [8] Undefined index: msgsys_upass D:\Web\PHP\MsgSystem\msgsys-002\Home\Controller\IndexController.class.php 第 158 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001236s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001339s ]
+
+[ 2017-09-09T17:56:31+08:00 ] 127.0.0.1 /msgsys-002/index.php/home/index/message.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001536s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002525s ]
+SQL: SHOW COLUMNS FROM `msg_content` [ RunTime:0.0129s ]
+SQL: INSERT INTO `msg_content` (`uid`,`text`,`time`,`uname`) VALUES ('1','i am fine','2017-09-09 17:56:30','admin') [ RunTime:0.0943s ]
+SQL: SELECT * FROM `msg_content` WHERE ( uname='admin' ) ORDER BY id desc LIMIT 1   [ RunTime:0.0012s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002907s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003147s ]
+
