@@ -1,0 +1,54 @@
+<!-- HTML5 文档声明 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap plug transition modal</title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="../bootstrap/js/html5shiv.min.js"></script>
+      <script src="../bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+<div class="modal fade" id="myModal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" data-dismiss="modal" aria-hidden="true" >&times;</span>
+        <h3 class="modal-title" id="myModLabel">A modal title</h3>
+      </div>
+      <div class="modal-body">
+        <p class="text-success">成功打开模态框</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button class="btn btn-primary">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--// 属性说明
+
+# 必要属性
+  data-target="#myModal" & id="myModal"  // 将关闭按钮与模态框联系起来
+  data-dismiss="modal" // 是自定义的 HTML5 data 属性。用于关闭模态窗口
+# 其它属性
+  data-toggle="modal"  // 是自定义的 HTML5 data 属性。用于打开模态窗口
+  aria-hidden="true"   // 用于保持模态窗口不可见，直到触发器被触发为止（比如点击在相关的按钮上）
+  aria-labelledby="myModalLabel"  // 该属性引用模态框的标题
+
+ //-->
+
+
+
+    <script src="../bootstrap/js/jquery.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

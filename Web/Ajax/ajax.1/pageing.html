@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>分页</title>
+	<link rel="stylesheet" href="css/main.css" />
+	<script src="js/main.js"></script>
+	<script>
+
+	</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>code</th>
+			<th>name</th>
+			<th>price</th>
+			<th>amount</th>
+			<th>web</th>
+		</tr>
+
+		<?php
+			foreach ($data as $val ) {
+		?>
+			<tr>
+
+			<?php
+			foreach ($val as $key => $v ) {
+			?>
+					<td><?php echo $v ?></td>
+			<?php
+			}
+			?>	
+		
+			</tr>
+		<?php
+		}
+		?>
+
+	</table>
+	<div id="list">
+		<a href="?pageNo=1">首页</a>
+		<a href="?pageNo=<?php echo $prevpage ?>">上一页</a>
+		<?php
+		// 获取总页码
+		for($i = 1; $i <= $overpage ; $i++ ){
+		?>
+			<a href="?pageNo=<?php echo $i ?>"><?php echo $i ?></a>
+		<?php
+		}
+		?>
+		<a href="?pageNo=<?php echo $nextpage ?>">下一页</a>
+		<a href="?pageNo=<?php echo $overpage ?>" id="last-page">尾页</a>
+		<a href="?pageNo=1" id="gotopage">
+			<input type="button" value="跳转到第"></a>
+		<input type="text" class="enter-page" value="1"  />
+
+	</div>
+	<script>
+		var gotopage = document.getElementById('gotopage');
+		var enterpage = document.getElementsByClassName('enter-page')[0];
+		var lastpage = document.getElementById('last-page').href;
+		var lastpageval = lastpage[lastpage.length-1];
+		enterpage.onchange = function(){
+			var tval = this.value;
+			if( tval < 1 || tval > lastpageval ){
+				alert("您输入的值范围不正确");
+				this.focus();
+			}else{
+				gotopage.href = "?pageNo=" + tval;
+			}
+		}
+
+	</script>
+</body>
+</html>

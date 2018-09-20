@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ajax---解析 JSON</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script src="js/main.js"> </script>
+</head>
+
+<body>
+
+<a href="ajax004.load.json">Clikc Me Get JSON Text</a>
+<div id="setGetText"></div>
+<script>
+window.onload = function(){
+	document.getElementsByTagName('a')[0].onclick = function(){
+		var request = new XMLHttpRequest();
+		var method = 'GET';
+		var url = this.href + "?time=" + new Date();
+		request.open(method, url);
+		request.send(null);
+		request.onreadystatechange  = function(){
+			if( request.readyState == 4){
+				if( request.status == 200 || request.status == 304){
+					var getJson= request.responseText; 
+					// 将 JSON 转换成 JS 对象
+					var Json = JSON.parse(getJson);
+					var className = Json.classname;
+					var aName = Json.setdata.aname;
+					var aText = Json.setdata.atext;
+					var aHref = Json.setdata.ahref;
+
+					// 建立 DOM 
+					var h2node = document.createElement('h2'); 
+					h2node.className = className;
+					var a1node = document.createElement('a'); 
+					a1node.name = aName;
+					a1node.appendChild(document.createTextNode(aText));
+					h2node.appendChild(a1node);
+					
+					var a2node = document.createElement('a');
+					a2node.appendChild(document.createTextNode(aHref));
+					a2node.href = aHref;
+					
+					var sgt = document.getElementById('setGetText');
+					sgt.innerHTML = '';
+					sgt.appendChild(h2node);
+					sgt.appendChild(a2node);
+				}else{
+					alert('找不到你要的信息');
+				}
+			}
+		}
+		return false;
+	};
+}
+</script>
+
+</body>
+</html>

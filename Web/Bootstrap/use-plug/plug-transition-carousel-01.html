@@ -1,0 +1,62 @@
+<!-- HTML5 文档声明 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap plug transition carousel</title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../public/css/plug.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="../bootstrap/js/html5shiv.min.js"></script>
+      <script src="../bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+
+  <!-- 注意在 Bootstrap 中，每个插件都会有一个该插件的对象 -->
+  <div class="carousel slide" id="myCarousel" data-ride="carousel">
+    <!-- 轮播点 -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol> 
+    <!-- 图片层 -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <span class="carousel-caption">标题一</span>
+        <img src="../public/img/plug-01.jpg" alt="">
+      </div>
+      <div class="item">
+        <span class="carousel-caption">标题二</span>
+        <img src="../public/img/plug-02.jpg" alt="">
+      </div>
+      <div class="item">
+        <span class="carousel-caption">标题三</span>
+        <img src="../public/img/plug-03.jpg" alt="">
+      </div>
+    </div>
+    <!-- 左右切换 -->
+    <a class="carousel-control left" href="#myCarousel" 
+        data-slide="prev">
+    </a>
+    <a class="carousel-control right" href="#myCarousel" 
+        data-slide="next">
+    </a>
+  </div>
+<!-- //属性说明
+# 必要属性
+  data-slide // prev 或 next，用来改变幻灯片相对于当前位置的位置。
+  data-slide-to  // 向轮播传递一个原始滑动索引，
+# 其它属性
+  data-ride="carousel"   // 表示页面加载完毕就开始轮播
+
+// -->
+
+    <script src="../bootstrap/js/jquery.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</htm

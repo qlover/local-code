@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ajax---解析 HTML</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script src="js/main.js"> </script>
+</head>
+
+<body>
+
+<a href="ajax002.load.html">Clikc Me Get HTML Text</a>
+<div id="setGetText"></div>
+<script>
+window.onload = function(){
+	document.getElementsByTagName('a')[0].onclick = function(){
+		var request = new XMLHttpRequest();
+		var method = 'GET';
+		var url = this.href + "?time=" + new Date();
+		request.open(method, url);
+		request.send(null);
+		request.onreadystatechange  = function(){
+			if( request.readyState == 4){
+				if( request.status == 200 || request.status == 304){
+					// 获取到的数据直接是 HTML 所以可以用元素的 innerHTML 属性
+					var getHtml = request.responseText;
+					document.getElementById('setGetText').innerHTML = getHtml;
+				}else{
+					alert('找不到你要的信息');
+				}
+			}
+		}
+		return false;
+	};
+}
+</script>
+
+</body>
+</html>

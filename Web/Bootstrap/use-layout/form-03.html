@@ -1,0 +1,84 @@
+<!-- HTML5 文档声明 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>登录页面</title>
+	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../public/css/style.css">
+	<!--[if lt IE 9]>
+	  <script src="../bootstrap/js/html5shiv.min.js"></script>
+	  <script src="../bootstrap/js/respond.min.js"></script>
+	<![endif]-->
+  </head>
+  <body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-md-offset-4 login-form">
+				<div class="row top">
+					<div class="">
+						<div class="img-login text-center">
+							<img src="../public/img/kode-icon.png" alt="" class="">
+							<h1><b>用户登录</b></h1>
+							<h4 style="color: #767578;">Bootstrap Login Page</h4>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+					</div>
+				</div>
+				<div class="row cont">
+					<div class="col-md-12">
+						<form action="?" class="form-horizontal" role="form">
+							<div class="form-group">
+								<label class="col-md-2 control-label">用户名</label>
+								<div class="col-md-10"> 
+									<input type="text" class="form-control" placeholder="请输入用户名">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-md-2 control-label">密码</label>
+								<div class="col-md-10"> 
+									<input type="password" class="form-control" placeholder="请输入密码">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">验证码</label>
+								<div class="col-md-10"> 
+									<input type="text" class="form-control" placeholder="请输入下面的验证码">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-10 col-md-offset-2">
+									<div class="captch">
+										<img src="" alt="暂时无图片">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-10 col-md-offset-2">
+									<label class="checkbox checkbox-inline">
+										<input type="checkbox"> 记住密码
+									</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-3 col-md-offset-2 col-xs-12">
+									<input type="submit"
+										class="btn btn-primary btn-md btn-block" value="登录">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../bootstrap/js/jquery.min.js"></script>
+	<script src="../bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

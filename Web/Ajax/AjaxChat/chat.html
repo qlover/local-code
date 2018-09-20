@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax Chat</title>
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<script src="jquery.min.js"></script>
+	<!-- [if IE]>
+	<script src="jquery.js"></script>
+	<![end if] -->
+</head>
+<script>
+
+
+</script>
+<body>
+<h3 id="totles" class="hid">总条数: <?php echo $totles ?> </h3>
+
+<div id="Window">
+	<div id="Window-wrap">
+		<div id="Win-main">
+			<div id="Win-cont">
+				<div class="top">
+					<div class="cont">
+						<h2>用户名：<?php echo $chat_info['username'] ?></h2>
+					</div>
+				</div>
+				<div class="mid">
+					<div class="cont">
+
+					
+
+					</div>
+				</div>
+				<div class="fot">
+					<div class="cont">
+						<div class="items"></div>
+						<div class="input-msg">
+							<form action="" method="post">
+								<textarea name="enter-msg" id="enter-msg">
+									
+								</textarea>
+							</div>
+							<div class="send-msg">
+								<input id="send-message" type="submit" value="发送">
+							</form>
+						</div>
+					</div>					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function(){
+
+		// 52 = $(this).height() - $(this).parent().height();
+	$('.mid').scrollTop($(this).height() - 252 );
+
+		var getNowFormatDate = function getNowFormatDate() {
+			var date = new Date();
+			var seperator1 = "-";
+			var seperator2 = ":";
+			var month = date.getMonth() + 1;
+			var strDate = date.getDate();
+			if (month >= 1 && month <= 9) {
+			    month = "0" + month;
+			}
+			if (strDate >= 0 && strDate <= 9) {
+			    strDate = "0" + strDate;
+			}
+			var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+			        + " " + date.getHours() + seperator2 + date.getMinutes()
+			        + seperator2 + (date.getSeconds()-1);
+			return currentdate;
+		}
+
+		// 向 chating 发送请求
+		var sendAjax = function sendAjax( args/* 附带的 get 参数 */ ){
+
+			var $data = args || new Date();
+			$.post('./chating.php', $data ,
+				function(data){
+					$('.mid .cont').append(data);
+					// $('.mid').scrollTop($(this).height() - 252 );
+				}, "text"
+			);
+		}
+
+
+		$('#enter-msg').val('');
+		$('#send-message').on('click', function(){
+			if ( $('#enter-msg').val() == '' ) {
+				alert('发送内容不能为空');
+				return false;
+			}
+
+			var $over_time = $('#Win-cont .box .time').last().text();
+			sendAjax({
+				id : <?php echo $chat_info['user_id']?>,
+				n : "<?php echo $chat_info['username']?>",
+				// 因为第一次加载后的时间没有，所以用 php 获取本地时间
+				// 为了考虑第二次后，有最后的的时间定位
+				time :  $over_time || '<?php echo date("Y-m-d H:i:s") ?>',
+				msg : $('#enter-msg').val(),
+				method : 'hand'
+			});
+
+			$('#enter-msg').val('');			
+			
+			return false;		
+		});
+
+	
+		// 利用反向推技术
+		setInterval(function autoSendAjax(){
+			var $over_time = $('#Win-cont .box .time').last().text();
+			sendAjax({
+				id : <?php echo $chat_info['user_id']?>,
+				time :  $over_time || '<?php echo date("Y-m-d H:i:s") ?>',
+				method : 'auto'
+			});
+			$('.mid').scrollTop($(this).height() - 252 );
+		}, 2000);
+
+
+	});
+</script>
+
+</body>
+</html>

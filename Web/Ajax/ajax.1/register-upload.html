@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ajax </title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script src="js/main.js"> </script>
+
+</head>
+
+<body>
+
+	<form name="myform" enctype="multipart/form-data" >
+		<p>用户名： <input type="text" name="user" /> </p>
+		<p>密码： <input type="password" name="pass" /> </p>
+		<p>邮箱： <input type="text" name="mail" /> </p>
+		<p>上传图片: <input type="file" name="upfile" /> </p>
+		<p><input type="submit" value="提交" /> </p>
+	</form>
+
+<script>
+
+	var fm = document.forms['myform'];
+
+	var fd = new FormData(fm);
+
+	fm.onsubmit = function(){
+		var xhr = new XMLHttpRequest();
+		var fd = new FormData(this);  // 当前 this 表示该事件调用的对象也就是 fm ，当然里面也可写 fm
+		xhr.open('post', './register-upload.php' );
+
+		xhr.onreadystatechange =function(){
+			if( xhr.readyState === 4){
+				if( xhr.status == 200 || xhr.status == 304 ){
+					alert(xhr.responseText);
+				}
+			}
+		}
+		// 用 H5 获取就不需要加上头
+		// xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+		xhr.send(fd);
+		return false;
+	};
+
+
+
+
+</script>
+
+
+</body>
+</html>

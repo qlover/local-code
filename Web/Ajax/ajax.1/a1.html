@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ajax </title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script src="js/main.js"> </script>
+<script>
+	// 获取 GET 数据
+	var xhr = new XMLHttpRequest();
+	xhr.open('get', './a1.php');
+	xhr.onreadystatechange = function(){
+		if( xhr.readyState === 4){
+			if ( xhr.status == 200 || xhr.status == 304 ){
+				document.getElementById('getData').innerHTML = 
+					xhr.responseText;					
+			}else{
+				alert('找不到你要的信息');
+			}
+		}
+	}
+	xhr.send(null);
+
+
+</script>
+</head>
+
+<body>
+	<h1>我要获取a1.php 页面中的返回信息</h1>
+	<div id="getData">
+		
+	</div>
+</body>
+</html>

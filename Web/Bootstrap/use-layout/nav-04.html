@@ -1,0 +1,85 @@
+<!-- HTML5 文档声明 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>响应导航页面</title>
+	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../public/css/style.css">
+	<!--[if lt IE 9]>
+	  <script src="../bootstrap/js/html5shiv.min.js"></script>
+	  <script src="../bootstrap/js/respond.min.js"></script>
+	<![endif]-->
+  </head>
+  <body>
+	<div id="full-img">
+		<div class="layout">
+			<div class="view"></div>
+			<div class="fix"></div>
+		</div>
+	</div>
+	
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a href="#" class="navbar-brand">Bootstrap Navigation</a>
+				<!-- 按钮 -->
+				<button class="navbar-toggle" 
+					data-toggle="collapse" 
+					data-target="#example-navbar-collapse">
+					<span class="sr-only"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<!-- 搜索 -->
+			<div class="navbar-serach">
+				<form action="?" class="navbar-form navbar-left">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search">
+						<button class="btn btn-default">Search</button>
+					</div>
+				</form>
+			</div>
+			<p class="navbar-text">Bootstrap Login</p>
+
+			<!-- 登录与注册 -->
+			<div class="navbar-lr">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-log-in"> 登录</span></a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-user"> 注册</span></a></li>
+				</ul>
+			</div>
+
+			<!-- 响应式的导航 -->
+			<div class="collapse navbar-collapse navbar-right" id="example-navbar-collapse">
+				<!-- 导航菜单 -->
+				<ul class="nav navbar-nav">
+					<li class="acitve"><a href="#">ISO</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Java
+							<span class="caret"></a>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">jmeter</a></li>
+							<li><a href="#">EJB</a></li>
+							<li><a href="#">Jasper Report</a></li>
+							<li class="divider"></li>
+							<li><a href="#">other</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Python</a></li>
+				</ul><!--// 导航菜单 -->
+			</div>
+		</div>
+	</nav>
+
+<p style="height: 1000px;"></p>
+	
+	<script src="../bootstrap/js/jquery.min.js"></script>
+	<script src="../bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

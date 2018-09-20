@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ajax</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script src="js/main.js"> </script>
+</head>
+
+<body>
+<a href="ajax001.txt" id="ajaxget">Ajax Get</a>
+<a href="ajax001.txt" id="ajaxsend">Ajax Send</a>
+
+<script>
+	window.onload = function(){
+		// 获取信息
+		document.getElementById('ajaxget').onclick = function(){
+			// 1.创建一个 XMLHttpRequest 对象
+			var request = new XMLHttpRequest();
+			// 2.准备发送请求
+			// var url = this.href;
+			var url = this.href + "?time=" + new Date();  // 禁用缓存
+			var method = "GET";
+			// 3.调用 XMLHttpRequest 对象的 open 方法
+			request.open(method,url);
+			// 4.调用 XMLHttpRequest 对象的 send 方法
+			request.send(null);
+			// 5.为 XMLHttpRequest 对象添加 onreadystatechange 响应函数
+			request.onreadystatechange = function(){
+				// 6.判断响应是否完成，XMLHttpRequest 对象的 readyState 属性值为 4 的起个
+				if(request.readyState == 4){
+					// 7.再判断响应是否可用：XMLHttpRequest 对象 state 属性值为 200
+					if( request.status == 200 || request.status == 200){
+						// 8.取得信息
+						alert(request.responseText);
+					}else{
+						alert("找不到你要的信息！");
+					}
+				}
+			}
+			return false;
+		};
+
+		// 发送信息
+		document.getElementById('ajaxsend').onclick = function(){
+			var request = new XMLHttpRequest();
+			var url = this.href + "?time=" + new Date();  // 禁用缓存
+			var method = "POST";
+			request.open(method,url);
+			request.setRequestHeader("ContentType","application/x-www-form-urlencoded");
+			// 该参数在控制劝 network 请求里面的 Request Payload 查看 
+			request.send("name='my name is qlover.'"); 
+			request.onreadystatechange = function(){
+				if(request.readyState == 4){
+					if( request.status == 200 || request.status == 200){
+						alert(request.responseText);
+					}else{
+						alert("找不到你要的信息！");
+					}
+				}
+			}
+			return false;
+		};
+	}
+	// 打开控制台。NetWork 下面就可以看见从 aja001 中获取到的文本信息
+</script>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<setdata>
+	<classname>getText</classname>
+	<aname>#parsingXML</aname>
+	<atext>I am the text after parsing XML</atext>
+	<ahref>http://www.qlover.website</ahref>
+</setdata>
