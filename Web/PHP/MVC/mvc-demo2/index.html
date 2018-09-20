@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MVC 获取数据库</title>
+	<style type="text/css">
+		table{ border-collapse: collapse; }
+		th,td{
+			padding: 5px 10px;
+			border: 1px solid #000;
+		}
+		span.tip{
+			color: #f00;
+		}
+	</style>
+</head>
+<body>
+<h2>登录表</h2>
+
+<table>
+	<tr>
+		<th>用户 Id</th>
+		<th>用户</th>
+		<th>性别</th>
+		<th>年龄</th>
+		<th>家庭地址</th>
+		<th>学校</th>
+	</tr>
+	<?php
+	foreach( $data1 as $key => $val ){
+	?>
+		<tr>
+			<td><?php echo $val['Id']; ?></td>
+			<td><?php echo $val['user']; ?></td>
+			<td><?php echo $val['sex']; ?></td>
+			<td><?php echo $val['age']; ?></td>
+			<td><?php echo $val['address']; ?></td>
+			<td><?php echo $val['school']; ?></td>
+		</tr>
+	<?php
+	}
+	?>
+</table>
+
+<h2>一共有<span class="tip"><?php echo $data2; ?></span>个用户</h2>
+
+<h2>id 为 <span class="tip"><?php echo $id ?></span> 的用户是：</h2>
+<table>
+	<tr>
+		<td><?php echo $data3['Id']; ?></td>
+		<td><?php echo $data3['user']; ?></td>
+		<td><?php echo $data3['sex']; ?></td>
+		<td><?php echo $data3['age']; ?></td>
+		<td><?php echo $data3['address']; ?></td>
+		<td><?php echo $data3['school']; ?></td>
+	</tr>
+</table>
+
+<h2>name 为 <span class="tip"><?php echo $user ?></span> 的用户是：</h2>
+<table>
+	<tr>
+		<td><?php echo $data4['Id']; ?></td>
+		<td><?php echo $data4['user']; ?></td>
+		<td><?php echo $data4['sex']; ?></td>
+		<td><?php echo $data4['age']; ?></td>
+		<td><?php echo $data4['address']; ?></td>
+		<td><?php echo $data4['school']; ?></td>
+	</tr>
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MVC 获取数据库</title>
+	<style type="text/css">
+		table{ border-collapse: collapse; }
+		th,td{
+			padding: 5px 10px;
+			border: 1px solid #000;
+		}
+		span.tip{
+			color: #f00;
+		}
+	</style>
+</head>
+<body>
+<h2>登录表</h2>
+<?php
+// $data1 是获取到的所有数据
+/*
+echo "<table>";
+echo "<tr><th>Id</th><th>username</th><th>password</th></tr>";
+foreach($data1 as $i){
+	echo "<tr>";
+	foreach ($i as $key => $value) {
+		if( $value === $i['password']){
+			$val = md5( $value );
+			echo "<td class=\"password\">{$val}</td>";
+		}else{
+			echo "<td>{$value}</td>";
+		}
+	}
+	echo "</tr>";
+}
+echo "</table>";
+*/
+// 但是记住，上面这样的写法不好，因为 MVC 是逻辑与显示相分离不要忘了
+// 应用下面的写法
+?>
+
+<table>
+	<tr>
+		<th>用户 ID</th>
+		<th>用户名</th>
+		<th>密码</th>
+	</tr>
+	<?php
+	foreach( $data1 as $key => $val ){
+	?>
+		<tr>
+			<td><?php echo $val['Id']; ?></td>
+			<td><?php echo $val['username']; ?></td>
+			<td><?php echo md5($val['password']); ?></td>
+		</tr>
+	<?php
+	}
+	?>
+
+</table>
+
+<h2>一共有<span class="tip"><?php echo $data2; ?></span>个用户</h2>
+
+</body>
+</html>
