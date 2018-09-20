@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>Smarty 变量调剂器</h2>
+
+	<div>{$smarty.now}</div>
+	<div>{$smarty.now|date_format:"%Y-%m-%d %H:%M:%S"}</div>
+	<div>{$addr|default:'sucuan'}</div>
+	<div>{$baidu}</div>
+	<div>{$baidu|escape}</div> {*将 < 和 > 都解析了 *}
+	<div>{$baidu|indent:4:'hello'}</div> {*缩进并用 hello 代替缩进符号*}
+
+	<div>{$content|truncate:11:'---'}</div>{*当字符多了就用 --- 代替后面的内容*}
+	<div>{$content|truncate:11:'...':true:true}</div> {*将中间的内容全都省略了*}
+	<div>{$content|truncate:11:'...':true:true|upper}</div>
+
+
+</body>
+</html>
+

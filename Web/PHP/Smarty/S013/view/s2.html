@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>局部不缓存</h2>
+	{* 如果不缓存，则页面的该时间戳不会变，因为被缓存了 *}
+	<div>{$smarty.now}</div>
+	{* 加上 nocache 不会被缓存*}
+	<div>{$smarty.now nocache}</div>
+	{* 会过来的 mytime 是格式化后的时间戳不会被缓存，因为第三个参数是 true  *}
+	<div>{$mytime}</div>
+
+</body>
+</html>

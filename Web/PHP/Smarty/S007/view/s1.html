@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>数组</h2>
+	<p>苹果：{$fruit[0]}, {$fruit.0}</p>
+	<p>梨：{$fruit[1]}</p>
+	<p>香蕉：{$fruit.2}</p>
+	<p>西瓜：{$fruit['wm']}</p>
+	
+{* 不会被 smart 解析，是 smart 的注释
+
+<p>也可以用二维数组，并且[] 和 . 是可以交互使用的</p>	
+
+*}
+
+	<h2>使用 foreach</h2>
+	
+	{foreach $fruit as $key => $val}
+		<P>{$key}=>{$val}</P>
+	{foreachelse}
+		<p>数组没有任何元素！</p>
+	{/foreach}
+	<h4>foreach 遍历内部的关键字</h4>
+	{*
+		@iteration 	从1开始序号信息
+		@index 		从0开始的序号信息
+		@first 		判断第一个元素，返回 boolean
+		@last 		判断最后一个元素，返回 boolean
+		@total 		获得数组元素长度
+		@show 		判断当前数组是否有遍历元素，返回 boolean
+	*}
+	<p>数组元素总个：{$val@total}</p>
+
+
+	<style>
+		.col1 {
+			background: #e00;
+		}
+		.col2 {
+			background: #ccc;
+		}
+	</style>
+
+	<h2>条件判断</h2>
+	<ul>
+	{foreach $items as $val}
+		{if $val@first}
+			<li class="col1">
+		{elseif $val@iteration%2==1}
+			<li class="col2">
+		{else}
+			<li>
+		{/if}
+
+		{$val}
+		</li>
+	{/foreach}
+	{* 遍历还可以用 section 遍历，但是只能遍历索引数组 *}
+	</ul>
+
+</body>
+</html>
