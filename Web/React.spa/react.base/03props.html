@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>React 属性传递</title>
+	<script src="/react.development.js"></script>
+	<script src="/react-dom.development.js"></script>
+	<script src="/browser.min.js"></script>
+</head>
+<body>
+	<div id="container"></div>
+	<script type="text/babel">
+		let container = document.querySelector("#container")
+
+
+
+		class Square extends React.Component {
+			render() {
+				let squareStyle = {
+					width: 300,
+					height: 150,
+					backgroundColor: this.props.color
+				};
+
+				return (
+					<div style={squareStyle}>
+					</div>
+				);
+			}
+		}
+
+		class Lable extends React.Component {
+			render() {
+				let lableStyle = {
+					width: 300,
+					height: 50,
+					textAlign: 'center'
+				};
+				return (
+					<div style={lableStyle}>
+						<p>{this.props.color}</p>
+					</div>
+				);
+			}
+		}
+
+
+		class Card extends React.Component {
+			render() {
+				let cardStyle = {
+					width: 300,
+					border: "2px solid #000",
+				};
+
+				return (
+					<div>
+						<Square color={this.props.color} />
+						<Lable color={this.props.color} />
+					</div>
+				);
+			}
+		}
+
+		ReactDOM.render(
+			<Card color="#AADDEE"></Card>,
+			container
+		);
+	</script>
+</body>
+</html>

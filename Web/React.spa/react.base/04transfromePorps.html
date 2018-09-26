@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>React 属性的传递</title>
+	<script src="/react.development.js"></script>
+	<script src="/react-dom.development.js"></script>
+	<script src="/browser.min.js"></script>
+</head>
+<body>
+
+	<div id="container"></div>
+	<script type="text/babel">
+		
+		let container = document.querySelector('#container');
+
+		class A extends React.Component {
+			render(){
+				return (
+					<B {...this.props}/>
+				);
+			}
+		}
+
+		class B extends React.Component {
+			render(){
+				return (
+					<div>
+						<C {...this.props}/>
+					</div>
+				);
+			}
+		}
+
+		class C extends React.Component {
+			render(){
+				return (
+					<div>
+						<p>{this.props.name}</p>
+						<p>{this.props.age}</p>
+						<p>{this.props.size}</p>
+					</div>
+				);
+			}
+		}
+
+		ReactDOM.render(
+			<B name="qlover" age="20" size="160"></B>,
+			container
+		);
+
+
+	</script>
+</body>
+</html>

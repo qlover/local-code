@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="/react.development.js"></script>
+	<script src="/react-dom.development.js"></script>
+	<script src="/browser.min.js"></script>
+
+	<style>
+		
+		.letter {
+			padding: 10px;
+			margin: 10px;
+			background-color: #ffde00;
+			color: #333;
+			display: inline-block;
+			font-family: "monospace";
+			font-size: 32px;
+
+		}
+	</style>
+</head>
+<body>
+
+	<div id="container"></div>
+
+	<script type="text/babel">
+		let container = document.querySelector("#container");
+
+		// 定义一个 react 组件对象
+		class Letter extends React.Component{
+			// 该 react 组件对象对外唯一接口方法
+			render(){
+				// 在组件中定义该组件对象的 CSS 样式，而不是逻辑与业务分离
+				let letterStyle = {
+					padding: 10,
+					margin: 10,
+					backgroundColor: this.props.bg,
+					color: "#333",
+					display: "inline-block",
+					fontFamily: "monospace",
+					fontSize: 32,
+					textAlign:"center"
+				}
+
+				// 返回则是一个组件对象
+				return (
+					<div style={letterStyle}>
+						{this.props.children}
+					</div>
+				);
+			}
+		}
+
+		ReactDOM.render(
+			<div><p>I am Qlover</p></div>,
+			container
+		);
+		
+		// 利用组件进行渲染
+		ReactDOM.render(
+			<div>
+				<Letter bg="#48B3FF">Q</Letter>
+				<Letter bg="#FF605F">l</Letter>
+				<Letter bg="#FFD53E">o</Letter>
+				<Letter bg="#49DD8E">v</Letter>
+				<Letter bg="#DDE42B">e</Letter>
+				<Letter bg="#AE99FF">r</Letter>
+			</div>,
+			container
+		);
+
+	</script>
+</body>
+</html>

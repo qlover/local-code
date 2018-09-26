@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="/react.development.js"></script>
+	<script src="/react-dom.development.js"></script>
+	<script src="/browser.min.js"></script>
+</head>
+<body>
+	<div id="container"></div>
+	<script type="text/babel">
+		let conatiner = document.querySelector('#container');
+
+		class LightningCounter extends React.Component {
+
+			// 注意在 ES6 语法中，状态不在需要 getInitialState() 方法
+			// 而是直接在构造中指定
+			constructor(props) {
+				super(props);
+				this.state = {
+					strikes: 0
+				};
+			}
+
+			// 当该组件添加到 DOM 中调用
+			componentDidMount(){
+				// 注意这里的写法
+				this.timerID = setInterval(() => this.tick(), 1000);
+			}
+
+			tick(){
+				this.setState({
+					strikes: this.state.strikes + 100
+				});
+			}
+
+			// 当该组件人 DOM 移除中调用
+			componentWillUnmount() {
+				clearInterval(this.timerID);
+			}
+ 
+
+			render() {
+				return (
+					<h1>{this.state.strikes}</h1>
+				);
+			}
+		}
+
+		class LightningCounterDisplay extends React.Component {
+			render() {
+				let lightStyle = {
+					width: 250,
+					textAlign: "center",
+					backgroundColor: "black",
+					padding: 40,
+					color: "#66FFFF",
+					fontFamily: "sans-serif",
+					borderRadius: 10
+				};
+
+				return (
+					<div style={lightStyle}>
+						<LightningCounter />
+					</div>
+				);
+			}
+		}
+
+		ReactDOM.render(
+			<LightningCounterDisplay />,
+			container
+		)
+
+
+	</script>
+</body>
+</html>
